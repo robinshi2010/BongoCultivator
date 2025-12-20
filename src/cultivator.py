@@ -18,7 +18,7 @@ class Cultivator:
         self.money = 0 # 灵石
         self.inventory = {} # 物品栏 {name: count}
         self.events = [] # 事件日志
-    
+
     @property
     def current_layer(self):
         if self.layer_index < len(self.LAYERS):
@@ -88,14 +88,44 @@ class Cultivator:
         self.gain_exp(base_exp)
             
         return gain_msg, is_combat
+    
+    def calculate_offline_progress(self, last_timestamp):
+        import time
+        current_time = time.time()
+        # 即使数据没有 timestamp，也要处理
+        if not last_timestamp:
+            return 
+            
+        diff = int(current_time - last_timestamp)
+        if diff > 60: # 离线超过1分钟才结算
+            # 离线默认按打坐计算，但收益减半 (2.5 exp/s)
+            exp_gain = int(diff * 2.5)
+            self.gain_exp(exp_gain)
+            self.events.append(f"闭关结束，离线 {diff // 60} 分钟，获得 {exp_gain} 修为")
+            
+    def get_random_dialogue(self):
+        dialogues = [
+            "道可道，非常道...",
+            "别摸了，贫道要走火入魔了！",
+            "今日宜修炼，忌摸鱼。",
+            "我感觉我要突破了！",
+            "这位道友，我看你骨骼精奇...",
+            "还不快去写代码？",
+            "只有充钱才能变得更强（误",
+            "修仙本是逆天而行...",
+            "灵气...这里的灵气太稀薄了。",
+        ]
+        return random.choice(dialogues)
 
     def save_data(self, filepath):
         import json
+        import time
         data = {
             "exp": self.exp,
             "layer_index": self.layer_index,
             "money": self.money,
-            "inventory": self.inventory
+            "inventory": self.inventory,
+            "last_save_time": time.time()
         }
         try:
             with open(filepath, 'w') as f:
@@ -117,6 +147,12 @@ class Cultivator:
                 self.layer_index = data.get("layer_index", 0)
                 self.money = data.get("money", 0)
                 self.inventory = data.get("inventory", {})
+                
+                # 结算离线
+                last_time = data.get("last_save_time", 0)
+                if last_time > 0:
+                    self.calculate_offline_progress(last_time)
+                    
             print("数据已加载")
         except Exception as e:
             print(f"如果你看到这个错误，说明加载失败: {e}")

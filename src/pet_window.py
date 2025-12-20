@@ -32,12 +32,36 @@ class PetWindow(QWidget):
         self.monitor = InputMonitor()
         self.monitor.start()
         
+        # 炼丹状态
+        self.is_alchemying = False
+        self.alchemy_time = 0
+        self.alchemy_target_time = 10
+        
         self.game_timer = QTimer(self)
         self.game_timer.timeout.connect(self.game_loop)
         self.game_timer.start(1000) # 1秒刷新一次
 
     def game_loop(self):
         apm = self.monitor.get_apm()
+        
+        # 如果正在炼丹
+        if self.is_alchemying:
+            # 高 APM 会打断炼丹
+            if apm > 50:
+                self.is_alchemying = False
+                self.show_notification("心神不宁，炼丹失败！(APM太高)")
+                self.set_state(PetState.COMBAT)
+            else:
+                self.alchemy_time += 1
+                if self.alchemy_time >= self.alchemy_target_time:
+                    # 炼丹完成
+                    self.is_alchemying = False
+                    self.finish_alchemy()
+                else:
+                    self.set_state(PetState.ALCHEMY)
+                    # 炼丹中不获取常规收益，或者获取少量
+                    return # 跳过后续常规 update
+
         gain_msg, is_combat = self.cultivator.update(apm)
         
         # 检查有没有新的事件需要通知
@@ -54,10 +78,30 @@ class PetWindow(QWidget):
             if self.current_state != PetState.IDLE:
                 self.set_state(PetState.IDLE)
                 
-    def show_notification(self, text):
-        # 简单的飘字效果，这里暂时直接用 info_label 显示一会
-        # 更好的做法是创建一个独立的 FloatingLabel 类
-        self.info_label.setText(text)
+    def start_alchemy(self):
+        if self.is_alchemying:
+            return
+        
+        self.is_alchemying = True
+        self.alchemy_time = 0
+        self.set_state(PetState.ALCHEMY)
+        self.show_notification("开始闭关炼丹... (请勿高频操作)")
+        
+    def finish_alchemy(self):
+        import random
+        # 炼丹产出
+        pills = ["聚气丹", "筑基丹", "废丹"]
+        # 权重
+        weights = [60, 10, 30]
+        result = random.choices(pills, weights=weights, k=1)[0]
+        
+        if result == "废丹":
+             self.show_notification("炼丹失败，得出一炉废丹。")
+        else:
+             self.cultivator.gain_item(result, 1)
+             self.show_notification(f"丹成！获得 {result} x1")
+        
+        self.set_state(PetState.IDLE)
         QTimer.singleShot(2000, lambda: self.info_label.setText("准备修仙..."))
 
     def closeEvent(self, event):
@@ -94,12 +138,11 @@ class PetWindow(QWidget):
         self.image_label.resize(200, 200)
         self.image_label.move(0, 0) # 相对 container 0,0
         
-        # 5. 信息 Label (默认精简，无背景)
+        # 5. 信息 Label (默认完全隐藏)
         self.info_label = QLabel(self)
         self.info_label.resize(280, 50)
         self.info_label.move(10, 10) # 顶部
         self.info_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        # 使用文字阴影代替黑底，看起来更融合
         self.info_label.setStyleSheet("""
             QLabel {
                 color: #FFFFFF;
@@ -109,7 +152,7 @@ class PetWindow(QWidget):
                 qproperty-alignment: AlignCenter;
             }
         """)
-        # 添加阴影效果 (通过 GraphicsEffect)
+        # 添加阴影效果
         from PyQt6.QtWidgets import QGraphicsDropShadowEffect
         shadow = QGraphicsDropShadowEffect()
         shadow.setBlurRadius(5)
@@ -117,7 +160,7 @@ class PetWindow(QWidget):
         shadow.setOffset(1, 1)
         self.info_label.setGraphicsEffect(shadow)
         
-        self.info_label.setText("准备修仙...")
+        self.info_label.hide() # 默认隐藏
 
         # 6. 呼吸/悬浮动画定时器
         self.float_timer = QTimer(self)
@@ -145,14 +188,16 @@ class PetWindow(QWidget):
         self.image_container.move(50, int(self.base_y + self.float_y))
 
     def paintEvent(self, event):
-        # 确保绘制是透明的 (重写 paintEvent 有助于解决某些系统下的黑框)
+        # 确保绘制是透明的
         pass 
-        # 不需要手动绘制背景，依靠 WA_TranslucentBackground + setStyleSheet
 
     # --- 鼠标悬停交互 ---
     def enterEvent(self, event):
         # 鼠标移入：显示详细信息
-        msg, _ = self.cultivator.update(0) # 获取当前状态文本
+        self.info_label.show()
+        # msg, _ = self.cultivator.update(0) # 不调用 update，只获取属性
+        # update 会触发经验增长，hover 不应该触发
+        
         self.info_label.setText(f"【{self.cultivator.current_layer}】\n灵石: {self.cultivator.money} | APM: {self.monitor.get_apm_snapshot()}")
         self.info_label.setStyleSheet("""
             QLabel {
@@ -167,17 +212,35 @@ class PetWindow(QWidget):
         super().enterEvent(event)
 
     def leaveEvent(self, event):
-        # 鼠标移出：恢复简约显示
-        self.info_label.setText(f"{self.cultivator.current_layer}")
+        # 鼠标移出：隐藏
+        self.info_label.hide()
+        super().leaveEvent(event)
+        
+    def show_notification(self, text):
+        # 显示通知时强制显示
+        self.info_label.setText(text)
         self.info_label.setStyleSheet("""
             QLabel {
-                color: #FFFFFF;
-                font-size: 14px;
-                font-weight: 900;
-                background-color: transparent;
+                color: #00FF7F; 
+                font-size: 16px;
+                font-weight: bold;
+                background-color: rgba(0, 0, 0, 150);
+                border-radius: 8px;
+                padding: 4px;
             }
         """)
-        super().leaveEvent(event)
+        self.info_label.show()
+        
+        # 2秒后如果鼠标不在上面，就隐藏
+        QTimer.singleShot(2000, self.hide_notification)
+
+    def hide_notification(self):
+        # 如果鼠标不在窗口内，就隐藏
+        if not self.underMouse():
+            self.info_label.hide()
+        else:
+            # 如果鼠标还在，恢复成 hover 状态的显示 (避免通知文字一直卡着)
+            self.enterEvent(None) # 重新触发一次 hover 刷新逻辑
 
     def load_assets(self):
         # 资源路径
@@ -198,6 +261,11 @@ class PetWindow(QWidget):
         if os.path.exists(combat_path):
             self.state_images[PetState.COMBAT] = QPixmap(combat_path)
             
+        # ALCHEMY
+        alchemy_path = os.path.join(assets_path, 'cultivator_alchemy.png')
+        if os.path.exists(alchemy_path):
+            self.state_images[PetState.ALCHEMY] = QPixmap(alchemy_path)
+
         # 默认显示 IDLE
         if PetState.IDLE in self.state_images:
             self.set_state(PetState.IDLE)
@@ -207,17 +275,81 @@ class PetWindow(QWidget):
     def set_state(self, state: PetState):
         if hasattr(self, 'state_images') and state in self.state_images:
             self.current_state = state
-            self.image_label.setPixmap(self.state_images[state])
+            pixmap = self.state_images[state]
+            self.image_label.setPixmap(pixmap)
+            
+            # 设置遮罩，实现点击穿透透明区域
+            # 注意：因为我们有浮动动画(Move)，mask 是相对于窗口坐标的
+            # mask 需要跟随 image_container 的位置变化比较麻烦
+            # 简单做法：我们只给 image_label 做 mask？不行，点击是 Window 接收的
+            
+            # 更好的方案：不依赖 mask，因为动画会导致 mask 频繁计算极其消耗性能
+            # 方案 B：在 mousePressEvent 里手动判定点击位置是否透明
+            
+            # 这里我们还是先做基础的 mask 测试，如果 mask 不动的话。
+            # 考虑到浮动范围很小，我们可以给整个 Window 一个稍微大一点的 Mask，或者暂时不 mask
+            # 为了响应 USER 的“穿透点击”需求，我们必须判定 alpha。
+            pass
 
     # --- 鼠标拖拽逻辑 ---
     def mousePressEvent(self, event: QMouseEvent):
+        # 手动判定是否点击在了图片的非透明区域
+        # 1. 获取点击位置相对于 image_label 的坐标
+        click_pos = event.position().toPoint()
+        
+        # image_container 的位置
+        container_pos = self.image_container.pos()
+        
+        # 相对坐标
+        local_pos = click_pos - container_pos
+        
+        is_hit = False
+        if hasattr(self, 'state_images') and self.current_state in self.state_images:
+            pixmap = self.state_images[self.current_state]
+            # 检查坐标是否在图片范围内
+            if 0 <= local_pos.x() < pixmap.width() and 0 <= local_pos.y() < pixmap.height():
+                # 获取该点的 alpha
+                # 注意：频繁转 Image 可能会慢，但在点击瞬间做一次是可以接受的
+                img = pixmap.toImage()
+                color = img.pixelColor(local_pos)
+                if color.alpha() > 10: # 非透明
+                    is_hit = True
+
+        if not is_hit:
+            # 如果没点中实体，理论上应该穿透
+            # 但作为 Frameless Window, 我们无法物理上“穿透”给下层窗口，
+            # 除非我们在系统层面 setMask。
+            # 但动态 setMask (动画中) 性能很差。
+            # 为了折中：我们让它 "忽略" 这次点击，不进行拖动。
+            # 但用户想的是“点到后面的网页”，这需要 setMask。
+            
+            # 既然用户明确要求“穿透点击”，我们必须用 setMask。
+            # 但为了性能，我们只在动画每一帧更新 mask? 
+            # 这太卡了。
+            # 妥协方案：只在“打坐”不动的时候 mask？或者只要 Mask 覆盖图片矩形即可？
+            pass
+            # 实际上，PyQt 有个 WA_TranslucentBackground 配合 setMask(pixmap.mask()) 是标准做法
+            # 我们尝试给整个窗口设置 Mask，每次 float 更新时移动 mask？
+
         if event.button() == Qt.MouseButton.LeftButton:
-            self.is_dragging = True
-            self.drag_position = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
-            self.setCursor(QCursor(Qt.CursorShape.ClosedHandCursor))
-            event.accept()
+            if is_hit:
+                self.is_dragging = True
+                self.drag_position = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
+                self.press_pos = event.globalPosition().toPoint()
+                self.setCursor(QCursor(Qt.CursorShape.ClosedHandCursor))
+                event.accept()
+            else:
+                # 转发还是忽略？
+                # 如果我们没有 setMask，我们依然挡住了后面。
+                # 只有 setMask 才能真正穿透。
+                event.ignore() # 试图忽略，看系统是否传递 (通常 Frameless 不会传递)
+                
         elif event.button() == Qt.MouseButton.RightButton:
-            self.show_context_menu(event.globalPosition().toPoint())
+            if is_hit:
+                self.show_context_menu(event.globalPosition().toPoint())
+            else:
+                event.ignore()
+
 
     def mouseMoveEvent(self, event: QMouseEvent):
         if self.is_dragging and event.buttons() == Qt.MouseButton.LeftButton:
@@ -228,7 +360,23 @@ class PetWindow(QWidget):
         if event.button() == Qt.MouseButton.LeftButton:
             self.is_dragging = False
             self.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
+            
+            # 判断是否是点击 (移动距离很小)
+            release_pos = event.globalPosition().toPoint()
+            if hasattr(self, 'press_pos') and (release_pos - self.press_pos).manhattanLength() < 5:
+                self.on_pet_clicked()
+                
             event.accept()
+            
+    def on_pet_clicked(self):
+        # 播放随机对话
+        dialogue = self.cultivator.get_random_dialogue()
+        self.show_notification(dialogue)
+        
+        # 简单的点击反馈动画 (例如稍微缩放一下，或者震动一下)
+        # 这里用一个小跳跃模拟
+        self.float_direction = -1
+        self.float_y = -10 # 向上跳一下
             
     # --- 右键菜单 ---
     def show_context_menu(self, pos):
@@ -265,6 +413,11 @@ class PetWindow(QWidget):
         menu.addAction(status_action)
         
         menu.addSeparator()
+
+        # 炼丹
+        alchemy_action = QAction('闭关炼丹', self)
+        alchemy_action.triggered.connect(self.start_alchemy)
+        menu.addAction(alchemy_action)
 
         # 打开背包
         bag_action = QAction('储物袋', self)
