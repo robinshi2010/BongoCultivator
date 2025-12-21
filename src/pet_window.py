@@ -422,7 +422,7 @@ class PetWindow(QWidget):
             speed = 0.5
             range_limit = 10
         else:
-            speed = 2 # 战斗时浮动更快
+            speed = 0.2 # 战斗时浮动更快
             range_limit = 5
             
         self.float_y += speed * self.float_direction

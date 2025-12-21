@@ -1415,3 +1415,148 @@ AttributeError: 'Cultivator' object has no attribute 'layer'
 2025-12-21 22:10:57,446 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
 2025-12-21 22:10:57,447 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
 2025-12-21 22:10:57,455 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-21 22:24:52,310 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 22:24:52,326 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 22:24:52,440 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 22:24:52,445 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 22:24:52,448 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 22:24:52,465 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-21 22:24:52,547 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:24:54,649 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:24:55,661 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:24:58,660 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:25:04,660 [DEBUG] [pet_window.py:539] - 切换状态: COMBAT
+2025-12-21 22:25:06,660 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:25:16,659 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:25:18,660 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:25:24,660 [DEBUG] [pet_window.py:539] - 切换状态: COMBAT
+2025-12-21 22:25:42,660 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:25:43,659 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:25:47,659 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:26:07,660 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:26:24,659 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:26:30,660 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:26:33,660 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:26:34,660 [DEBUG] [pet_window.py:539] - 切换状态: COMBAT
+2025-12-21 22:26:35,660 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:26:56,660 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:27:01,662 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:27:05,660 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:27:13,659 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:27:14,660 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:27:15,660 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:27:18,659 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:27:21,410 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 22:27:21,419 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 22:27:21,511 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 22:27:21,514 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 22:27:21,517 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 22:27:21,528 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-21 22:27:21,595 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:27:29,628 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-21 22:27:29,641 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-21 22:27:29,660 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:27:32,152 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-21 22:27:32,165 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-21 22:27:34,114 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 22:27:34,120 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 22:27:34,212 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 22:27:34,217 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 22:27:34,220 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 22:27:34,233 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-21 22:27:34,299 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:27:36,201 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:27:37,160 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:27:38,163 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:27:43,160 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:27:45,160 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:28:04,160 [DEBUG] [pet_window.py:539] - 切换状态: COMBAT
+2025-12-21 22:28:05,160 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:28:18,004 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 22:28:18,013 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 22:28:18,108 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 22:28:18,111 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 22:28:18,112 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 22:28:18,121 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-21 22:28:18,173 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:28:22,159 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:28:26,015 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-21 22:28:26,030 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-21 22:28:27,795 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-21 22:28:27,808 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-21 22:28:32,435 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 22:28:32,441 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 22:28:32,531 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 22:28:32,533 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 22:28:32,533 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 22:28:32,540 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-21 22:28:32,581 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:28:38,660 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:29:04,660 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:29:11,660 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:29:18,660 [DEBUG] [pet_window.py:539] - 切换状态: COMBAT
+2025-12-21 22:29:19,659 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:29:23,660 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:29:28,660 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:29:34,660 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:29:37,660 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:29:44,660 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:29:46,659 [DEBUG] [pet_window.py:539] - 切换状态: COMBAT
+2025-12-21 22:29:49,660 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:29:58,660 [DEBUG] [pet_window.py:539] - 切换状态: COMBAT
+2025-12-21 22:30:00,247 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 22:30:00,247 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-21 22:30:00,257 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-21 22:30:01,478 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 22:30:01,486 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 22:30:01,583 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 22:30:01,589 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 22:30:01,591 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 22:30:01,601 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-21 22:30:01,689 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:30:07,776 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:30:16,777 [DEBUG] [pet_window.py:539] - 切换状态: COMBAT
+2025-12-21 22:30:18,965 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-21 22:30:18,977 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-21 22:30:21,302 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 22:30:21,306 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 22:30:21,398 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 22:30:21,400 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 22:30:21,400 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 22:30:21,409 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-21 22:30:21,450 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:30:48,277 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:30:53,277 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:30:59,277 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:31:05,277 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:31:08,277 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:31:12,947 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 22:31:12,948 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-21 22:31:12,958 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-21 22:31:13,913 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 22:31:13,920 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 22:31:14,014 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 22:31:14,018 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 22:31:14,021 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 22:31:14,030 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-21 22:31:14,083 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:31:16,184 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:31:20,277 [DEBUG] [pet_window.py:539] - 切换状态: COMBAT
+2025-12-21 22:31:22,276 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:31:23,247 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 22:31:23,247 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-21 22:31:23,257 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-21 22:31:24,394 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 22:31:24,397 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 22:31:24,494 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 22:31:24,495 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 22:31:24,495 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 22:31:24,502 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-21 22:31:24,544 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:31:26,646 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-21 22:31:34,777 [DEBUG] [pet_window.py:539] - 切换状态: COMBAT
+2025-12-21 22:31:37,779 [DEBUG] [pet_window.py:539] - 切换状态: WORK
+2025-12-21 22:31:39,778 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-21 22:31:45,277 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 22:31:45,277 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-21 22:31:45,287 [INFO] [cultivator.py:410] - 数据已保存
