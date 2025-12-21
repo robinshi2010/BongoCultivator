@@ -1,4 +1,5 @@
 import random
+from src.logger import logger
 
 class Cultivator:
     LAYERS = [
@@ -130,9 +131,9 @@ class Cultivator:
         try:
             with open(filepath, 'w') as f:
                 json.dump(data, f)
-            print("数据已保存")
+            logger.info("数据已保存")
         except Exception as e:
-            print(f"如果你看到这个错误，说明保存失败: {e}")
+            logger.error(f"保存失败: {e}")
 
     def load_data(self, filepath):
         import json
@@ -153,6 +154,6 @@ class Cultivator:
                 if last_time > 0:
                     self.calculate_offline_progress(last_time)
                     
-            print("数据已加载")
+            logger.info("数据已加载")
         except Exception as e:
-            print(f"如果你看到这个错误，说明加载失败: {e}")
+            logger.error(f"加载失败: {e}")

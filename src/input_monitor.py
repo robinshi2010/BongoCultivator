@@ -10,7 +10,9 @@ class InputMonitor:
         
         # 监听器
         self.kb_listener = keyboard.Listener(on_press=self.on_press)
+        self.kb_listener.daemon = True
         self.mouse_listener = mouse.Listener(on_click=self.on_click)
+        self.mouse_listener.daemon = True
         
         self.running = False
 

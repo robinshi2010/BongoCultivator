@@ -1,0 +1,152 @@
+2025-12-21 18:25:49,458 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 18:25:49,459 [INFO] [main.py:7] - 启动应用程序...
+2025-12-21 18:25:49,579 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 18:25:49,593 [INFO] [cultivator.py:157] - 数据已加载
+2025-12-21 18:25:49,993 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:26:42,773 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:26:44,773 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:26:47,559 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:26:47,559 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:26:47,773 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (60)
+2025-12-21 18:26:47,773 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:26:47,774 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:26:51,082 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:26:51,088 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:26:51,773 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (60)
+2025-12-21 18:26:51,777 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:26:51,778 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:26:53,084 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:26:53,085 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:26:53,774 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (60)
+2025-12-21 18:26:53,774 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:26:53,774 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:26:55,052 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:26:55,053 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:26:55,774 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (60)
+2025-12-21 18:26:55,775 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:26:55,775 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:27:02,760 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:27:02,764 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:27:02,773 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (60)
+2025-12-21 18:27:02,774 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:27:02,774 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:27:07,619 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:27:07,619 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:27:07,774 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (60)
+2025-12-21 18:27:07,775 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:27:07,775 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:27:13,774 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:27:13,880 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:27:13,880 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:27:23,774 [INFO] [pet_window.py:103] - 炼丹完成: 废丹
+2025-12-21 18:27:23,781 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:27:32,480 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:27:32,482 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:27:32,774 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (60)
+2025-12-21 18:27:32,775 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:27:32,775 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:28:09,269 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:28:09,274 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:28:09,774 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (60)
+2025-12-21 18:28:09,775 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:28:09,775 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:28:11,924 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:28:11,925 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:28:21,775 [INFO] [pet_window.py:106] - 炼丹成功: 聚气丹
+2025-12-21 18:28:21,776 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:28:26,774 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:28:27,776 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:28:28,774 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:28:31,774 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:28:33,775 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:28:34,775 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:28:35,775 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:28:58,775 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:29:02,661 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:29:02,662 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:29:02,775 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (60)
+2025-12-21 18:29:02,776 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:29:02,776 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:29:07,624 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:29:07,624 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:29:07,775 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (60)
+2025-12-21 18:29:07,776 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:29:07,776 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:29:12,617 [DEBUG] [pet_window.py:293] - 切换状态: ALCHEMY
+2025-12-21 18:29:12,619 [INFO] [pet_window.py:91] - 开始闭关炼丹
+2025-12-21 18:29:12,775 [WARNING] [pet_window.py:54] - 炼丹失败: APM过高 (120)
+2025-12-21 18:29:12,776 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:29:13,775 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:29:31,775 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:29:32,775 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:30:02,776 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:30:03,776 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:30:05,777 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:30:06,776 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:30:12,777 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:30:13,775 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:30:14,776 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:30:18,776 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:30:20,776 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:30:26,776 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:30:28,777 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:30:32,776 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:30:39,776 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:30:54,777 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:30:55,777 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:31:00,777 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:48:49,790 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:48:50,791 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:48:52,790 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:48:53,790 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:48:55,790 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:49:02,791 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:49:05,790 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:49:09,790 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:49:30,791 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:49:32,791 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:50:11,791 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:50:13,791 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:50:18,148 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 18:50:18,148 [INFO] [main.py:8] - 启动应用程序...
+2025-12-21 18:50:18,247 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 18:50:18,253 [INFO] [cultivator.py:157] - 数据已加载
+2025-12-21 18:50:18,285 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:50:24,292 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:50:25,291 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:50:26,291 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:50:27,291 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:50:33,292 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:50:36,292 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:50:39,528 [INFO] [pet_window.py:114] - 程序关闭，保存数据...
+2025-12-21 18:50:39,542 [INFO] [cultivator.py:134] - 数据已保存
+2025-12-21 18:51:26,156 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 18:51:26,156 [INFO] [main.py:8] - 启动应用程序...
+2025-12-21 18:51:26,253 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 18:51:26,258 [INFO] [cultivator.py:157] - 数据已加载
+2025-12-21 18:51:26,282 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:51:28,971 [INFO] [pet_window.py:114] - 程序关闭，保存数据...
+2025-12-21 18:51:28,980 [INFO] [cultivator.py:134] - 数据已保存
+2025-12-21 18:51:31,094 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 18:51:31,094 [INFO] [main.py:8] - 启动应用程序...
+2025-12-21 18:51:31,189 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 18:51:31,190 [INFO] [cultivator.py:157] - 数据已加载
+2025-12-21 18:51:31,213 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:51:32,264 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:51:33,292 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:51:34,293 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:51:40,292 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:51:51,293 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:51:58,293 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:52:09,293 [DEBUG] [pet_window.py:293] - 切换状态: COMBAT
+2025-12-21 18:52:10,293 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:52:45,720 [INFO] [pet_window.py:114] - 程序关闭，保存数据...
+2025-12-21 18:52:45,732 [INFO] [cultivator.py:134] - 数据已保存
+2025-12-21 18:52:48,109 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 18:52:48,109 [INFO] [main.py:10] - 启动应用程序...
+2025-12-21 18:52:48,208 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 18:52:48,212 [INFO] [cultivator.py:157] - 数据已加载
+2025-12-21 18:52:48,245 [DEBUG] [pet_window.py:293] - 切换状态: IDLE
+2025-12-21 18:52:56,144 [INFO] [main.py:25] - 用户强制退出 (SIGINT)
+2025-12-21 18:52:56,148 [INFO] [pet_window.py:114] - 程序关闭，保存数据...
+2025-12-21 18:52:56,160 [INFO] [cultivator.py:134] - 数据已保存

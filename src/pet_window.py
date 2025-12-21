@@ -6,12 +6,14 @@ from PyQt6.QtGui import QPixmap, QAction, QMouseEvent, QCursor
 from src.state import PetState
 from src.input_monitor import InputMonitor
 from src.cultivator import Cultivator
+from src.logger import logger
 
 class PetWindow(QWidget):
     def __init__(self):
         super().__init__()
         
         # 核心数据
+        logger.info("初始化 PetWindow...")
         self.cultivator = Cultivator()
         
         # 路径处理
@@ -49,6 +51,7 @@ class PetWindow(QWidget):
             # 高 APM 会打断炼丹
             if apm > 50:
                 self.is_alchemying = False
+                logger.warning(f"炼丹失败: APM过高 ({apm})")
                 self.show_notification("心神不宁，炼丹失败！(APM太高)")
                 self.set_state(PetState.COMBAT)
             else:
@@ -85,6 +88,7 @@ class PetWindow(QWidget):
         self.is_alchemying = True
         self.alchemy_time = 0
         self.set_state(PetState.ALCHEMY)
+        logger.info("开始闭关炼丹")
         self.show_notification("开始闭关炼丹... (请勿高频操作)")
         
     def finish_alchemy(self):
@@ -96,8 +100,10 @@ class PetWindow(QWidget):
         result = random.choices(pills, weights=weights, k=1)[0]
         
         if result == "废丹":
+             logger.info("炼丹完成: 废丹")
              self.show_notification("炼丹失败，得出一炉废丹。")
         else:
+             logger.info(f"炼丹成功: {result}")
              self.cultivator.gain_item(result, 1)
              self.show_notification(f"丹成！获得 {result} x1")
         
@@ -105,6 +111,7 @@ class PetWindow(QWidget):
         QTimer.singleShot(2000, lambda: self.info_label.setText("准备修仙..."))
 
     def closeEvent(self, event):
+        logger.info("程序关闭，保存数据...")
         self.cultivator.save_data(self.save_path)
         self.monitor.stop()
         super().closeEvent(event)
@@ -277,10 +284,13 @@ class PetWindow(QWidget):
         if PetState.IDLE in self.state_images:
             self.set_state(PetState.IDLE)
         else:
+            logger.warning("资源缺失: cultivator_idle.png")
             self.info_label.setText("资源缺失")
 
     def set_state(self, state: PetState):
         if hasattr(self, 'state_images') and state in self.state_images:
+            if getattr(self, 'current_state', None) != state:
+                 logger.debug(f"切换状态: {state.name}")
             self.current_state = state
             pixmap = self.state_images[state]
             self.image_label.setPixmap(pixmap)
