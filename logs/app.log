@@ -909,3 +909,152 @@ AttributeError: 'Cultivator' object has no attribute 'layer'
 2025-12-21 20:18:01,660 [DEBUG] [pet_window.py:383] - 切换状态: IDLE
 2025-12-21 20:18:39,660 [DEBUG] [pet_window.py:383] - 切换状态: COMBAT
 2025-12-21 20:18:52,660 [DEBUG] [pet_window.py:383] - 切换状态: IDLE
+2025-12-21 20:21:49,660 [CRITICAL] [logger.py:60] - 未捕获的异常 (Uncaught exception):
+Traceback (most recent call last):
+  File "/Volumes/home/mac/robin/bongo/src/pet_window.py", line 73, in game_loop
+    gain_msg, state_code = self.cultivator.update(kb_apm, mouse_apm)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/home/mac/robin/bongo/src/cultivator.py", line 343, in update
+    event = self.event_manager.get_random_event(self)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/home/mac/robin/bongo/src/event_manager.py", line 37, in get_random_event
+    if self._check_conditions(event, cultivator):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/home/mac/robin/bongo/src/event_manager.py", line 58, in _check_conditions
+    if 'min_layer' in conditions and cultivator.layer < conditions['min_layer']:
+                                     ^^^^^^^^^^^^^^^^
+AttributeError: 'Cultivator' object has no attribute 'layer'
+2025-12-21 20:26:49,661 [CRITICAL] [logger.py:60] - 未捕获的异常 (Uncaught exception):
+Traceback (most recent call last):
+  File "/Volumes/home/mac/robin/bongo/src/pet_window.py", line 73, in game_loop
+    gain_msg, state_code = self.cultivator.update(kb_apm, mouse_apm)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/home/mac/robin/bongo/src/cultivator.py", line 343, in update
+    event = self.event_manager.get_random_event(self)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/home/mac/robin/bongo/src/event_manager.py", line 37, in get_random_event
+    if self._check_conditions(event, cultivator):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/home/mac/robin/bongo/src/event_manager.py", line 58, in _check_conditions
+    if 'min_layer' in conditions and cultivator.layer < conditions['min_layer']:
+                                     ^^^^^^^^^^^^^^^^
+AttributeError: 'Cultivator' object has no attribute 'layer'
+2025-12-21 20:27:12,660 [DEBUG] [pet_window.py:383] - 切换状态: COMBAT
+2025-12-21 20:27:16,660 [DEBUG] [pet_window.py:383] - 切换状态: IDLE
+2025-12-21 20:30:49,960 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 20:30:49,960 [INFO] [pet_window.py:168] - 程序关闭，保存数据...
+2025-12-21 20:30:49,970 [INFO] [cultivator.py:409] - 数据已保存
+2025-12-21 20:30:52,262 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 20:30:52,268 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 20:30:52,375 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 20:30:52,378 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 20:30:52,379 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 20:30:52,387 [INFO] [cultivator.py:449] - 数据已加载
+2025-12-21 20:30:52,425 [DEBUG] [pet_window.py:428] - 切换状态: IDLE
+2025-12-21 20:30:57,660 [DEBUG] [pet_window.py:428] - 切换状态: COMBAT
+2025-12-21 20:31:02,660 [DEBUG] [pet_window.py:428] - 切换状态: IDLE
+2025-12-21 20:31:13,740 [INFO] [pet_window.py:168] - 程序关闭，保存数据...
+2025-12-21 20:31:13,756 [INFO] [cultivator.py:409] - 数据已保存
+2025-12-21 20:38:50,085 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 20:38:50,136 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 20:38:50,243 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 20:38:50,248 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 20:38:50,251 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 20:38:50,269 [INFO] [cultivator.py:449] - 数据已加载
+2025-12-21 20:38:50,314 [DEBUG] [pet_window.py:453] - 切换状态: IDLE
+2025-12-21 20:38:50,334 [INFO] [pet_window.py:262] - 开启鼠标穿透模式 (Ghost Mode)
+2025-12-21 20:39:08,161 [DEBUG] [pet_window.py:453] - 切换状态: COMBAT
+2025-12-21 20:39:08,210 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 20:39:08,210 [INFO] [pet_window.py:170] - 程序关闭，保存数据...
+2025-12-21 20:39:08,223 [INFO] [cultivator.py:409] - 数据已保存
+2025-12-21 20:41:04,106 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 20:41:04,123 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 20:41:04,224 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 20:41:04,230 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 20:41:04,233 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 20:41:04,245 [INFO] [cultivator.py:449] - 数据已加载
+2025-12-21 20:41:04,275 [DEBUG] [pet_window.py:453] - 切换状态: IDLE
+2025-12-21 20:41:04,293 [INFO] [pet_window.py:262] - 开启鼠标穿透模式 (Ghost Mode)
+2025-12-21 20:41:15,911 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 20:41:15,913 [INFO] [pet_window.py:170] - 程序关闭，保存数据...
+2025-12-21 20:41:15,922 [INFO] [cultivator.py:409] - 数据已保存
+2025-12-21 20:49:36,541 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 20:49:36,572 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 20:49:36,677 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 20:49:36,681 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 20:49:36,683 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 20:49:36,702 [INFO] [cultivator.py:449] - 数据已加载
+2025-12-21 20:49:36,746 [DEBUG] [pet_window.py:496] - 切换状态: IDLE
+2025-12-21 20:49:36,766 [INFO] [pet_window.py:266] - 关闭鼠标穿透模式
+2025-12-21 20:50:16,369 [INFO] [pet_window.py:262] - 开启鼠标穿透模式 (Ghost Mode)
+2025-12-21 20:50:27,509 [INFO] [pet_window.py:266] - 关闭鼠标穿透模式
+2025-12-21 20:50:34,961 [INFO] [pet_window.py:262] - 开启鼠标穿透模式 (Ghost Mode)
+2025-12-21 20:50:37,666 [INFO] [pet_window.py:266] - 关闭鼠标穿透模式
+2025-12-21 20:50:43,312 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 20:50:43,315 [INFO] [pet_window.py:170] - 程序关闭，保存数据...
+2025-12-21 20:50:43,325 [INFO] [cultivator.py:409] - 数据已保存
+2025-12-21 20:56:53,850 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 20:56:53,861 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 20:56:53,956 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 20:56:53,959 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 20:56:53,961 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 20:56:53,971 [INFO] [cultivator.py:449] - 数据已加载
+2025-12-21 20:56:54,014 [DEBUG] [pet_window.py:511] - 切换状态: IDLE
+2025-12-21 20:56:54,029 [INFO] [pet_window.py:271] - 关闭鼠标穿透模式
+2025-12-21 20:57:32,203 [INFO] [pet_window.py:265] - 开启鼠标穿透模式 (Ghost Mode)
+2025-12-21 20:57:42,058 [INFO] [pet_window.py:271] - 关闭鼠标穿透模式
+2025-12-21 20:57:50,546 [INFO] [pet_window.py:265] - 开启鼠标穿透模式 (Ghost Mode)
+2025-12-21 20:58:02,286 [INFO] [pet_window.py:271] - 关闭鼠标穿透模式
+2025-12-21 20:58:06,765 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 20:58:06,765 [INFO] [pet_window.py:171] - 程序关闭，保存数据...
+2025-12-21 20:58:06,775 [INFO] [cultivator.py:409] - 数据已保存
+2025-12-21 21:01:29,080 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 21:01:29,095 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 21:01:29,202 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 21:01:29,207 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 21:01:29,210 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 21:01:29,230 [INFO] [cultivator.py:449] - 数据已加载
+2025-12-21 21:01:29,279 [DEBUG] [pet_window.py:533] - 切换状态: IDLE
+2025-12-21 21:01:29,303 [INFO] [pet_window.py:271] - 关闭鼠标穿透模式
+2025-12-21 21:01:50,963 [INFO] [pet_window.py:265] - 开启鼠标穿透模式 (Ghost Mode)
+2025-12-21 21:02:00,474 [INFO] [pet_window.py:271] - 关闭鼠标穿透模式
+2025-12-21 21:02:09,933 [INFO] [pet_window.py:265] - 开启鼠标穿透模式 (Ghost Mode)
+2025-12-21 21:02:14,284 [INFO] [pet_window.py:171] - 程序关闭，保存数据...
+2025-12-21 21:02:14,298 [INFO] [cultivator.py:409] - 数据已保存
+2025-12-21 21:03:05,146 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 21:03:05,156 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 21:03:05,254 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 21:03:05,258 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 21:03:05,259 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 21:03:05,274 [INFO] [cultivator.py:449] - 数据已加载
+2025-12-21 21:03:05,298 [DEBUG] [pet_window.py:533] - 切换状态: IDLE
+2025-12-21 21:03:05,317 [INFO] [pet_window.py:265] - 开启鼠标穿透模式 (Ghost Mode)
+2025-12-21 21:03:07,592 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 21:03:07,593 [INFO] [pet_window.py:171] - 程序关闭，保存数据...
+2025-12-21 21:03:07,606 [INFO] [cultivator.py:409] - 数据已保存
+2025-12-21 21:05:27,990 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 21:05:28,026 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 21:05:28,133 [INFO] [pet_window.py:17] - 初始化 PetWindow...
+2025-12-21 21:05:28,138 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 21:05:28,141 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 21:05:28,164 [INFO] [cultivator.py:449] - 数据已加载
+2025-12-21 21:05:28,211 [DEBUG] [pet_window.py:558] - 切换状态: IDLE
+2025-12-21 21:05:28,230 [INFO] [pet_window.py:280] - 关闭鼠标穿透模式
+2025-12-21 21:05:36,159 [DEBUG] [pet_window.py:558] - 切换状态: COMBAT
+2025-12-21 21:05:41,158 [DEBUG] [pet_window.py:558] - 切换状态: IDLE
+2025-12-21 21:05:42,538 [INFO] [pet_window.py:274] - 开启鼠标穿透模式 (Ghost Mode)
+2025-12-21 21:05:51,584 [INFO] [pet_window.py:280] - 关闭鼠标穿透模式
+2025-12-21 21:05:57,021 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
+2025-12-21 21:05:57,024 [INFO] [pet_window.py:180] - 程序关闭，保存数据...
+2025-12-21 21:05:57,035 [INFO] [cultivator.py:409] - 数据已保存
+2025-12-21 21:10:59,358 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-21 21:10:59,384 [INFO] [main.py:12] - 启动应用程序...
+2025-12-21 21:10:59,491 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-21 21:10:59,498 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-21 21:10:59,498 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-21 21:10:59,514 [INFO] [cultivator.py:449] - 数据已加载
+2025-12-21 21:10:59,556 [DEBUG] [pet_window.py:498] - 切换状态: IDLE
+2025-12-21 21:11:05,659 [DEBUG] [pet_window.py:498] - 切换状态: COMBAT
+2025-12-21 21:11:08,659 [DEBUG] [pet_window.py:498] - 切换状态: IDLE
+2025-12-21 21:11:54,255 [INFO] [pet_window.py:170] - 程序关闭，保存数据...
+2025-12-21 21:11:54,268 [INFO] [cultivator.py:409] - 数据已保存

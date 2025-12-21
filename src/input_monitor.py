@@ -8,6 +8,8 @@ class InputMonitor:
         self._kb_count = 0
         self._mouse_count = 0
         self._start_time = time.time()
+        self.last_error = None
+        self.permission_denied = False
         
         # 监听器
         self.kb_listener = keyboard.Listener(on_press=self.on_press)
@@ -22,8 +24,27 @@ class InputMonitor:
 
     def start(self):
         self.running = True
-        self.kb_listener.start()
-        self.mouse_listener.start()
+        self.last_error = None
+        self.permission_denied = False
+        try:
+            self.kb_listener.start()
+            self.mouse_listener.start()
+        except Exception as exc:
+            self.last_error = exc
+            message = str(exc)
+            if "not trusted" in message.lower() or "operation not permitted" in message.lower():
+                self.permission_denied = True
+            self.running = False
+            try:
+                self.kb_listener.stop()
+            except Exception:
+                pass
+            try:
+                self.mouse_listener.stop()
+            except Exception:
+                pass
+            return False
+        return True
 
     def stop(self):
         self.running = False

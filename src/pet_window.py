@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt6.QtWidgets import QWidget, QLabel, QApplication, QMenu
+from PyQt6.QtWidgets import QWidget, QLabel, QApplication, QMenu, QMessageBox
 from PyQt6.QtCore import Qt, QTimer, QPoint, QSize
 from PyQt6.QtGui import QPixmap, QAction, QMouseEvent, QCursor
 from src.state import PetState
@@ -32,7 +32,9 @@ class PetWindow(QWidget):
         
         # 核心逻辑
         self.monitor = InputMonitor()
-        self.monitor.start()
+        monitor_started = self.monitor.start()
+        if not monitor_started:
+            self._maybe_prompt_input_permissions()
         
         # 炼丹状态
         self.is_alchemying = False
@@ -245,35 +247,148 @@ class PetWindow(QWidget):
         self.move(screen.width() - 350, screen.height() - 400)
         self.show()
         
-    def set_ghost_mode(self, enabled: bool):
-        # 切换鼠标穿透模式
-        # 需要重新设置 WindowFlags，这会隐藏窗口，所以需要重新 show
-        
-        current_flags = self.windowFlags()
-        
-        if enabled:
-            logger.info("开启鼠标穿透模式 (Ghost Mode)")
-            # 添加 TransparentForInput
-            new_flags = current_flags | Qt.WindowType.WindowTransparentForInput
-            self.show_notification("已锁定: 鼠标将穿透窗口 (请使用托盘图标解锁)")
-        else:
-            logger.info("关闭鼠标穿透模式")
-            # 移除 TransparentForInput
-            # Note: WindowFlags 是位掩码，移除只能重组
-            # 重新构建标准 flags
-            new_flags = (Qt.WindowType.FramelessWindowHint | 
-                         Qt.WindowType.WindowStaysOnTopHint | 
-                         Qt.WindowType.Tool |
-                         Qt.WindowType.WindowDoesNotAcceptFocus)
+    def showEvent(self, event):
+        super().showEvent(event)
+        if sys.platform == "darwin":
+            QTimer.singleShot(0, self._apply_macos_window_settings)
+            QTimer.singleShot(150, self._apply_macos_window_settings)
 
-        self.setWindowFlags(new_flags)
-        
-        # 重新应用属性 (setWindowFlags 可能会重置某些属性)
-        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
-        self.setAttribute(Qt.WidgetAttribute.WA_NoSystemBackground, False)
-        self.setAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating, True)
-        
-        self.show()
+    def _macos_get_ns_window(self):
+        if sys.platform != "darwin":
+            return None
+
+        try:
+            import ctypes
+            from ctypes import c_char_p, c_void_p
+            from ctypes.util import find_library
+        except Exception as exc:
+            logger.warning(f"macOS 窗口初始化失败: {exc}")
+            return None
+
+        libobjc_path = find_library("objc")
+        if not libobjc_path:
+            logger.warning("macOS 窗口初始化失败: 找不到 libobjc")
+            return None
+
+        try:
+            libobjc = ctypes.cdll.LoadLibrary(libobjc_path)
+            sel_register_name = libobjc.sel_registerName
+            sel_register_name.restype = c_void_p
+            sel_register_name.argtypes = [c_char_p]
+
+            objc_msg_send = libobjc.objc_msgSend
+
+            def send(receiver, selector, *args, restype=c_void_p, argtypes=None):
+                objc_msg_send.restype = restype
+                objc_msg_send.argtypes = [c_void_p, c_void_p] + (argtypes or [])
+                return objc_msg_send(receiver, selector, *args)
+
+            wid = int(self.winId())
+            if wid == 0:
+                return None
+
+            ns_view = c_void_p(wid)
+            ns_window = send(ns_view, sel_register_name(b"window"), restype=c_void_p)
+            if not ns_window:
+                return None
+
+            return ns_window, send, sel_register_name
+        except Exception as exc:
+            logger.warning(f"macOS 窗口初始化失败: {exc}")
+            return None
+
+    def _apply_macos_window_settings(self):
+        if sys.platform != "darwin":
+            return
+
+        try:
+            import ctypes
+            from ctypes import c_bool, c_int, c_long, c_ulong
+            from ctypes.util import find_library
+        except Exception as exc:
+            logger.warning(f"macOS 窗口设置失败: {exc}")
+            return
+
+        result = self._macos_get_ns_window()
+        if not result:
+            return
+
+        ns_window, send, sel_register_name = result
+
+        try:
+            sel_ignore = sel_register_name(b"setIgnoresMouseEvents:")
+            send(ns_window, sel_ignore, c_bool(False), restype=None, argtypes=[c_bool])
+        except Exception as exc:
+            logger.warning(f"macOS 点击穿透设置失败: {exc}")
+
+        try:
+            sel_hides = sel_register_name(b"setHidesOnDeactivate:")
+            send(ns_window, sel_hides, c_bool(False), restype=None, argtypes=[c_bool])
+        except Exception as exc:
+            logger.warning(f"macOS Deactivate 设置失败: {exc}")
+
+        try:
+            sel_set_behavior = sel_register_name(b"setCollectionBehavior:")
+            NSWindowCollectionBehaviorCanJoinAllSpaces = 1 << 0
+            NSWindowCollectionBehaviorStationary = 1 << 4
+            NSWindowCollectionBehaviorFullScreenAuxiliary = 1 << 8
+            behavior = (
+                NSWindowCollectionBehaviorCanJoinAllSpaces
+                | NSWindowCollectionBehaviorStationary
+                | NSWindowCollectionBehaviorFullScreenAuxiliary
+            )
+            send(ns_window, sel_set_behavior, c_ulong(behavior), restype=None, argtypes=[c_ulong])
+        except Exception as exc:
+            logger.warning(f"macOS 窗口空间设置失败: {exc}")
+
+        try:
+            core_graphics_path = find_library("CoreGraphics")
+            if not core_graphics_path:
+                logger.warning("macOS 置顶设置失败: 找不到 CoreGraphics")
+                return
+
+            core_graphics = ctypes.cdll.LoadLibrary(core_graphics_path)
+            cg_window_level_for_key = core_graphics.CGWindowLevelForKey
+            cg_window_level_for_key.argtypes = [c_int]
+            cg_window_level_for_key.restype = c_int
+
+            kCGFloatingWindowLevelKey = 5
+            level_key = kCGFloatingWindowLevelKey
+            level = cg_window_level_for_key(level_key)
+
+            sel_set_level = sel_register_name(b"setLevel:")
+            send(ns_window, sel_set_level, c_long(level), restype=None, argtypes=[c_long])
+        except Exception as exc:
+            logger.warning(f"macOS 置顶设置失败: {exc}")
+
+        try:
+            sel_order_front = sel_register_name(b"orderFrontRegardless")
+            send(ns_window, sel_order_front, restype=None)
+        except Exception as exc:
+            logger.warning(f"macOS 置顶前置失败: {exc}")
+
+    def _maybe_prompt_input_permissions(self):
+        if sys.platform != "darwin":
+            return
+
+        if self.monitor.permission_denied:
+            message = (
+                "需要启用输入监听权限才能捕获键盘/鼠标动作。\n\n"
+                "请前往：系统设置 > 隐私与安全性 > 输入监控\n"
+                "并允许当前应用或 python 进程。\n\n"
+                "如仍无效，请同时开启“辅助功能”权限。"
+            )
+        elif self.monitor.last_error:
+            message = (
+                "全局输入监听启动失败。\n\n"
+                "请检查：系统设置 > 隐私与安全性 > 输入监控。\n"
+                "必要时也开启“辅助功能”权限。"
+            )
+        else:
+            return
+
+        logger.warning("全局输入监听未就绪，提示权限设置")
+        QMessageBox.information(None, "需要输入监听权限", message)
 
     def update_floating_animation(self):
         # 简单的上下浮动 (Sin 也可以，这里用简单的增量)

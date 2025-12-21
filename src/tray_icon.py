@@ -1,12 +1,9 @@
 import sys
 from PyQt6.QtWidgets import QSystemTrayIcon, QMenu
 from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtCore import QObject, pyqtSignal
+from PyQt6.QtCore import QObject
 
 class SystemTray(QObject):
-    # 信号：请求切换穿透模式
-    toggle_ghost_signal = pyqtSignal(bool)
-    
     def __init__(self, pet_window, app):
         super().__init__()
         self.pet_window = pet_window
@@ -29,15 +26,6 @@ class SystemTray(QObject):
     def init_menu(self):
         menu = QMenu()
         
-        # 锁定/穿透模式
-        self.ghost_action = QAction("锁定 (鼠标穿透)", self)
-        self.ghost_action.setCheckable(True)
-        self.ghost_action.setChecked(False)
-        self.ghost_action.triggered.connect(self.on_toggle_ghost)
-        menu.addAction(self.ghost_action)
-        
-        menu.addSeparator()
-        
         # 还原位置 (防止飞出屏幕)
         reset_pos_action = QAction("重置位置", self)
         reset_pos_action.triggered.connect(self.pet_window.reset_position)
@@ -51,10 +39,3 @@ class SystemTray(QObject):
         menu.addAction(quit_action)
         
         self.tray_icon.setContextMenu(menu)
-        
-    def on_toggle_ghost(self, checked):
-        self.pet_window.set_ghost_mode(checked)
-        if checked:
-            self.ghost_action.setText("解锁 (恢复交互)")
-        else:
-            self.ghost_action.setText("锁定 (鼠标穿透)")
