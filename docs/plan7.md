@@ -139,4 +139,34 @@ def reset_to_beginning(self):
 4.  **验证**: 确保存档能正常读写，物品能正常显示。
 
 ---
-**Status**: Pending Implementation
+**Status**: Completed
+
+## 完成情况记录 (Completion Log)
+*Date: 2025-12-24*
+
+### 1. 数据库构建
+- 在 `src/database.py` 中实现了完整的 SQLite Schema:
+    - `item_definitions`: 物品静态数据
+    - `recipes`: 配方数据
+    - `player_status`: 用户存档 (ID=1)
+    - `player_inventory`: 用户背包
+    - `player_events`: 事件日志
+- 实现了 `_init_db` 自动初始化逻辑。
+
+### 2. 物品系统重构 (Item System v2)
+- 编写了 `tools_generate_items.py`，程序化生成了从炼气期(Tier 0)到渡劫期(Tier 8)的 9 套标准物品数据。
+- 包含：灵草(common)、元果(rare)、妖丹(material)、以及 5 种标准丹药(经验/回复/Buff/突破)。
+- 修改 `src/item_manager.py`:
+    - 启动时自动检查 DB，若为空则从 `items_v2.json` 导入数据。
+    - 内存中改为从 DB 加载数据，支持 0-8 动态层级。
+
+### 3. 存档迁移与逻辑更新
+- 修改 `src/cultivator.py`:
+    - `load_data`: 优先读取 SQLite，若无数据则自动读取旧 `save_data.json` 并迁移入库，旧文件备份为 `.bak`。
+    - `save_data`: 全面改为写入 SQLite。
+    - `reset_to_beginning`: 实现了重置/转世逻辑。
+    - 整合了 Plan 4 的 `EXP_TABLE` 和 Plan 6 的动态坊市掉落逻辑。
+
+### 4. 验证
+- 通过 `tools_verify_db.py` 验证了物品导入的正确性 (71种物品)。
+- 通过 `tools_verify_cultivator.py` 验证了存档迁移、读取和新坊市刷新逻辑的正确性。

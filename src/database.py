@@ -30,8 +30,73 @@ class DatabaseManager:
                     CREATE INDEX IF NOT EXISTS idx_timestamp 
                     ON activity_logs_minute (timestamp)
                 """)
+
+                # 1. Item Definitions
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS item_definitions (
+                        id TEXT PRIMARY KEY,
+                        name TEXT NOT NULL,
+                        type TEXT,       
+                        tier INTEGER,    
+                        description TEXT,
+                        price INTEGER,
+                        effect_json TEXT 
+                    )
+                """)
+
+                # 2. Recipes
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS recipes (
+                        result_item_id TEXT PRIMARY KEY,
+                        ingredients_json TEXT, 
+                        craft_time INTEGER,    
+                        success_rate REAL      
+                    )
+                """)
+
+                # 3. Player Status (Single row, id=1)
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS player_status (
+                        id INTEGER PRIMARY KEY CHECK (id = 1),
+                        layer_index INTEGER DEFAULT 0, 
+                        current_exp INTEGER DEFAULT 0,
+                        money INTEGER DEFAULT 0,
+                        
+                        stat_body INTEGER DEFAULT 10,  
+                        stat_mind INTEGER DEFAULT 0,    
+                        stat_luck INTEGER DEFAULT 0,    
+                        
+                        talent_points INTEGER DEFAULT 0,
+                        talent_json TEXT,              
+                        
+                        last_save_time INTEGER,
+                        last_login_time INTEGER
+                    )
+                """)
+                
+                # Initialize player row if not exists
+                cursor.execute("INSERT OR IGNORE INTO player_status (id) VALUES (1)")
+
+                # 4. Player Inventory
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS player_inventory (
+                        item_id TEXT PRIMARY KEY,
+                        count INTEGER DEFAULT 0
+                    )
+                """)
+
+                # 5. Events Log
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS player_events (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        timestamp INTEGER,
+                        event_type TEXT,
+                        message TEXT
+                    )
+                """)
+
                 conn.commit()
-                logger.info("数据库初始化完成: activity_logs_minute")
+                logger.info("数据库初始化完成: all tables ready")
         except Exception as e:
             logger.error(f"数据库初始化失败: {e}")
 

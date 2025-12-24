@@ -8,6 +8,19 @@ class Cultivator:
         "炼气期", "筑基期", "金丹期", "元婴期", "化神期", "炼虚期", "合体期", "大乘期", "渡劫期"
     ]
     
+    # Based on Plan 4 & 6 (Standardized 9 Tiers)
+    EXP_TABLE = [
+        200000,      # 0: 炼气
+        1400000,     # 1: 筑基
+        6000000,     # 2: 金丹
+        6000000,     # 3: 元婴
+        9000000,     # 4: 化神
+        13500000,    # 5: 炼虚
+        20250000,    # 6: 合体
+        30375000,    # 7: 大乘
+        999999999    # 8: 渡劫 (Max)
+    ]
+    
     def __init__(self):
         self.exp = 0
         self.layer_index = 0
@@ -76,8 +89,8 @@ class Cultivator:
         
         # 随机生成 6 个商品
         # 逻辑：3个材料，2个消耗品，1个珍稀(低概率)
-        # 简单实现：从当前 Tier 和 上一 Tier 随机抽取
-        current_tier = 1 if self.layer_index == 0 else 2
+        # 随机生成 6 个商品
+        current_tier = min(self.layer_index, 8)
         
         for _ in range(6):
             # 随机决定类型
@@ -85,7 +98,7 @@ class Cultivator:
             if roll < 0.6: # 60% 材料
                 item_id = self.item_manager.get_random_material(current_tier)
             else: # 40% 丹药
-                candidates = self.item_manager.tier_lists[current_tier]["pills"]
+                candidates = self.item_manager.tier_lists.get(current_tier, {}).get("pills", [])
                 item_id = random.choice(candidates) if candidates else None
                 
             if item_id:
@@ -213,7 +226,9 @@ class Cultivator:
     @property
     def max_exp(self):
         # 简单的指数级经验曲线
-        return 100 * (2 ** self.layer_index)
+        if self.layer_index < len(self.EXP_TABLE):
+            return self.EXP_TABLE[self.layer_index]
+        return self.EXP_TABLE[-1]
 
     def gain_exp(self, amount):
         self.exp += amount
@@ -302,7 +317,7 @@ class Cultivator:
         current_state_code = 0 
         
         # Mapping Tier
-        current_tier = 1 if self.layer_index == 0 else 2 
+        current_tier = min(self.layer_index, 8) 
         
         # 0. 心魔与天赋判定
         # 天赋加成
@@ -422,70 +437,172 @@ class Cultivator:
         ]
         return random.choice(dialogues)
 
-    def save_data(self, filepath):
+    def save_data(self, filepath=None):
+        # filepath argument is kept for compatibility but ignored for SQLite
+        from src.database import db_manager
         import json
         import time
-        data = {
-            "exp": self.exp,
-            "layer_index": self.layer_index,
-            "money": self.money,
-            "inventory": self.inventory,
-            "last_save_time": time.time(),
-            "market_goods": self.market_goods,
-            "last_market_refresh": self.last_market_refresh,
-            "daily_reward_claimed": self.daily_reward_claimed,
-            "stats": {
-                "mind": self.mind,
-                "body": self.body,
-                "affection": self.affection
-            },
-            "talents": self.talents,
-            "talent_points": self.talent_points
-        }
+        
+        current_time = int(time.time())
+        talent_json = json.dumps(self.talents)
+        
         try:
-            with open(filepath, 'w') as f:
-                json.dump(data, f)
-            logger.info("数据已保存")
+            with db_manager._get_conn() as conn:
+                cursor = conn.cursor()
+                
+                # 1. Update Status
+                cursor.execute("""
+                    UPDATE player_status
+                    SET layer_index = ?, current_exp = ?, money = ?,
+                        stat_body = ?, stat_mind = ?, stat_luck = ?,
+                        talent_points = ?, talent_json = ?,
+                        last_save_time = ?
+                    WHERE id = 1
+                """, (
+                    self.layer_index, self.exp, self.money,
+                    self.body, self.mind, self.affection,
+                    self.talent_points, talent_json,
+                    current_time
+                ))
+                
+                # 2. Update Inventory
+                # Strategy: Clear existing inventory for this user (or simple item-by-item upsert)
+                # Since inventory is simple, let's just upsert all items.
+                # But to handle deleted items (count 0), we should probably delete all first?
+                # Actually, our inventory dict keeps 0 count items sometimes.
+                # Let's clean up: remove items with <= 0 count from DB, upsert > 0.
+                
+                # First, upsert non-zero items
+                for item_id, count in self.inventory.items():
+                    if count > 0:
+                        cursor.execute("""
+                            INSERT INTO player_inventory (item_id, count)
+                            VALUES (?, ?)
+                            ON CONFLICT(item_id) DO UPDATE SET count = excluded.count
+                        """, (item_id, count))
+                    else:
+                        cursor.execute("DELETE FROM player_inventory WHERE item_id = ?", (item_id,))
+                        
+                conn.commit()
+                logger.info("数据已保存至数据库")
         except Exception as e:
             logger.error(f"保存失败: {e}")
 
-    def load_data(self, filepath):
+    def load_data(self, filepath=None):
+        from src.database import db_manager
         import json
         import os
-        if not os.path.exists(filepath):
-            # 新存档，初始化坊市
-            self.refresh_market()
-            return
+        import time
         
+        # 1. Try to load from DB
+        loaded_from_db = False
         try:
-            with open(filepath, 'r') as f:
-                data = json.load(f)
-                self.exp = data.get("exp", 0)
-                self.layer_index = data.get("layer_index", 0)
-                self.money = data.get("money", 0)
-                self.inventory = data.get("inventory", {})
-                self.market_goods = data.get("market_goods", [])
-                self.last_market_refresh = data.get("last_market_refresh", 0)
-                self.daily_reward_claimed = data.get("daily_reward_claimed", None)
+            with db_manager._get_conn() as conn:
+                conn.row_factory = lambda c, r: dict(zip([col[0] for col in c.description], r))
+                cursor = conn.cursor()
                 
-                stats = data.get("stats", {})
-                self.mind = stats.get("mind", 0)
-                self.body = stats.get("body", 10)
-                self.affection = stats.get("affection", 0)
+                cursor.execute("SELECT * FROM player_status WHERE id = 1")
+                status = cursor.fetchone()
                 
-                self.talents = data.get("talents", {"exp": 0, "drop": 0})
-                self.talent_points = data.get("talent_points", 0)
+                if status and status['last_save_time']: 
+                    # DB has data
+                    self.layer_index = status['layer_index']
+                    self.exp = status['current_exp']
+                    self.money = status['money']
+                    self.body = status['stat_body']
+                    self.mind = status['stat_mind']
+                    self.affection = status['stat_luck']
+                    self.talent_points = status['talent_points']
+                    if status['talent_json']:
+                        self.talents = json.loads(status['talent_json'])
+                    
+                    last_time = status['last_save_time']
+                    
+                    # Load Inventory
+                    cursor.execute("SELECT * FROM player_inventory")
+                    inv_rows = cursor.fetchall()
+                    self.inventory = {row['item_id']: row['count'] for row in inv_rows}
+                    
+                    loaded_from_db = True
+                    
+                    # Offline Progress
+                    if last_time > 0:
+                        self.calculate_offline_progress(last_time)
+        except Exception as e:
+            logger.error(f"从数据库加载失败: {e}")
+
+        # 2. If DB empty, check for JSON migration
+        if not loaded_from_db and filepath and os.path.exists(filepath):
+            logger.info("数据库无存档，尝试迁移旧 JSON 存档...")
+            try:
+                with open(filepath, 'r') as f:
+                    data = json.load(f)
+                    self.exp = data.get("exp", 0)
+                    self.layer_index = data.get("layer_index", 0)
+                    self.money = data.get("money", 0)
+                    self.inventory = data.get("inventory", {})
+                    # ... other fields ...
+                    stats = data.get("stats", {})
+                    self.mind = stats.get("mind", 0)
+                    self.body = stats.get("body", 10)
+                    self.affection = stats.get("affection", 0)
+                    self.talents = data.get("talents", {"exp": 0, "drop": 0})
+                    self.talent_points = data.get("talent_points", 0)
+                    
+                # Save immediately to DB
+                self.save_data()
+                # Rename old file to backup
+                os.rename(filepath, filepath + ".bak")
+                logger.info("迁移完成，旧存档已备份已 .bak")
                 
-                # 结算离线
+                # Check Offline for JSON migration too if needed, but let's assume save_data sets current time.
+                # If we want offline progress from JSON time:
                 last_time = data.get("last_save_time", 0)
                 if last_time > 0:
-                    self.calculate_offline_progress(last_time)
+                     self.calculate_offline_progress(last_time)
+                     
+            except Exception as e:
+                logger.error(f"JSON 迁移失败: {e}")
+        
+        # 3. Validation
+        self.check_daily_refresh()
+
+    def reset_to_beginning(self):
+        """
+        重置玩家数据回到初始状态 (转世重修)
+        """
+        from src.database import db_manager
+        import time
+        
+        self.exp = 0
+        self.layer_index = 0
+        self.money = 0
+        self.body = 10
+        self.mind = 0
+        self.affection = 0
+        self.inventory = {}
+        self.talents = {"exp": 0, "drop": 0}
+        self.talent_points = 0
+        
+        try:
+            with db_manager._get_conn() as conn:
+                cursor = conn.cursor()
+                # Reset Status
+                cursor.execute("""
+                    UPDATE player_status
+                    SET layer_index=0, current_exp=0, money=0,
+                        stat_body=10, stat_mind=0, stat_luck=0,
+                        talent_points=0, talent_json='{}',
+                        last_save_time=?
+                    WHERE id=1
+                """, (int(time.time()),))
+                
+                # Clear Inventory
+                cursor.execute("DELETE FROM player_inventory")
+                
+                conn.commit()
             
-            # 检查刷新
-            self.check_daily_refresh()
-            if not self.market_goods:
-                self.refresh_market()
-                    
-            logger.info("数据已加载")
+            logger.info("玩家已转世重修 (数据重置)")
+            self.events.append("【轮回】万法归一，重入灵途！")
         except Exception as e:
-            logger.error(f"加载失败: {e}")
+            logger.error(f"重置失败: {e}")

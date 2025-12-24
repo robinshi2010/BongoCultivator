@@ -1,0 +1,1029 @@
+{
+    "tier_0": {
+        "materials": [
+            {
+                "id": "herb_spirit_0",
+                "name": "炼气灵草",
+                "type": "consumable",
+                "tier": 0,
+                "price": 100,
+                "desc": "生长在灵气充裕之地的草药，适合炼气期修士吞服。",
+                "effect": {
+                    "exp": 5,
+                    "mind_dmg": 1
+                }
+            },
+            {
+                "id": "fruit_essence_0",
+                "name": "炼气元果",
+                "type": "consumable",
+                "tier": 0,
+                "price": 500,
+                "desc": "凝聚了天地日月的精华，炼气期的大补之物。",
+                "effect": {
+                    "exp": 15
+                }
+            },
+            {
+                "id": "mat_monster_0",
+                "name": "炼气妖丹",
+                "type": "material",
+                "tier": 0,
+                "price": 800,
+                "desc": "炼气期妖兽的内丹，炼丹主材。"
+            }
+        ],
+        "pills": [
+            {
+                "id": "pill_exp_0",
+                "name": "炼气聚气丹",
+                "type": "consumable",
+                "tier": 0,
+                "price": 100,
+                "desc": "大幅精进炼气期修为。",
+                "effect": {
+                    "exp": 50
+                },
+                "recipe": {
+                    "herb_spirit_0": 3
+                }
+            },
+            {
+                "id": "pill_mind_0",
+                "name": "炼气清心丹",
+                "type": "consumable",
+                "tier": 0,
+                "price": 80,
+                "desc": "抚平心魔，稳固道心。",
+                "effect": {
+                    "mind_heal": 10
+                },
+                "recipe": {
+                    "herb_spirit_0": 2,
+                    "fruit_essence_0": 1
+                }
+            },
+            {
+                "id": "pill_speed_0",
+                "name": "炼气神行散",
+                "type": "buff",
+                "tier": 0,
+                "price": 120,
+                "desc": "短时间内大幅提升机缘(掉落率)。",
+                "effect": {
+                    "buff": "drop_boost",
+                    "value": 0.2,
+                    "duration": 1800
+                },
+                "recipe": {
+                    "mat_monster_0": 1,
+                    "herb_spirit_0": 2
+                }
+            },
+            {
+                "id": "pill_idle_0",
+                "name": "炼气辟谷丹",
+                "type": "buff",
+                "tier": 0,
+                "price": 100,
+                "desc": "提升闭关挂机收益。",
+                "effect": {
+                    "buff": "idle_boost",
+                    "value": 0.1,
+                    "duration": 3600
+                },
+                "recipe": {
+                    "fruit_essence_0": 2
+                }
+            },
+            {
+                "id": "pill_break_0",
+                "name": "筑基突破丹",
+                "type": "breakthrough",
+                "tier": 0,
+                "price": 1000,
+                "desc": "辅助突破瓶颈，晋升筑基。",
+                "effect": {
+                    "breakthrough": "tier_1",
+                    "chance_add": 20
+                },
+                "recipe": {
+                    "mat_monster_0": 5,
+                    "fruit_essence_0": 5,
+                    "herb_spirit_0": 10
+                }
+            }
+        ]
+    },
+    "tier_1": {
+        "materials": [
+            {
+                "id": "herb_spirit_1",
+                "name": "筑基灵草",
+                "type": "consumable",
+                "tier": 1,
+                "price": 500,
+                "desc": "生长在灵气充裕之地的草药，适合筑基期修士吞服。",
+                "effect": {
+                    "exp": 60,
+                    "mind_dmg": 1
+                }
+            },
+            {
+                "id": "fruit_essence_1",
+                "name": "筑基元果",
+                "type": "consumable",
+                "tier": 1,
+                "price": 2500,
+                "desc": "凝聚了天地日月的精华，筑基期的大补之物。",
+                "effect": {
+                    "exp": 180
+                }
+            },
+            {
+                "id": "mat_monster_1",
+                "name": "筑基妖丹",
+                "type": "material",
+                "tier": 1,
+                "price": 4000,
+                "desc": "筑基期妖兽的内丹，炼丹主材。"
+            }
+        ],
+        "pills": [
+            {
+                "id": "pill_exp_1",
+                "name": "筑基聚气丹",
+                "type": "consumable",
+                "tier": 1,
+                "price": 500,
+                "desc": "大幅精进筑基期修为。",
+                "effect": {
+                    "exp": 600
+                },
+                "recipe": {
+                    "herb_spirit_1": 3
+                }
+            },
+            {
+                "id": "pill_mind_1",
+                "name": "筑基清心丹",
+                "type": "consumable",
+                "tier": 1,
+                "price": 400,
+                "desc": "抚平心魔，稳固道心。",
+                "effect": {
+                    "mind_heal": 15
+                },
+                "recipe": {
+                    "herb_spirit_1": 2,
+                    "fruit_essence_1": 1
+                }
+            },
+            {
+                "id": "pill_speed_1",
+                "name": "筑基神行散",
+                "type": "buff",
+                "tier": 1,
+                "price": 600,
+                "desc": "短时间内大幅提升机缘(掉落率)。",
+                "effect": {
+                    "buff": "drop_boost",
+                    "value": 0.25,
+                    "duration": 1800
+                },
+                "recipe": {
+                    "mat_monster_1": 1,
+                    "herb_spirit_1": 2
+                }
+            },
+            {
+                "id": "pill_idle_1",
+                "name": "筑基辟谷丹",
+                "type": "buff",
+                "tier": 1,
+                "price": 500,
+                "desc": "提升闭关挂机收益。",
+                "effect": {
+                    "buff": "idle_boost",
+                    "value": 0.15000000000000002,
+                    "duration": 3600
+                },
+                "recipe": {
+                    "fruit_essence_1": 2
+                }
+            },
+            {
+                "id": "pill_break_1",
+                "name": "金丹突破丹",
+                "type": "breakthrough",
+                "tier": 1,
+                "price": 5000,
+                "desc": "辅助突破瓶颈，晋升金丹。",
+                "effect": {
+                    "breakthrough": "tier_2",
+                    "chance_add": 21
+                },
+                "recipe": {
+                    "mat_monster_1": 5,
+                    "fruit_essence_1": 5,
+                    "herb_spirit_1": 10
+                }
+            }
+        ]
+    },
+    "tier_2": {
+        "materials": [
+            {
+                "id": "herb_spirit_2",
+                "name": "金丹灵草",
+                "type": "consumable",
+                "tier": 2,
+                "price": 2000,
+                "desc": "生长在灵气充裕之地的草药，适合金丹期修士吞服。",
+                "effect": {
+                    "exp": 500,
+                    "mind_dmg": 1
+                }
+            },
+            {
+                "id": "fruit_essence_2",
+                "name": "金丹元果",
+                "type": "consumable",
+                "tier": 2,
+                "price": 10000,
+                "desc": "凝聚了天地日月的精华，金丹期的大补之物。",
+                "effect": {
+                    "exp": 1500
+                }
+            },
+            {
+                "id": "mat_monster_2",
+                "name": "金丹妖丹",
+                "type": "material",
+                "tier": 2,
+                "price": 16000,
+                "desc": "金丹期妖兽的内丹，炼丹主材。"
+            }
+        ],
+        "pills": [
+            {
+                "id": "pill_exp_2",
+                "name": "金丹聚气丹",
+                "type": "consumable",
+                "tier": 2,
+                "price": 2000,
+                "desc": "大幅精进金丹期修为。",
+                "effect": {
+                    "exp": 5000
+                },
+                "recipe": {
+                    "herb_spirit_2": 3
+                }
+            },
+            {
+                "id": "pill_mind_2",
+                "name": "金丹清心丹",
+                "type": "consumable",
+                "tier": 2,
+                "price": 1600,
+                "desc": "抚平心魔，稳固道心。",
+                "effect": {
+                    "mind_heal": 20
+                },
+                "recipe": {
+                    "herb_spirit_2": 2,
+                    "fruit_essence_2": 1
+                }
+            },
+            {
+                "id": "pill_speed_2",
+                "name": "金丹神行散",
+                "type": "buff",
+                "tier": 2,
+                "price": 2400,
+                "desc": "短时间内大幅提升机缘(掉落率)。",
+                "effect": {
+                    "buff": "drop_boost",
+                    "value": 0.30000000000000004,
+                    "duration": 1800
+                },
+                "recipe": {
+                    "mat_monster_2": 1,
+                    "herb_spirit_2": 2
+                }
+            },
+            {
+                "id": "pill_idle_2",
+                "name": "金丹辟谷丹",
+                "type": "buff",
+                "tier": 2,
+                "price": 2000,
+                "desc": "提升闭关挂机收益。",
+                "effect": {
+                    "buff": "idle_boost",
+                    "value": 0.2,
+                    "duration": 3600
+                },
+                "recipe": {
+                    "fruit_essence_2": 2
+                }
+            },
+            {
+                "id": "pill_break_2",
+                "name": "元婴突破丹",
+                "type": "breakthrough",
+                "tier": 2,
+                "price": 20000,
+                "desc": "辅助突破瓶颈，晋升元婴。",
+                "effect": {
+                    "breakthrough": "tier_3",
+                    "chance_add": 22
+                },
+                "recipe": {
+                    "mat_monster_2": 5,
+                    "fruit_essence_2": 5,
+                    "herb_spirit_2": 10
+                }
+            }
+        ]
+    },
+    "tier_3": {
+        "materials": [
+            {
+                "id": "herb_spirit_3",
+                "name": "元婴灵草",
+                "type": "consumable",
+                "tier": 3,
+                "price": 8000,
+                "desc": "生长在灵气充裕之地的草药，适合元婴期修士吞服。",
+                "effect": {
+                    "exp": 5000,
+                    "mind_dmg": 1
+                }
+            },
+            {
+                "id": "fruit_essence_3",
+                "name": "元婴元果",
+                "type": "consumable",
+                "tier": 3,
+                "price": 40000,
+                "desc": "凝聚了天地日月的精华，元婴期的大补之物。",
+                "effect": {
+                    "exp": 15000
+                }
+            },
+            {
+                "id": "mat_monster_3",
+                "name": "元婴妖丹",
+                "type": "material",
+                "tier": 3,
+                "price": 64000,
+                "desc": "元婴期妖兽的内丹，炼丹主材。"
+            }
+        ],
+        "pills": [
+            {
+                "id": "pill_exp_3",
+                "name": "元婴聚气丹",
+                "type": "consumable",
+                "tier": 3,
+                "price": 8000,
+                "desc": "大幅精进元婴期修为。",
+                "effect": {
+                    "exp": 50000
+                },
+                "recipe": {
+                    "herb_spirit_3": 3
+                }
+            },
+            {
+                "id": "pill_mind_3",
+                "name": "元婴清心丹",
+                "type": "consumable",
+                "tier": 3,
+                "price": 6400,
+                "desc": "抚平心魔，稳固道心。",
+                "effect": {
+                    "mind_heal": 25
+                },
+                "recipe": {
+                    "herb_spirit_3": 2,
+                    "fruit_essence_3": 1
+                }
+            },
+            {
+                "id": "pill_speed_3",
+                "name": "元婴神行散",
+                "type": "buff",
+                "tier": 3,
+                "price": 9600,
+                "desc": "短时间内大幅提升机缘(掉落率)。",
+                "effect": {
+                    "buff": "drop_boost",
+                    "value": 0.35000000000000003,
+                    "duration": 1800
+                },
+                "recipe": {
+                    "mat_monster_3": 1,
+                    "herb_spirit_3": 2
+                }
+            },
+            {
+                "id": "pill_idle_3",
+                "name": "元婴辟谷丹",
+                "type": "buff",
+                "tier": 3,
+                "price": 8000,
+                "desc": "提升闭关挂机收益。",
+                "effect": {
+                    "buff": "idle_boost",
+                    "value": 0.25,
+                    "duration": 3600
+                },
+                "recipe": {
+                    "fruit_essence_3": 2
+                }
+            },
+            {
+                "id": "pill_break_3",
+                "name": "化神突破丹",
+                "type": "breakthrough",
+                "tier": 3,
+                "price": 80000,
+                "desc": "辅助突破瓶颈，晋升化神。",
+                "effect": {
+                    "breakthrough": "tier_4",
+                    "chance_add": 23
+                },
+                "recipe": {
+                    "mat_monster_3": 5,
+                    "fruit_essence_3": 5,
+                    "herb_spirit_3": 10
+                }
+            }
+        ]
+    },
+    "tier_4": {
+        "materials": [
+            {
+                "id": "herb_spirit_4",
+                "name": "化神灵草",
+                "type": "consumable",
+                "tier": 4,
+                "price": 30000,
+                "desc": "生长在灵气充裕之地的草药，适合化神期修士吞服。",
+                "effect": {
+                    "exp": 50000,
+                    "mind_dmg": 1
+                }
+            },
+            {
+                "id": "fruit_essence_4",
+                "name": "化神元果",
+                "type": "consumable",
+                "tier": 4,
+                "price": 150000,
+                "desc": "凝聚了天地日月的精华，化神期的大补之物。",
+                "effect": {
+                    "exp": 150000
+                }
+            },
+            {
+                "id": "mat_monster_4",
+                "name": "化神妖丹",
+                "type": "material",
+                "tier": 4,
+                "price": 240000,
+                "desc": "化神期妖兽的内丹，炼丹主材。"
+            }
+        ],
+        "pills": [
+            {
+                "id": "pill_exp_4",
+                "name": "化神聚气丹",
+                "type": "consumable",
+                "tier": 4,
+                "price": 30000,
+                "desc": "大幅精进化神期修为。",
+                "effect": {
+                    "exp": 500000
+                },
+                "recipe": {
+                    "herb_spirit_4": 3
+                }
+            },
+            {
+                "id": "pill_mind_4",
+                "name": "化神清心丹",
+                "type": "consumable",
+                "tier": 4,
+                "price": 24000,
+                "desc": "抚平心魔，稳固道心。",
+                "effect": {
+                    "mind_heal": 30
+                },
+                "recipe": {
+                    "herb_spirit_4": 2,
+                    "fruit_essence_4": 1
+                }
+            },
+            {
+                "id": "pill_speed_4",
+                "name": "化神神行散",
+                "type": "buff",
+                "tier": 4,
+                "price": 36000,
+                "desc": "短时间内大幅提升机缘(掉落率)。",
+                "effect": {
+                    "buff": "drop_boost",
+                    "value": 0.4,
+                    "duration": 1800
+                },
+                "recipe": {
+                    "mat_monster_4": 1,
+                    "herb_spirit_4": 2
+                }
+            },
+            {
+                "id": "pill_idle_4",
+                "name": "化神辟谷丹",
+                "type": "buff",
+                "tier": 4,
+                "price": 30000,
+                "desc": "提升闭关挂机收益。",
+                "effect": {
+                    "buff": "idle_boost",
+                    "value": 0.30000000000000004,
+                    "duration": 3600
+                },
+                "recipe": {
+                    "fruit_essence_4": 2
+                }
+            },
+            {
+                "id": "pill_break_4",
+                "name": "炼虚突破丹",
+                "type": "breakthrough",
+                "tier": 4,
+                "price": 300000,
+                "desc": "辅助突破瓶颈，晋升炼虚。",
+                "effect": {
+                    "breakthrough": "tier_5",
+                    "chance_add": 24
+                },
+                "recipe": {
+                    "mat_monster_4": 5,
+                    "fruit_essence_4": 5,
+                    "herb_spirit_4": 10
+                }
+            }
+        ]
+    },
+    "tier_5": {
+        "materials": [
+            {
+                "id": "herb_spirit_5",
+                "name": "炼虚灵草",
+                "type": "consumable",
+                "tier": 5,
+                "price": 100000,
+                "desc": "生长在灵气充裕之地的草药，适合炼虚期修士吞服。",
+                "effect": {
+                    "exp": 200000,
+                    "mind_dmg": 1
+                }
+            },
+            {
+                "id": "fruit_essence_5",
+                "name": "炼虚元果",
+                "type": "consumable",
+                "tier": 5,
+                "price": 500000,
+                "desc": "凝聚了天地日月的精华，炼虚期的大补之物。",
+                "effect": {
+                    "exp": 600000
+                }
+            },
+            {
+                "id": "mat_monster_5",
+                "name": "炼虚妖丹",
+                "type": "material",
+                "tier": 5,
+                "price": 800000,
+                "desc": "炼虚期妖兽的内丹，炼丹主材。"
+            }
+        ],
+        "pills": [
+            {
+                "id": "pill_exp_5",
+                "name": "炼虚聚气丹",
+                "type": "consumable",
+                "tier": 5,
+                "price": 100000,
+                "desc": "大幅精进炼虚期修为。",
+                "effect": {
+                    "exp": 2000000
+                },
+                "recipe": {
+                    "herb_spirit_5": 3
+                }
+            },
+            {
+                "id": "pill_mind_5",
+                "name": "炼虚清心丹",
+                "type": "consumable",
+                "tier": 5,
+                "price": 80000,
+                "desc": "抚平心魔，稳固道心。",
+                "effect": {
+                    "mind_heal": 35
+                },
+                "recipe": {
+                    "herb_spirit_5": 2,
+                    "fruit_essence_5": 1
+                }
+            },
+            {
+                "id": "pill_speed_5",
+                "name": "炼虚神行散",
+                "type": "buff",
+                "tier": 5,
+                "price": 120000,
+                "desc": "短时间内大幅提升机缘(掉落率)。",
+                "effect": {
+                    "buff": "drop_boost",
+                    "value": 0.45,
+                    "duration": 1800
+                },
+                "recipe": {
+                    "mat_monster_5": 1,
+                    "herb_spirit_5": 2
+                }
+            },
+            {
+                "id": "pill_idle_5",
+                "name": "炼虚辟谷丹",
+                "type": "buff",
+                "tier": 5,
+                "price": 100000,
+                "desc": "提升闭关挂机收益。",
+                "effect": {
+                    "buff": "idle_boost",
+                    "value": 0.35,
+                    "duration": 3600
+                },
+                "recipe": {
+                    "fruit_essence_5": 2
+                }
+            },
+            {
+                "id": "pill_break_5",
+                "name": "合体突破丹",
+                "type": "breakthrough",
+                "tier": 5,
+                "price": 1000000,
+                "desc": "辅助突破瓶颈，晋升合体。",
+                "effect": {
+                    "breakthrough": "tier_6",
+                    "chance_add": 25
+                },
+                "recipe": {
+                    "mat_monster_5": 5,
+                    "fruit_essence_5": 5,
+                    "herb_spirit_5": 10
+                }
+            }
+        ]
+    },
+    "tier_6": {
+        "materials": [
+            {
+                "id": "herb_spirit_6",
+                "name": "合体灵草",
+                "type": "consumable",
+                "tier": 6,
+                "price": 500000,
+                "desc": "生长在灵气充裕之地的草药，适合合体期修士吞服。",
+                "effect": {
+                    "exp": 1000000,
+                    "mind_dmg": 1
+                }
+            },
+            {
+                "id": "fruit_essence_6",
+                "name": "合体元果",
+                "type": "consumable",
+                "tier": 6,
+                "price": 2500000,
+                "desc": "凝聚了天地日月的精华，合体期的大补之物。",
+                "effect": {
+                    "exp": 3000000
+                }
+            },
+            {
+                "id": "mat_monster_6",
+                "name": "合体妖丹",
+                "type": "material",
+                "tier": 6,
+                "price": 4000000,
+                "desc": "合体期妖兽的内丹，炼丹主材。"
+            }
+        ],
+        "pills": [
+            {
+                "id": "pill_exp_6",
+                "name": "合体聚气丹",
+                "type": "consumable",
+                "tier": 6,
+                "price": 500000,
+                "desc": "大幅精进合体期修为。",
+                "effect": {
+                    "exp": 10000000
+                },
+                "recipe": {
+                    "herb_spirit_6": 3
+                }
+            },
+            {
+                "id": "pill_mind_6",
+                "name": "合体清心丹",
+                "type": "consumable",
+                "tier": 6,
+                "price": 400000,
+                "desc": "抚平心魔，稳固道心。",
+                "effect": {
+                    "mind_heal": 40
+                },
+                "recipe": {
+                    "herb_spirit_6": 2,
+                    "fruit_essence_6": 1
+                }
+            },
+            {
+                "id": "pill_speed_6",
+                "name": "合体神行散",
+                "type": "buff",
+                "tier": 6,
+                "price": 600000,
+                "desc": "短时间内大幅提升机缘(掉落率)。",
+                "effect": {
+                    "buff": "drop_boost",
+                    "value": 0.5,
+                    "duration": 1800
+                },
+                "recipe": {
+                    "mat_monster_6": 1,
+                    "herb_spirit_6": 2
+                }
+            },
+            {
+                "id": "pill_idle_6",
+                "name": "合体辟谷丹",
+                "type": "buff",
+                "tier": 6,
+                "price": 500000,
+                "desc": "提升闭关挂机收益。",
+                "effect": {
+                    "buff": "idle_boost",
+                    "value": 0.4,
+                    "duration": 3600
+                },
+                "recipe": {
+                    "fruit_essence_6": 2
+                }
+            },
+            {
+                "id": "pill_break_6",
+                "name": "大乘突破丹",
+                "type": "breakthrough",
+                "tier": 6,
+                "price": 5000000,
+                "desc": "辅助突破瓶颈，晋升大乘。",
+                "effect": {
+                    "breakthrough": "tier_7",
+                    "chance_add": 26
+                },
+                "recipe": {
+                    "mat_monster_6": 5,
+                    "fruit_essence_6": 5,
+                    "herb_spirit_6": 10
+                }
+            }
+        ]
+    },
+    "tier_7": {
+        "materials": [
+            {
+                "id": "herb_spirit_7",
+                "name": "大乘灵草",
+                "type": "consumable",
+                "tier": 7,
+                "price": 2000000,
+                "desc": "生长在灵气充裕之地的草药，适合大乘期修士吞服。",
+                "effect": {
+                    "exp": 5000000,
+                    "mind_dmg": 1
+                }
+            },
+            {
+                "id": "fruit_essence_7",
+                "name": "大乘元果",
+                "type": "consumable",
+                "tier": 7,
+                "price": 10000000,
+                "desc": "凝聚了天地日月的精华，大乘期的大补之物。",
+                "effect": {
+                    "exp": 15000000
+                }
+            },
+            {
+                "id": "mat_monster_7",
+                "name": "大乘妖丹",
+                "type": "material",
+                "tier": 7,
+                "price": 16000000,
+                "desc": "大乘期妖兽的内丹，炼丹主材。"
+            }
+        ],
+        "pills": [
+            {
+                "id": "pill_exp_7",
+                "name": "大乘聚气丹",
+                "type": "consumable",
+                "tier": 7,
+                "price": 2000000,
+                "desc": "大幅精进大乘期修为。",
+                "effect": {
+                    "exp": 50000000
+                },
+                "recipe": {
+                    "herb_spirit_7": 3
+                }
+            },
+            {
+                "id": "pill_mind_7",
+                "name": "大乘清心丹",
+                "type": "consumable",
+                "tier": 7,
+                "price": 1600000,
+                "desc": "抚平心魔，稳固道心。",
+                "effect": {
+                    "mind_heal": 45
+                },
+                "recipe": {
+                    "herb_spirit_7": 2,
+                    "fruit_essence_7": 1
+                }
+            },
+            {
+                "id": "pill_speed_7",
+                "name": "大乘神行散",
+                "type": "buff",
+                "tier": 7,
+                "price": 2400000,
+                "desc": "短时间内大幅提升机缘(掉落率)。",
+                "effect": {
+                    "buff": "drop_boost",
+                    "value": 0.55,
+                    "duration": 1800
+                },
+                "recipe": {
+                    "mat_monster_7": 1,
+                    "herb_spirit_7": 2
+                }
+            },
+            {
+                "id": "pill_idle_7",
+                "name": "大乘辟谷丹",
+                "type": "buff",
+                "tier": 7,
+                "price": 2000000,
+                "desc": "提升闭关挂机收益。",
+                "effect": {
+                    "buff": "idle_boost",
+                    "value": 0.45000000000000007,
+                    "duration": 3600
+                },
+                "recipe": {
+                    "fruit_essence_7": 2
+                }
+            },
+            {
+                "id": "pill_break_7",
+                "name": "渡劫突破丹",
+                "type": "breakthrough",
+                "tier": 7,
+                "price": 20000000,
+                "desc": "辅助突破瓶颈，晋升渡劫。",
+                "effect": {
+                    "breakthrough": "tier_8",
+                    "chance_add": 27
+                },
+                "recipe": {
+                    "mat_monster_7": 5,
+                    "fruit_essence_7": 5,
+                    "herb_spirit_7": 10
+                }
+            }
+        ]
+    },
+    "tier_8": {
+        "materials": [
+            {
+                "id": "herb_spirit_8",
+                "name": "渡劫灵草",
+                "type": "consumable",
+                "tier": 8,
+                "price": 10000000,
+                "desc": "生长在灵气充裕之地的草药，适合渡劫期修士吞服。",
+                "effect": {
+                    "exp": 20000000,
+                    "mind_dmg": 1
+                }
+            },
+            {
+                "id": "fruit_essence_8",
+                "name": "渡劫元果",
+                "type": "consumable",
+                "tier": 8,
+                "price": 50000000,
+                "desc": "凝聚了天地日月的精华，渡劫期的大补之物。",
+                "effect": {
+                    "exp": 60000000
+                }
+            },
+            {
+                "id": "mat_monster_8",
+                "name": "渡劫妖丹",
+                "type": "material",
+                "tier": 8,
+                "price": 80000000,
+                "desc": "渡劫期妖兽的内丹，炼丹主材。"
+            }
+        ],
+        "pills": [
+            {
+                "id": "pill_exp_8",
+                "name": "渡劫聚气丹",
+                "type": "consumable",
+                "tier": 8,
+                "price": 10000000,
+                "desc": "大幅精进渡劫期修为。",
+                "effect": {
+                    "exp": 200000000
+                },
+                "recipe": {
+                    "herb_spirit_8": 3
+                }
+            },
+            {
+                "id": "pill_mind_8",
+                "name": "渡劫清心丹",
+                "type": "consumable",
+                "tier": 8,
+                "price": 8000000,
+                "desc": "抚平心魔，稳固道心。",
+                "effect": {
+                    "mind_heal": 50
+                },
+                "recipe": {
+                    "herb_spirit_8": 2,
+                    "fruit_essence_8": 1
+                }
+            },
+            {
+                "id": "pill_speed_8",
+                "name": "渡劫神行散",
+                "type": "buff",
+                "tier": 8,
+                "price": 12000000,
+                "desc": "短时间内大幅提升机缘(掉落率)。",
+                "effect": {
+                    "buff": "drop_boost",
+                    "value": 0.6000000000000001,
+                    "duration": 1800
+                },
+                "recipe": {
+                    "mat_monster_8": 1,
+                    "herb_spirit_8": 2
+                }
+            },
+            {
+                "id": "pill_idle_8",
+                "name": "渡劫辟谷丹",
+                "type": "buff",
+                "tier": 8,
+                "price": 10000000,
+                "desc": "提升闭关挂机收益。",
+                "effect": {
+                    "buff": "idle_boost",
+                    "value": 0.5,
+                    "duration": 3600
+                },
+                "recipe": {
+                    "fruit_essence_8": 2
+                }
+            }
+        ]
+    }
+}
