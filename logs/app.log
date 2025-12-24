@@ -1560,3 +1560,61 @@ AttributeError: 'Cultivator' object has no attribute 'layer'
 2025-12-21 22:31:45,277 [INFO] [main.py:30] - 用户强制退出 (SIGINT)
 2025-12-21 22:31:45,277 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
 2025-12-21 22:31:45,287 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-22 08:35:36,602 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-22 08:35:36,604 [INFO] [main.py:12] - 启动应用程序...
+2025-12-22 08:35:36,786 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-22 08:35:36,787 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-22 08:35:36,787 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-22 08:35:36,797 [INFO] [cultivator.py:102] - 坊市商品已刷新
+2025-12-22 08:35:36,797 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-22 08:35:36,851 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-22 08:36:20,276 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-22 08:36:20,277 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-22 10:15:17,767 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-22 10:15:17,771 [INFO] [main.py:12] - 启动应用程序...
+2025-12-22 10:15:17,909 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-22 10:15:17,909 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-22 10:15:17,909 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-22 10:15:17,924 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-22 10:15:17,979 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-22 10:16:14,396 [DEBUG] [pet_window.py:539] - 切换状态: ALCHEMY
+2025-12-22 10:16:14,397 [INFO] [pet_window.py:140] - 开始炼制: pill_zhenyuan
+2025-12-22 10:16:23,929 [INFO] [pet_window.py:160] - 炼丹成功: 真元丹
+2025-12-22 10:16:23,930 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-22 10:18:21,767 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-22 10:18:21,769 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-22 10:20:15,426 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-22 10:20:15,429 [INFO] [main.py:12] - 启动应用程序...
+2025-12-22 10:20:15,554 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-22 10:20:15,555 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-22 10:20:15,555 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-22 10:20:15,563 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-22 10:20:15,617 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-22 10:20:17,519 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-22 10:20:18,470 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-22 10:20:19,429 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-22 10:20:20,428 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-22 10:21:42,629 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-22 10:21:42,630 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-22 10:41:48,795 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-22 10:41:48,798 [INFO] [main.py:12] - 启动应用程序...
+2025-12-22 10:41:48,931 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-22 10:41:48,932 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-22 10:41:48,932 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-22 10:41:48,941 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-22 10:41:49,014 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-22 10:41:52,932 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-22 10:41:53,932 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-22 10:42:08,000 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-22 10:42:08,000 [INFO] [cultivator.py:410] - 数据已保存
+2025-12-22 12:43:41,651 [INFO] [logger.py:71] - 日志系统已启动 (Log system initialized).
+2025-12-22 12:43:41,655 [INFO] [main.py:12] - 启动应用程序...
+2025-12-22 12:43:41,801 [INFO] [pet_window.py:16] - 初始化 PetWindow...
+2025-12-22 12:43:41,801 [INFO] [item_manager.py:39] - 成功加载物品数据库，共 52 种物品。
+2025-12-22 12:43:41,802 [INFO] [event_manager.py:24] - 成功加载 4 个随机事件
+2025-12-22 12:43:41,816 [INFO] [cultivator.py:450] - 数据已加载
+2025-12-22 12:43:41,871 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-22 12:43:43,958 [DEBUG] [pet_window.py:539] - 切换状态: READ
+2025-12-22 12:43:44,957 [DEBUG] [pet_window.py:539] - 切换状态: IDLE
+2025-12-22 12:46:23,880 [INFO] [pet_window.py:192] - 程序关闭，保存数据...
+2025-12-22 12:46:23,880 [INFO] [cultivator.py:410] - 数据已保存
