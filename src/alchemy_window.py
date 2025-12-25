@@ -139,7 +139,7 @@ class AlchemyWindow(QWidget):
         self.current_recipe_id = pill_id
         
         name = info["name"]
-        desc = info["desc"]
+        desc = info.get("description", "无描述")
         recipe = info.get("recipe", {})
         
         # Build Ingredients Text

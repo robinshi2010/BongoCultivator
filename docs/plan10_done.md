@@ -149,4 +149,23 @@ CREATE TABLE game_events (
     *   更新 `memory.md` 和 `plan10.md` 状态。
 
 ---
-**Status**: Pending
+**Status**: Completed
+
+## 完成情况 (Completion Log)
+*Date: 2025-12-25*
+
+### 1. 数据库与数据
+- 创建了 `game_events` 表。
+- 编写并执行了 `tools_update_events.py`，注入了 34+ 个初始事件（覆盖 Common, Rare, Unique 类型，Tier 0-9）。
+- 事件内容与 Plan 9 物品系统深度联动。
+
+### 2. 引擎实现
+- 创建了 `src/services/event_engine.py`，实现了基于 Layer, State, Stats, Chance 的触发器检查逻辑。
+- 实现了 Outcomes 执行逻辑 (Exp, Mind, Luck, Item)。
+- 实现了 Unique 事件的历史记录去重。
+
+### 3. 集成与测试
+- 更新了 `src/cultivator.py`，集成了 `EventEngine`。
+- 修改了 `update` 循环，每 5 分钟 (300 ticks) 尝试触发一次事件。
+- 确保事件文本追加到 `gain_msg`，从而在 UI 气泡中显示。
+- 编写了 `tools_verify_events.py` 并验证通过。

@@ -3286,3 +3286,112 @@ AttributeError: 'Cultivator' object has no attribute 'layer'
 2025-12-25 10:29:39,385 [INFO] [cultivator.py:497] - 数据已保存至数据库
 2025-12-25 10:29:39,385 [INFO] [activity_recorder.py:20] - 停止 ActivityRecorder...
 2025-12-25 10:29:39,386 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766629779, Keys=0, Mouse=37
+2025-12-25 11:13:28,030 [INFO] [logger.py:69] - 日志系统已启动 (Log system initialized).
+2025-12-25 11:13:28,036 [INFO] [database.py:102] - 数据库初始化完成: all tables ready
+2025-12-25 11:13:28,079 [INFO] [main.py:12] - 启动应用程序...
+2025-12-25 11:13:28,262 [INFO] [pet_window.py:18] - 初始化 PetWindow...
+2025-12-25 11:13:28,263 [INFO] [item_manager.py:48] - Loaded 113 items from Database.
+2025-12-25 11:13:28,263 [INFO] [event_manager.py:25] - 成功加载 4 个随机事件
+2025-12-25 11:13:28,274 [INFO] [cultivator.py:118] - 坊市商品已刷新
+2025-12-25 11:13:28,330 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:13:28,331 [INFO] [activity_recorder.py:16] - 启动 ActivityRecorder (每 60 秒记录一次)...
+2025-12-25 11:13:41,268 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:13:41,269 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:13:42,268 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:13:42,269 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:13:43,828 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:13:43,828 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:13:48,268 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:13:48,269 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:13:49,284 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:13:51,269 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:13:52,444 [CRITICAL] [logger.py:58] - 未捕获的异常 (Uncaught exception):
+Traceback (most recent call last):
+  File "/Users/robin/Work/DEV/2GAME/bongo/src/alchemy_window.py", line 142, in show_recipe_detail
+    desc = info["desc"]
+           ~~~~^^^^^^^^
+KeyError: 'desc'
+2025-12-25 11:13:53,209 [CRITICAL] [logger.py:58] - 未捕获的异常 (Uncaught exception):
+Traceback (most recent call last):
+  File "/Users/robin/Work/DEV/2GAME/bongo/src/alchemy_window.py", line 142, in show_recipe_detail
+    desc = info["desc"]
+           ~~~~^^^^^^^^
+KeyError: 'desc'
+2025-12-25 11:13:53,270 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:13:53,270 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:13:54,600 [CRITICAL] [logger.py:58] - 未捕获的异常 (Uncaught exception):
+Traceback (most recent call last):
+  File "/Users/robin/Work/DEV/2GAME/bongo/src/alchemy_window.py", line 142, in show_recipe_detail
+    desc = info["desc"]
+           ~~~~^^^^^^^^
+KeyError: 'desc'
+2025-12-25 11:13:55,269 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:13:55,270 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:13:56,020 [CRITICAL] [logger.py:58] - 未捕获的异常 (Uncaught exception):
+Traceback (most recent call last):
+  File "/Users/robin/Work/DEV/2GAME/bongo/src/alchemy_window.py", line 142, in show_recipe_detail
+    desc = info["desc"]
+           ~~~~^^^^^^^^
+KeyError: 'desc'
+2025-12-25 11:13:56,493 [CRITICAL] [logger.py:58] - 未捕获的异常 (Uncaught exception):
+Traceback (most recent call last):
+  File "/Users/robin/Work/DEV/2GAME/bongo/src/alchemy_window.py", line 142, in show_recipe_detail
+    desc = info["desc"]
+           ~~~~^^^^^^^^
+KeyError: 'desc'
+2025-12-25 11:13:57,270 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:13:57,270 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:14:06,268 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:14:06,270 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:14:07,269 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:14:07,270 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:14:08,269 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:14:08,270 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:14:09,269 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:14:17,269 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:14:18,269 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:14:20,270 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:14:20,346 [CRITICAL] [logger.py:58] - 未捕获的异常 (Uncaught exception):
+Traceback (most recent call last):
+  File "/Users/robin/Work/DEV/2GAME/bongo/src/alchemy_window.py", line 142, in show_recipe_detail
+    desc = info["desc"]
+           ~~~~^^^^^^^^
+KeyError: 'desc'
+2025-12-25 11:14:20,808 [CRITICAL] [logger.py:58] - 未捕获的异常 (Uncaught exception):
+Traceback (most recent call last):
+  File "/Users/robin/Work/DEV/2GAME/bongo/src/alchemy_window.py", line 142, in show_recipe_detail
+    desc = info["desc"]
+           ~~~~^^^^^^^^
+KeyError: 'desc'
+2025-12-25 11:14:21,268 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:14:21,269 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:14:22,269 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:14:22,999 [INFO] [main.py:35] - 用户强制退出 (SIGINT)
+2025-12-25 11:14:22,999 [INFO] [pet_window.py:237] - 程序关闭，保存数据...
+2025-12-25 11:14:23,002 [INFO] [cultivator.py:497] - 数据已保存至数据库
+2025-12-25 11:14:23,002 [INFO] [activity_recorder.py:20] - 停止 ActivityRecorder...
+2025-12-25 11:14:23,003 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766632463, Keys=2, Mouse=86
+2025-12-25 11:17:50,561 [INFO] [logger.py:69] - 日志系统已启动 (Log system initialized).
+2025-12-25 11:17:50,567 [INFO] [database.py:102] - 数据库初始化完成: all tables ready
+2025-12-25 11:17:50,570 [INFO] [main.py:12] - 启动应用程序...
+2025-12-25 11:17:50,708 [INFO] [pet_window.py:18] - 初始化 PetWindow...
+2025-12-25 11:17:50,709 [INFO] [item_manager.py:48] - Loaded 113 items from Database.
+2025-12-25 11:17:50,710 [INFO] [event_manager.py:25] - 成功加载 4 个随机事件
+2025-12-25 11:17:50,723 [INFO] [cultivator.py:118] - 坊市商品已刷新
+2025-12-25 11:17:50,795 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:17:50,796 [INFO] [activity_recorder.py:16] - 启动 ActivityRecorder (每 60 秒记录一次)...
+2025-12-25 11:17:54,770 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:17:54,771 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:17:55,771 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:17:56,769 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:17:57,771 [DEBUG] [pet_window.py:588] - 切换状态: READ
+2025-12-25 11:17:57,772 [DEBUG] [pet_window.py:588] - 切换状态: IDLE
+2025-12-25 11:17:58,661 [INFO] [pet_window.py:237] - 程序关闭，保存数据...
+2025-12-25 11:17:58,663 [INFO] [cultivator.py:497] - 数据已保存至数据库
+2025-12-25 11:17:58,663 [INFO] [activity_recorder.py:20] - 停止 ActivityRecorder...
+2025-12-25 11:17:58,665 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766632678, Keys=0, Mouse=9
+2025-12-25 11:22:17,822 [INFO] [logger.py:69] - 日志系统已启动 (Log system initialized).
+2025-12-25 11:22:17,823 [INFO] [database.py:102] - 数据库初始化完成: all tables ready
+2025-12-25 11:22:17,825 [INFO] [item_manager.py:48] - Loaded 113 items from Database.
+2025-12-25 11:22:17,825 [INFO] [event_engine.py:42] - EventEngine loaded 34 events, 0 history records.
+2025-12-25 11:22:17,825 [INFO] [event_engine.py:109] - Triggering event: 误食野果 (evt_t0_c2)

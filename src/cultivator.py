@@ -1,7 +1,7 @@
-import random
 from src.logger import logger
 from src.item_manager import ItemManager
-from src.event_manager import EventManager
+from src.services.event_engine import EventEngine
+from src.database import DB_FILE
 
 class Cultivator:
     LAYERS = [
@@ -41,9 +41,9 @@ class Cultivator:
         self.last_event_time = 0 
         self.event_interval = 300 # 300秒(5分钟)触发一次随机事件 (测试可改为30)
         
-        # 初始化 ItemManager 和 EventManager
+        # 初始化 ItemManager 和 EventEngine
         self.item_manager = ItemManager()
-        self.event_manager = EventManager()
+        self.event_manager = EventEngine(DB_FILE, self.item_manager)
         
         # 天赋系统
         self.talent_points = 0
@@ -403,18 +403,24 @@ class Cultivator:
         self.tick_counter = getattr(self, 'tick_counter', 0) + 1
         if self.tick_counter >= self.event_interval:
             self.tick_counter = 0
-            event = self.event_manager.get_random_event(self)
+            
+            # Map code to state string
+            state_map = {0: "IDLE", 1: "COMBAT", 2: "WORK", 3: "READ"}
+            state_name = state_map.get(current_state_code, "IDLE")
+            
+            event = self.event_manager.check_triggers(self, state_name)
             if event:
-                if event['type'] == 'random':
-                    logger.info(f"触发随机事件: {event['text']}")
-                    effect_texts = self.event_manager.apply_event_effect(self, event.get('effects', {}))
-                    
-                    full_msg = f"【机缘】{event['text']}"
-                    if effect_texts:
-                         full_msg += f"\n> {' '.join(effect_texts)}"
-                    self.events.append(full_msg)
+                result_msg = self.event_manager.trigger_event(event, self)
+                event_msg = f"【机缘】{event['title']}\n{event['text']}"
+                if result_msg:
+                     event_msg += f"\n> {result_msg}"
+                self.events.append(event_msg)
+                
+                # Make sure to show it in UI
+                if gain_msg:
+                    gain_msg += "\n\n" + event_msg
                 else:
-                    logger.info(f"触发特殊事件(未实装UI): {event['text']}")
+                    gain_msg = event_msg
 
             
         return gain_msg, current_state_code

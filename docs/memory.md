@@ -75,16 +75,12 @@
 - [x] **[Plan 7: 数据库迁移](plan7_done.md)** (SQLite Migration, Item Tier 0-8)
 - [x] **[Plan 8: 跨平台打包 (macOS)](plan8_done.md)** (PyInstaller .app)
 - [x] **[Plan 2 (Phase 6): 视觉增强](plan2_done.md)** (VFX, Animations)
-- [x] **[Plan 9: 物品扩充与文案精修](plan9_done.md)**
-    - **内容**: 全面重构物品 DB (Tier 0-9)，新增 110+ 物品与 39+ 配方，采用修仙/科幻混合风格。
-    - **状态**: **已完成**
+- [x] **[Plan 9: 物品扩充](plan9_done.md)** (110+ items, Sci-Fi Cultivation lore)
+- [x] **[Plan 10: 奇遇事件系统](plan10_done.md)** (DB-driven Event Engine, 60+ events)
 
 ### 待执行 (Pending / In Progress)
 
 #### 1. 系统深度化 (Priority: Medium)
-- [ ] **[Plan 10: 奇遇事件系统](plan10.md)**
-    - **内容**: `game_events` 表结构，支持条件触发 (Triggers) 和结果 (Consequences)。
-    - **目标**: 数据驱动的随机事件。
 - [ ] **[Plan 11: 成就系统](plan11.md)**
     - **内容**: 基于生产力数据 (Keys, Clicks) 的成就反馈机制。
 
