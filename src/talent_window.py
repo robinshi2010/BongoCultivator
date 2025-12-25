@@ -59,8 +59,9 @@ class TalentWindow(QWidget):
         self.mind_label = QLabel()
         self.body_label = QLabel()
         self.aff_label = QLabel() 
+        self.death_label = QLabel()
         
-        for lbl in [self.mind_label, self.body_label, self.aff_label]:
+        for lbl in [self.mind_label, self.body_label, self.aff_label, self.death_label]:
             lbl.setStyleSheet("color: white; font-size: 14px;")
             stat_layout.addWidget(lbl)
             
@@ -73,6 +74,18 @@ class TalentWindow(QWidget):
         self.points_label.setStyleSheet("color: #00FF7F; font-size: 16px; font-weight: bold;")
         self.points_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(self.points_label)
+
+# ... inside refresh_data ...
+
+        self.mind_label.setText(f"心魔: {self.cultivator.mind} / 100")
+        self.body_label.setText(f"体魄: {self.cultivator.body}")
+        self.aff_label.setText(f"气运: {self.cultivator.affection}")
+        self.death_label.setText(f"轮回: {self.cultivator.death_count} 世")
+        
+        # 刷新点数
+        pts = self.cultivator.talent_points
+        legacy = getattr(self.cultivator, 'legacy_points', 0)
+        self.points_label.setText(f"剩余天赋点: {pts}\n(先天传承: {legacy})")
         
         # 天赋加点区域
         talent_frame = QFrame()

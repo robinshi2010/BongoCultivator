@@ -122,6 +122,16 @@ class DatabaseManager:
                 except Exception:
                     pass
 
+                # Migration for Plan 14: Legacy System
+                try:
+                    cursor.execute("ALTER TABLE player_status ADD COLUMN death_count INTEGER DEFAULT 0")
+                except Exception:
+                    pass
+                try:
+                    cursor.execute("ALTER TABLE player_status ADD COLUMN legacy_points INTEGER DEFAULT 0")
+                except Exception:
+                    pass
+
                 conn.commit()
                 logger.info("数据库初始化完成: all tables ready")
         except Exception as e:

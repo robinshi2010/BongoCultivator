@@ -1027,11 +1027,47 @@ class PetWindow(QWidget):
         secret_action.triggered.connect(self.input_secret)
         menu.addAction(secret_action)
         
+        # 轮回
+        if self.cultivator.layer_index >= 2: # 金丹以上才允许主动重修?
+            rebirth_action = QAction('兵解重修', self)
+            rebirth_action.triggered.connect(self.on_voluntary_rebirth)
+            menu.addAction(rebirth_action)
+
         quit_action = QAction('云游四海 (退出)', self) # 原: 归隐山林
         quit_action.triggered.connect(QApplication.instance().quit)
         menu.addAction(quit_action)
         
         menu.exec(pos)
+
+    def on_voluntary_rebirth(self):
+        from PyQt6.QtWidgets import QMessageBox
+        from src.services.reincarnation_manager import ReincarnationManager
+        
+        reply = QMessageBox.question(self, '兵解重修', 
+                                     "你确定要兵解重修吗？\n当前修为将清空，但保留大部分气运(AP)。\n这将开始新的轮回。",
+                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No, 
+                                     QMessageBox.StandardButton.No)
+        
+        if reply == QMessageBox.StandardButton.Yes:
+             success, res = ReincarnationManager.perform_reincarnation(self.cultivator, "rebirth")
+             if success:
+                 self.show_notification(f"重修成功！继承气运: {res['legacy_points']}")
+                 self.set_state(PetState.IDLE)
+
+    def handle_death(self):
+         from src.services.reincarnation_manager import ReincarnationManager
+         from PyQt6.QtWidgets import QMessageBox
+         
+         # 先计算预览
+         legacy = ReincarnationManager.calculate_inheritance(self.cultivator, "death")
+         
+         QMessageBox.critical(self, "身死道消", 
+             f"渡劫失败，肉身崩坏！\n你已身死道消...\n\n即将进入轮回。\n继承气运: {legacy['legacy_points']} (继承率 {int(legacy['rate_used']*100)}%)",
+             QMessageBox.StandardButton.Ok)
+         
+         ReincarnationManager.perform_reincarnation(self.cultivator, "death")
+         self.set_state(PetState.IDLE)
+         self.show_notification("转世重生，再踏仙途...")
 
     def on_attempt_breakthrough(self):
         # 1. Start Tribulation Effect first
@@ -1040,6 +1076,11 @@ class PetWindow(QWidget):
         # Delay the actual calculation slightly to show off the effect?
         # Or just do it.
         success, msg = self.cultivator.attempt_breakthrough()
+        
+        if not success and msg == "DEATH":
+             self.handle_death()
+             return
+
         self.show_notification(msg)
         
         if success:

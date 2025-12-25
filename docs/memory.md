@@ -95,15 +95,16 @@
 - [x] **[Plan 11: 成就系统](plan11_done.md)** (Achievements, Titles & Buffs)
 - [x] **[Plan 13: 渡劫视觉逻辑](plan13_done.md)** (Tribulation Animation Sequence, Transparency)
 - [x] **[Plan 12: 视觉素材扩展](plan12.md)** (Phase 2 & 3 Tribulation Assets)
+- [x] **[Plan 14: 轮回继承](plan14_done.md)** (Legacy System, Death/Rebirth Logic)
 
 ### 待执行 (Pending / In Progress)
 
 #### 1. 系统深度化 (Priority: Medium)
-*   [ ] **Plan 14 (桌面互动扩展)**: 窗口吸附、拖拽反馈优化。
+*   [ ] **Plan 15**: [物品价值重构与经济循环](plan15_item_economy.md) (Item Utility Refactor)
 
 #### 2. 遗留任务 from Plan 2/8
 - [ ] **Plan 2 (Phase 8)**: 桌面互动 (窗口吸附) / 放置深度化 (灵田)。
 - [ ] **Plan 8 (Windows)**: 在 Windows 环境下运行打包脚本。
 
 ---
-(最后更新: 2025-12-25 16:15)
+(最后更新: 2025-12-25 17:25)

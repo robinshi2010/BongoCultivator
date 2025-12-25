@@ -59,6 +59,10 @@ class Cultivator:
         
         # 称号系统
         self.equipped_title = None
+
+        # Plan 14: 轮回系统
+        self.death_count = 0
+        self.legacy_points = 0
         
     # ... (properties methods) ...
 
@@ -304,10 +308,14 @@ class Cultivator:
             return True, msg
         else:
             # 失败惩罚
-            # ... (unchanged) ...
+            self.body -= 1
+            if self.body <= 0:
+                self.body = 0
+                return False, "DEATH"
+
             loss = int(self.max_exp * 0.3)
             self.exp -= loss
-            self.body = max(0, self.body - 1)
+            # self.body already decremented above
             self.mind = min(100, self.mind + 10)
             
             msg = f"渡劫失败！天雷滚滚，肉身受损。\n修为-{loss}，体魄-1，心魔+10"
@@ -535,13 +543,15 @@ class Cultivator:
                     SET layer_index = ?, current_exp = ?, money = ?,
                         stat_body = ?, stat_mind = ?, stat_luck = ?,
                         talent_points = ?, talent_json = ?,
-                        last_save_time = ?, equipped_title = ?
+                        last_save_time = ?, equipped_title = ?,
+                        death_count = ?, legacy_points = ?
                     WHERE id = 1
                 """, (
                     self.layer_index, self.exp, self.money,
                     self.body, self.mind, self.affection,
                     self.talent_points, talent_json,
-                    current_time, self.equipped_title
+                    current_time, self.equipped_title,
+                    self.death_count, self.legacy_points
                 ))
                 
                 # 2. Update Inventory
@@ -596,6 +606,8 @@ class Cultivator:
                         self.talents = json.loads(status['talent_json'])
                         
                     self.equipped_title = status.get('equipped_title')
+                    self.death_count = status.get('death_count', 0)
+                    self.legacy_points = status.get('legacy_points', 0)
                     
                     last_time = status['last_save_time']
                     
@@ -652,41 +664,10 @@ class Cultivator:
         """
         重置玩家数据回到初始状态 (转世重修)
         """
-        from src.database import db_manager
-        import time
-        
-        self.exp = 0
-        self.layer_index = 0
-        self.money = 0
-        self.body = 10
-        self.mind = 0
-        self.affection = 0
-        self.inventory = {}
-        self.talents = {"exp": 0, "drop": 0}
-        self.talent_points = 0
-        
-        try:
-            with db_manager._get_conn() as conn:
-                cursor = conn.cursor()
-                # Reset Status
-                cursor.execute("""
-                    UPDATE player_status
-                    SET layer_index=0, current_exp=0, money=0,
-                        stat_body=10, stat_mind=0, stat_luck=0,
-                        talent_points=0, talent_json='{}',
-                        last_save_time=?
-                    WHERE id=1
-                """, (int(time.time()),))
-                
-                # Clear Inventory
-                cursor.execute("DELETE FROM player_inventory")
-                
-                conn.commit()
-            
-            logger.info("玩家已转世重修 (数据重置)")
-            self.events.append("【轮回】万法归一，重入灵途！")
-        except Exception as e:
-            logger.error(f"重置失败: {e}")
+        from src.services.reincarnation_manager import ReincarnationManager
+        success, res = ReincarnationManager.perform_reincarnation(self, reason="rebirth")
+        if not success:
+             logger.error(f"重置失败: {res}")
     def process_secret_command(self, code):
         """
         处理作弊/秘籍指令

@@ -1,4 +1,4 @@
-# Plan 14: 轮回继承与转世重修系统 (Legacy System)
+# Plan 14: 轮回继承与转世重修系统 (Legacy System) - DONE
 
 ## 目标
 实现角色“身死道消”或“兵解重修”后的资源继承机制，使玩家在重新开始时能够保留部分积累，体验 Rogue-lite 式的成长循环。解决用户提出的“加点和属性继承”需求。
@@ -34,27 +34,25 @@
     *   **重修**: 80% - 100% (鼓励达到瓶颈后重修)。
 *   **上限限制**: 每一世能够继承的点数有上限（受限于“灵魂强度”），灵魂强度可以通过多次转世提升。
 
-
-
 ## 3. 实现步骤
 
-### Phase 1: 数据结构升级
+### Phase 1: 数据结构升级 (Completed)
 1.  **修改 `PlayerData`**: 增加 `death_count` (转世次数), `legacy_points` (继承点数)。
 2.  **修改 `save_data.json`**:
     *   除了当前的 `cultivator` 字段，增加 `legacy` 字段存储全局积累。
 
-### Phase 2: 结算逻辑 (`ReincarnationManager`)
+### Phase 2: 结算逻辑 (`ReincarnationManager`) (Completed)
 1.  创建 `src/services/reincarnation_manager.py`。
 2.  实现 `calculate_legacy(cultivator, reason)` 方法，返回继承数据。
 
-### Phase 3: 死亡与重生流程
+### Phase 3: 死亡与重生流程 (Completed)
 1.  **死亡弹窗**: 当 HP <= 0 且无复活手段 -> 弹出“轮回结算界面”。
 2.  **结算界面**: 展示本世生平（存活时间、最高境界），计算获得加成。
 3.  **新游戏初始化**:
     *   修改 `Cultivator.__init__` 或 `load_data`，支持传入 `legacy_data`。
     *   在初始化属性时，叠加上一世的 `Inherited_AP`。
 
-### Phase 4: UI 支持
+### Phase 4: UI 支持 (Completed)
 1.  **人才(属性)面板**: 显示“先天属性”和“后天投入”的区别。
 2.  **设置/系统菜单**: 增加“兵解重修”按钮（带二次确认）。
 
@@ -66,5 +64,5 @@
     *   重修继承率 90%。
     *   下一世开局，直接获得 450 点自由属性点（直接起飞）。
 
-## 5. 
-按比例折算为少量初始灵石，都是所有物品。
+## 5. 补充规则
+按比例折算为少量初始灵石，都是所有物品（清空背包）。
