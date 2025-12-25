@@ -3611,3 +3611,192 @@ NameError: name 'random' is not defined
 2025-12-25 14:23:55,234 [INFO] [cultivator.py:566] - 数据已保存至数据库
 2025-12-25 14:23:55,234 [INFO] [activity_recorder.py:20] - 停止 ActivityRecorder...
 2025-12-25 14:23:55,235 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766643835, Keys=28, Mouse=29
+2025-12-25 14:34:03,185 [INFO] [logger.py:69] - 日志系统已启动 (Log system initialized).
+2025-12-25 14:34:03,192 [INFO] [database.py:126] - 数据库初始化完成: all tables ready
+2025-12-25 14:34:03,196 [INFO] [main.py:12] - 启动应用程序...
+2025-12-25 14:34:03,352 [INFO] [pet_window.py:18] - 初始化 PetWindow...
+2025-12-25 14:34:03,353 [INFO] [item_manager.py:48] - Loaded 113 items from Database.
+2025-12-25 14:34:03,353 [INFO] [event_engine.py:42] - EventEngine loaded 34 events, 0 history records.
+2025-12-25 14:34:03,370 [INFO] [cultivator.py:123] - 坊市商品已刷新
+2025-12-25 14:34:03,751 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:03,752 [INFO] [activity_recorder.py:16] - 启动 ActivityRecorder (每 60 秒记录一次)...
+2025-12-25 14:34:10,807 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:10,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:11,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:11,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:12,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:12,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:13,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:13,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:14,814 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:34:15,320 [INFO] [cultivator.py:686] - 玩家已转世重修 (数据重置)
+2025-12-25 14:34:17,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:20,831 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:20,831 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:28,157 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:28,158 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:31,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:33,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:37,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:37,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:38,807 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:40,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:42,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:44,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:45,807 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:49,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:50,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:50,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:51,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:34:51,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:34:54,808 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:34:58,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:01,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:03,811 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766644503, Keys=29, Mouse=142
+2025-12-25 14:35:04,810 [INFO] [achievement_manager.py:202] - Achievement Unlocked: ach_poor_0
+2025-12-25 14:35:07,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:17,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:18,807 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:19,807 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:19,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:21,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:21,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:22,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:27,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:29,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:32,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:34,807 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:34,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:35,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:38,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:40,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:41,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:45,812 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:49,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:50,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:50,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:51,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:35:54,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:35:58,807 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:36:01,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:36:03,812 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766644563, Keys=14, Mouse=184
+2025-12-25 14:36:08,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:36:14,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:36:15,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:36:15,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:36:32,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:36:35,809 [DEBUG] [pet_window.py:621] - 切换状态: COMBAT
+2025-12-25 14:36:35,810 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:36:46,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:36:48,808 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:36:50,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:36:51,808 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:36:56,809 [DEBUG] [pet_window.py:621] - 切换状态: COMBAT
+2025-12-25 14:36:59,810 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:37:01,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:03,811 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766644623, Keys=140, Mouse=59
+2025-12-25 14:37:08,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:09,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:10,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:10,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:11,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:11,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:15,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:17,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:18,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:18,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:23,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:23,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:24,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:24,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:25,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:25,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:26,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:26,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:27,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:27,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:38,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:40,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:41,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:41,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:42,809 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:37:44,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:45,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:46,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:37:56,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:37:58,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:38:03,813 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766644683, Keys=5, Mouse=41
+2025-12-25 14:38:10,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:38:10,811 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:38:11,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:38:13,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:38:14,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:38:28,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:38:30,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:38:35,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:38:38,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:38:39,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:38:52,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:38:54,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:38:55,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:38:55,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:38:57,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:38:59,808 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:39:00,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:39:00,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:39:03,813 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766644743, Keys=2, Mouse=281
+2025-12-25 14:39:10,810 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:39:28,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:39:29,810 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:40:03,815 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766644803, Keys=396, Mouse=0
+2025-12-25 14:40:04,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:07,811 [INFO] [achievement_manager.py:202] - Achievement Unlocked: ach_kb_1w
+2025-12-25 14:40:12,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:40:12,811 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:13,810 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:40:15,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:28,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:40:31,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:37,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:40:39,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:40,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:40:40,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:41,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:40:43,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:44,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:40:47,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:50,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:40:50,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:51,810 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:40:51,811 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:53,810 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:40:55,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:40:58,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:00,810 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:03,812 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766644863, Keys=0, Mouse=104
+2025-12-25 14:41:03,813 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:05,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:06,808 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:07,812 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:10,809 [DEBUG] [pet_window.py:621] - 切换状态: WORK
+2025-12-25 14:41:12,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:17,810 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:21,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:26,810 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:26,811 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:27,810 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:29,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:30,810 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:30,811 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:31,810 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:34,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:37,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:37,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:47,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:48,811 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:49,809 [DEBUG] [pet_window.py:621] - 切换状态: READ
+2025-12-25 14:41:49,809 [DEBUG] [pet_window.py:621] - 切换状态: IDLE
+2025-12-25 14:41:50,359 [INFO] [pet_window.py:238] - 程序关闭，保存数据...
+2025-12-25 14:41:50,361 [INFO] [cultivator.py:566] - 数据已保存至数据库
+2025-12-25 14:41:50,361 [INFO] [activity_recorder.py:20] - 停止 ActivityRecorder...
+2025-12-25 14:41:50,362 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766644910, Keys=6, Mouse=157

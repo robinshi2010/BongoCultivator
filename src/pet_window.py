@@ -42,6 +42,7 @@ class PetWindow(QWidget):
         
         # 炼丹状态
         self.is_alchemying = False
+        self.is_ascending = False
         self.alchemy_time = 0
         self.alchemy_target_time = 10
         
@@ -109,7 +110,7 @@ class PetWindow(QWidget):
             self.effect_widget.set_mode("idle")   # 预留
             
         # 切换状态 (如果不是炼丹状态)
-        if not self.is_alchemying:
+        if not self.is_alchemying and not getattr(self, 'is_ascending', False):
             if self.current_state != target_state:
                 self.set_state(target_state)
             
@@ -570,6 +571,31 @@ class PetWindow(QWidget):
         if os.path.exists(work_path):
              self.state_images[PetState.WORK] = QPixmap(work_path)
 
+        # TRIBULATION
+        self.tribulation_images = {}
+        # Load specific 0-2 images
+        for i in range(3):
+            path = os.path.join(assets_path, f'tribulation_{i}_.png') # Note: Plan 13 says tribulation_0_foundation.png, but regex might be easier or exact mapping
+            # Actually user file names are tribulation_0_foundation.png
+            # Let's try exact names as defined
+            names = [
+                'tribulation_0_foundation.png',
+                'tribulation_1_goldcore.png',
+                'tribulation_2_nascentsoul.png'
+            ]
+            if i < len(names):
+                path = os.path.join(assets_path, names[i])
+                if os.path.exists(path):
+                    self.tribulation_images[i] = QPixmap(path)
+        
+        # Fallback / Generic Tribulation if needed (user didn't provide generic yet, but we can reuse high alchemy or combat?)
+        # For now, if missing, it falls back to IDLE in set_state
+
+        # WORK (Use walk as default)
+        work_path = os.path.join(assets_path, 'cultivator_walk.png')
+        if os.path.exists(work_path):
+             self.state_images[PetState.WORK] = QPixmap(work_path)
+
         # READ
         read_path = os.path.join(assets_path, 'cultivator_read.png')
         if os.path.exists(read_path):
@@ -599,9 +625,6 @@ class PetWindow(QWidget):
             
             # Special handling for Alchemy Tier
             if state == PetState.ALCHEMY and hasattr(self, 'alchemy_images'):
-                # 0-2 (练气/筑基/金丹): Low
-                # 3-5 (元婴/化神/炼虚): Mid
-                # 6-8 (合体/大乘/渡劫): High
                 idx = self.cultivator.layer_index
                 if idx <= 2:
                     pixmap = self.alchemy_images.get('low')
@@ -610,7 +633,17 @@ class PetWindow(QWidget):
                 else:
                     pixmap = self.alchemy_images.get('high')
             
-            # Fallback to standard logic if pixmap not set or not alchemy
+            # Special handling for Tribulation (ASCEND)
+            elif state == PetState.ASCEND and hasattr(self, 'tribulation_images'):
+                idx = self.cultivator.layer_index
+                # Map layer to image: 0->0, 1->1, 2->2, >2 -> use 2 or none
+                # Logic: We have images for 0, 1, 2.
+                # If layer > 2, we default to the highest available (2) for now, or just IDLE if strict.
+                # Let's use 2 as fallback for high levels until we have assets.
+                target_idx = min(idx, 2)
+                pixmap = self.tribulation_images.get(target_idx)
+
+            # Fallback to standard logic
             if not pixmap:
                 pixmap = self.state_images.get(state)
             
@@ -632,6 +665,66 @@ class PetWindow(QWidget):
             }
             effect_mode = mode_map.get(state, "idle")
             self.effect_widget.set_mode(effect_mode)
+
+    # --- 鼠标拖拽逻辑 ---
+    # ... (Keep existing layout) ...
+    # Skip lines until input_secret to override it
+
+    def input_secret(self):
+        from PyQt6.QtWidgets import QInputDialog, QLineEdit
+        text, ok = QInputDialog.getText(self, "天机", "请输入密令:", QLineEdit.EchoMode.Normal, "")
+        if ok and text:
+            # Check old level
+            old_layer = self.cultivator.layer_index
+            success, msg = self.cultivator.process_secret_command(text)
+            self.show_notification(msg)
+            
+            if success:
+                # If level up happened
+                if self.cultivator.layer_index > old_layer:
+                    self.is_ascending = True
+                    # Show visual effect sequence
+                    # 1. Tribulation visuals (briefly)
+                    self.set_state(PetState.ASCEND)
+                    self.effect_widget.trigger_tribulation()
+                    
+                    # 2. Success Effect after 2s
+                    QTimer.singleShot(2000, self.effect_widget.trigger_breakthrough_success)
+                    def end_secret_ascend():
+                        self.is_ascending = False
+                        self.set_state(PetState.IDLE)
+                    QTimer.singleShot(3000, end_secret_ascend)
+                else:
+                    # Just simple success (e.g. money reset)
+                     if "已转世" not in msg:
+                        self.effect_widget.trigger_breakthrough_success()
+
+    def on_attempt_breakthrough(self):
+        # 1. Trigger Visuals FIRST
+        self.is_ascending = True
+        self.set_state(PetState.ASCEND)
+        self.effect_widget.trigger_tribulation()
+        self.show_notification("天劫降临... (渡劫中)")
+        
+        # 2. Delay calculation by 3 seconds
+        QTimer.singleShot(3000, self._finalize_breakthrough)
+
+    def _finalize_breakthrough(self):
+        success, msg = self.cultivator.attempt_breakthrough()
+        self.show_notification(msg)
+        
+        def end_ascend():
+            self.is_ascending = False
+            self.set_state(PetState.IDLE)
+
+        if success:
+            # 3. Success Effect
+            self.effect_widget.trigger_breakthrough_success()
+            # Revert to idle after some time
+            QTimer.singleShot(2000, end_ascend)
+        else:
+            # Failed
+            QTimer.singleShot(1000, end_ascend)
 
     # --- 鼠标拖拽逻辑 ---
     def mousePressEvent(self, event: QMouseEvent):
