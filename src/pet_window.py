@@ -155,16 +155,56 @@ class PetWindow(QWidget):
             self.show_notification(latest_event)
             self.cultivator.events.clear()
                 
+    # --- 辅助方法: 计算窗口安全位置 (防止超出屏幕) ---
+    def _calculate_safe_pos(self, widget, prefer_side='right'):
+        pet_geo = self.frameGeometry()
+        screen_geo = QApplication.primaryScreen().geometry()
+        
+        w = widget.width()
+        h = widget.height()
+        
+        # X 轴处理
+        if prefer_side == 'right':
+            # 优先尝试右边
+            x = pet_geo.right() + 10
+            # 如果右边放不下，放左边
+            if x + w > screen_geo.right():
+                x = pet_geo.left() - w - 10
+        else: # prefer 'left'
+            # 优先尝试左边
+            x = pet_geo.left() - w - 10
+            # 如果左边放不下，放右边
+            if x < screen_geo.left():
+                x = pet_geo.right() + 10
+                
+        # 兜底: 如果还是出界 (窗口太宽)，则强制显示在屏幕内
+        if x < screen_geo.left(): 
+            x = screen_geo.left() + 10
+        elif x + w > screen_geo.right():
+            x = screen_geo.right() - w - 10
+
+        # Y 轴处理 (防止底部被遮挡)
+        # 默认顶部对齐
+        y = pet_geo.top()
+        
+        # 如果底部超出了屏幕底部
+        if y + h > screen_geo.bottom():
+             # 向上移动，底部对齐屏幕底部 (留出少许边距)
+             y = screen_geo.bottom() - h - 10
+             
+        # 兜底: 防止顶部出界
+        if y < screen_geo.top():
+            y = screen_geo.top() + 10
+            
+        return x, y
+
     def open_alchemy_window(self):
         from src.alchemy_window import AlchemyWindow
         if not hasattr(self, 'alchemy_window') or self.alchemy_window is None:
             self.alchemy_window = AlchemyWindow(self.cultivator, self)
             
-        # 居中显示
-        screen = QApplication.primaryScreen().geometry()
-        x = (screen.width() - self.alchemy_window.width()) // 2
-        y = (screen.height() - self.alchemy_window.height()) // 2
-        
+        # 统一使用安全定位，放在右侧 (和背包一侧，方便查看材料)
+        x, y = self._calculate_safe_pos(self.alchemy_window, prefer_side='right')
         self.alchemy_window.move(x, y)
         self.alchemy_window.show()
 
@@ -173,6 +213,10 @@ class PetWindow(QWidget):
         if self.stats_window is None:
             self.stats_window = StatsWindow(cultivator=self.cultivator)
             
+        # 使用新的安全定位 (默认右边)
+        x, y = self._calculate_safe_pos(self.stats_window, prefer_side='right')
+        self.stats_window.move(x, y)
+        
         self.stats_window.show()
         self.stats_window.raise_()
         self.stats_window.activateWindow()
@@ -190,6 +234,42 @@ class PetWindow(QWidget):
         self.set_state(PetState.ALCHEMY)
         logger.info(f"开始炼制: {target_pill_id}")
         self.show_notification("开始闭关炼丹... (请勿高频操作)")
+
+    def open_inventory(self):
+        # 延迟导入防止循环依赖
+        from src.inventory_window import InventoryWindow
+        
+        # 单例/缓存处理：如果还没创建过，就创建
+        if not hasattr(self, 'inventory_window') or self.inventory_window is None:
+            self.inventory_window = InventoryWindow(self.cultivator, None) # parent=None 保证它是独立窗口，不受主窗口裁剪限制
+            
+        x, y = self._calculate_safe_pos(self.inventory_window, prefer_side='right')
+        self.inventory_window.move(x, y)
+        
+        self.inventory_window.show()
+        self.inventory_window.refresh_list() # 刷新数据
+
+    def open_market(self):
+        from src.market_window import MarketWindow
+        
+        if not hasattr(self, 'market_window') or self.market_window is None:
+            self.market_window = MarketWindow(self.cultivator, None)
+            
+        x, y = self._calculate_safe_pos(self.market_window, prefer_side='left')
+        self.market_window.move(x, y)
+        self.market_window.show()
+
+    def open_talent_window(self):
+        from src.talent_window import TalentWindow
+        
+        if not hasattr(self, 'talent_window') or self.talent_window is None:
+            self.talent_window = TalentWindow(self.cultivator, None)
+            
+        x, y = self._calculate_safe_pos(self.talent_window, prefer_side='left')
+        self.talent_window.move(x, y)
+        self.talent_window.show()
+
+
 
     def finish_alchemy(self):
         import random
@@ -995,68 +1075,7 @@ class PetWindow(QWidget):
         if hasattr(self, 'original_pos'):
             self.move(self.original_pos)
 
-    def open_inventory(self):
-        # 延迟导入防止循环依赖
-        from src.inventory_window import InventoryWindow
-        
-        # 单例/缓存处理：如果还没创建过，就创建
-        if not hasattr(self, 'inventory_window') or self.inventory_window is None:
-            self.inventory_window = InventoryWindow(self.cultivator, None) # parent=None 保证它是独立窗口，不受主窗口裁剪限制
-            
-        # 计算位置：显示在桌宠右侧或者左侧，防止出屏幕
-        pet_geo = self.frameGeometry()
-        screen_geo = QApplication.primaryScreen().geometry()
-        
-        # 默认放右边
-        target_x = pet_geo.right() + 10
-        target_y = pet_geo.top()
-        
-        # 如果右边放不下，就放左边
-        if target_x + self.inventory_window.width() > screen_geo.right():
-            target_x = pet_geo.left() - self.inventory_window.width() - 10
-            
-        self.inventory_window.move(target_x, target_y)
-        self.inventory_window.show()
-        self.inventory_window.refresh_list() # 刷新数据
 
-    def open_market(self):
-        from src.market_window import MarketWindow
-        
-        if not hasattr(self, 'market_window') or self.market_window is None:
-            self.market_window = MarketWindow(self.cultivator, None)
-            
-        pet_geo = self.frameGeometry()
-        screen_geo = QApplication.primaryScreen().geometry()
-        
-        # 默认放左边 (和背包分开)
-        target_x = pet_geo.left() - self.market_window.width() - 10
-        target_y = pet_geo.top()
-        
-        # 如果左边放不下，就放右边
-        if target_x < screen_geo.left():
-            target_x = pet_geo.right() + 10
-            
-        self.market_window.move(target_x, target_y)
-        self.market_window.show()
-
-    def open_talent_window(self):
-        from src.talent_window import TalentWindow
-        
-        if not hasattr(self, 'talent_window') or self.talent_window is None:
-            self.talent_window = TalentWindow(self.cultivator, None)
-            
-        pet_geo = self.frameGeometry()
-        screen_geo = QApplication.primaryScreen().geometry()
-        
-        # 默认放左边
-        target_x = pet_geo.left() - self.talent_window.width() - 10
-        target_y = pet_geo.top()
-        
-        if target_x < screen_geo.left():
-            target_x = pet_geo.right() + 10
-            
-        self.talent_window.move(target_x, target_y)
-        self.talent_window.show()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

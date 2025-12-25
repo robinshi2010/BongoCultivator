@@ -4,23 +4,7 @@ import collections
 
 # 目标图片清单
 TARGET_FILES = [
-    "cultivator_alchemy_high.png",
-    "cultivator_alchemy_low.png",
-    "cultivator_alchemy_mid.png",
-    "cultivator_cast.png",
-    "cultivator_drag.png",
-    "cultivator_idle.png",
-    "cultivator_read.png",
-    "cultivator_walk.png",
-    "tribulation_0_foundation.png",
-    "tribulation_1_goldcore.png",
-    "tribulation_2_nascentsoul.png",
-    "tribulation_3_divine.png",
-    "tribulation_4_void.png",
-    "tribulation_5_integration.png",
-    "tribulation_6_mahayana.png",
-    "tribulation_7_calamity.png",
-    "tribulation_8_ascension.png"
+    "image.png"
 ]
 
 def remove_background(image_path, tolerance=30):
