@@ -56,10 +56,16 @@ class EventEngine:
             cond = evt.get("conditions", {})
             
             # 2. Condition Checks
-            if "min_layer" in cond and layer < cond["min_layer"]: continue
-            if "max_layer" in cond and layer > cond["max_layer"]: continue
-            if "min_money" in cond and money < cond["min_money"]: continue
-            if "min_mind" in cond and mind < cond["min_mind"]: continue
+            # 2. Condition Checks
+            min_layer = evt.get("min_layer", cond.get("min_layer", 0))
+            max_layer = evt.get("max_layer", cond.get("max_layer", 99))
+            min_money = evt.get("min_money", cond.get("min_money", 0))
+            min_mind = evt.get("min_mind", cond.get("min_mind", 0))
+
+            if layer < min_layer: continue
+            if layer > max_layer: continue
+            if money < min_money: continue
+            if mind < min_mind: continue
             
             # 3. Add to pool
             w = evt.get("weight", 10)
@@ -154,7 +160,8 @@ class EventEngine:
                 if isinstance(v, dict):
                     for iid, count in v.items():
                         cultivator.gain_item(iid, count)
-                        logs.append(f"获得: {iid} x{count}") # TODO: Get Name
+                        item_name = self.item_manager.get_item_name(iid)
+                        logs.append(f"获得: {item_name} x{count}")
                         
         return logs
 

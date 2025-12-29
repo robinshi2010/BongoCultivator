@@ -5508,3 +5508,13 @@ KeyError: 'title'
 2025-12-29 08:53:10,861 [INFO] [cultivator.py:576] - 数据已保存至数据库
 2025-12-29 08:53:10,861 [INFO] [activity_recorder.py:20] - 停止 ActivityRecorder...
 2025-12-29 08:53:10,863 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766969590, Keys=0, Mouse=30
+2025-12-29 10:14:22,406 [INFO] [logger.py:69] - 日志系统已启动 (Log system initialized).
+2025-12-29 10:14:22,412 [INFO] [database.py:152] - 数据库初始化完成: all tables ready
+2025-12-29 10:14:22,417 [INFO] [item_manager.py:44] - Loaded 113 items from Database.
+2025-12-29 10:14:22,417 [INFO] [event_engine.py:34] - EventEngine loaded 11 events from DB.
+2025-12-29 10:14:22,417 [INFO] [event_engine.py:34] - EventEngine loaded 11 events from DB.
+2025-12-29 10:14:22,418 [INFO] [event_engine.py:34] - EventEngine loaded 11 events from DB.
+2025-12-29 10:14:22,418 [INFO] [event_engine.py:34] - EventEngine loaded 11 events from DB.
+2025-12-29 10:14:22,418 [INFO] [event_engine.py:34] - EventEngine loaded 11 events from DB.
+2025-12-29 10:14:22,418 [INFO] [event_engine.py:34] - EventEngine loaded 11 events from DB.
+2025-12-29 10:14:22,419 [WARNING] [cultivator.py:334] - Economy Safeguard: Blocked Tier 8 item (god_item_t8) for Layer 0 player.

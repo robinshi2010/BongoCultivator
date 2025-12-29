@@ -323,6 +323,24 @@ class Cultivator:
             return False, msg
 
     def gain_item(self, item_id, count=1):
+        # Safeguard: Check item tier balance (Plan 17)
+        item_info = self.item_manager.get_item(item_id)
+        if item_info:
+            item_tier = item_info.get("tier", 0)
+            # Allow items up to Current Layer + 1
+            max_allowed_tier = self.layer_index + 1
+            
+            if item_tier > max_allowed_tier:
+                logger.warning(f"Economy Safeguard: Blocked Tier {item_tier} item ({item_id}) for Layer {self.layer_index} player.")
+                # Fallback: Get a random material of appropriate tier
+                fallback_tier = max_allowed_tier
+                new_item_id = self.item_manager.get_random_material(fallback_tier)
+                if new_item_id:
+                    item_id = new_item_id
+                    # Update info for logging if needed but main logic uses ID
+                else:
+                    return # Should not happen, but safe exit
+
         if item_id in self.inventory:
             self.inventory[item_id] += count
         else:
