@@ -5408,3 +5408,4 @@ KeyError: 'title'
 2025-12-25 18:09:28,849 [DEBUG] [pet_window.py:712] - 切换状态: COMBAT
 2025-12-25 18:09:28,850 [DEBUG] [pet_window.py:712] - 切换状态: WORK
 2025-12-25 18:09:30,853 [INFO] [activity_recorder.py:37] - 已归档活动记录: Time=1766657370, Keys=119, Mouse=33
+2025-12-25 18:09:33,851 [DEBUG] [pet_window.py:712] - 切换状态: IDLE

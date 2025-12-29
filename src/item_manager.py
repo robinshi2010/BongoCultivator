@@ -32,7 +32,14 @@ class ItemManager:
         try:
             self._load_from_db()
             if not self.flat_items:
-                logger.warning("Item Database is EMPTY! Please run 'python3 tools/import_all_data.py' to populate data.")
+                logger.info("检测到数据库为空，尝试加载默认数据...")
+                from src.services.data_loader import DataLoader
+                if DataLoader.load_initial_data():
+                    # Reload from DB after initialization
+                    self._load_from_db()
+                    
+                if not self.flat_items:
+                    logger.warning("Item Database is still EMPTY! Please check data files.")
             else:
                 logger.info(f"Loaded {len(self.flat_items)} items from Database.")
         except Exception as e:
