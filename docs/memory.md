@@ -9,6 +9,11 @@
     - `ItemManager` & `EventManager`: 单例管理数据配置 (DB-driven)。
     - `AchievementManager`: 追踪成就进度、解锁状态及头衔加成。
 
+## 维护工具 (Maintenance Tools)
+- `tools/generate_json_assets.py`: 从代码重建 `src/data/` 下缺失的 items/events JSON 文件 (Fix missing data)。
+- `tools/fix_inventory_ids.py`: 迁移旧存档 `player_inventory` 中的过期 ID 到新规范 (Fix English names)。
+- `DataLoader`: 集成在启动流程中，自动检测并修复空数据库。
+
 ## 已完成功能 (Completed Features)
 1. **基础互动**: 
     - 鼠标拖拽移动
@@ -97,7 +102,7 @@
 - [x] **[Plan 12: 视觉素材扩展](plan12.md)** (Phase 2 & 3 Tribulation Assets)
 - [x] **[Plan 14: 轮回继承](plan14_done.md)** (Legacy System, Death/Rebirth Logic)
 - [x] **[Plan 15: 物品价值与经济循环](plan15_item_economy.md)** (Item Utility, Market Selling, Interactive Events)
-- [x] **[Plan 16: 数据加载修复与数值调整](docs/16_done.md)** (Data Integration, Experience Curve Tuning)
+- [x] **[Plan 16: 数据加载修复与数值调整](docs/16_done.md)** (Data Integration, Storage Bag Fix, Packaging)
 
 ### 待执行 (Pending / In Progress)
 
