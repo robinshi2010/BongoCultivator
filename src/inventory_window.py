@@ -154,12 +154,17 @@ class InventoryWindow(QWidget):
         if item_type == "material": type_str = "[材料]"
         elif item_type == "consumable": type_str = "[消耗品]"
         elif item_type == "junk": type_str = "[杂物]"
-        elif item_type == "breakthrough": type_str = "[珍稀]"
+        elif item_type in ["breakthrough", "break"]: type_str = "[珍稀]"
+        elif item_type in ["exp", "stat", "buff", "recov", "utility", "special", "cosmetic"]: type_str = "[丹药]"
         
         self.detail_label.setText(f"【{name}】{type_str}\n{desc}")
         
-        # 只有 consumable 和 breakthrough 可以使用
-        can_use = item_type in ["consumable", "breakthrough", "buff"]
+        # 允许使用的类型扩展
+        allowed_types = [
+            "consumable", "breakthrough", "break", 
+            "buff", "exp", "stat", "recov", "utility", "special", "cosmetic"
+        ]
+        can_use = item_type in allowed_types
         self.use_btn.setEnabled(can_use)
 
     def use_item(self):
@@ -179,74 +184,101 @@ class InventoryWindow(QWidget):
         msg = ""
         used_success = False
         
-        if item_type == "consumable" or item_type == "buff":
-            # 处理各类效果
+        # Breakthrough Logic (Mapped from 'break' or 'breakthrough')
+        if item_type in ["breakthrough", "break"]:
+             # Prefer 'breakthrough_chance' (new) over 'chance' (old)
+             chance_percent = effects.get("breakthrough_chance", effects.get("chance", 0))
+             
+             # If chance is like 0.2 (20%), handle it. If > 1 (20), handle it.
+             if chance_percent > 1.0:
+                 base_rate = chance_percent / 100.0
+             else:
+                 base_rate = chance_percent
+             
+             success, res_msg = self.cultivator.attempt_breakthrough(base_rate)
+             msg = res_msg
+             
+             if not success and "修为" in res_msg:
+                 msg = res_msg
+                 used_success = False # 不扣物品
+             else:
+                 used_success = True # 尝试了，扣物品
+
+        # Consumable Logic (All other types)
+        else:
+            # 1. EXP
             if "exp" in effects:
                 val = effects["exp"]
                 self.cultivator.gain_exp(val)
                 msg = f"服用了 {info['name']}, 修为增加 {val}!"
                 used_success = True
-                
+            elif "exp_gain" in effects:
+                val = effects["exp_gain"]
+                # If < 1.0, treat as percentage of max_exp
+                if val < 1.0:
+                    amount = int(self.cultivator.max_exp * val)
+                else:
+                    amount = int(val)
+                self.cultivator.gain_exp(amount)
+                msg = f"服用了 {info['name']}, 修为精进 {amount}!"
+                used_success = True
+
+            # 2. Stat
+            elif "stat_body" in effects:
+                val = effects["stat_body"]
+                self.cultivator.modify_stat("body", val)
+                msg = f"体魄增加了 {val} 点 (永久)"
+                used_success = True
+            
+            # 3. Heal/Recover
             elif "heal" in effects:
                 val = effects["heal"]
                 msg = f"恢复了 {val} 点状态 (暂无实效)"
                 used_success = True
-                
+            elif "mind_heal" in effects:
+                val = effects["mind_heal"]
+                self.cultivator.modify_stat("mind", -val)
+                msg = f"心魔减少了 {val} 点"
+                used_success = True
+            
+            # 4. Buffs
             elif "buff" in effects:
                 buff_name = effects["buff"]
                 duration = effects.get("duration", 0)
                 msg = f"获得了增益 [{buff_name}] 持续 {duration//60} 分钟 (开发中)"
                 used_success = True
                 
-            elif "stat_body" in effects:
-                val = effects["stat_body"]
-                self.cultivator.modify_stat("body", val)
-                msg = f"体魄增加了 {val} 点 (永久)"
-                used_success = True
-                
-            elif "mind_heal" in effects:
-                val = effects["mind_heal"]
-                self.cultivator.modify_stat("mind", -val)
-                msg = f"心魔减少了 {val} 点"
-                used_success = True
-                
+            # 5. Affection
             elif "affection" in effects:
                 val = effects["affection"]
                 self.cultivator.modify_stat("affection", val)
                 msg = f"宠物好感度增加 {val} 点"
                 used_success = True
                 
+            # 6. Special Actions
             elif "action" in effects:
                 action = effects["action"]
                 if action == "reset_talent":
                     self.cultivator.modify_stat("reset_talent", 0)
                     msg = "已洗髓伐骨，天赋点已重置！"
                     used_success = True
-                
-            # Fallback
-            if not used_success:
-                 msg = "物品已使用，但好像没发生什么。"
+            
+            # 7. Fallback for valid types but empty effects (e.g. placeholder items)
+            elif item_type == "recov":
+                 val = 10
+                 self.cultivator.modify_stat("mind", -val)
+                 msg = f"神清气爽，心魔减少了 {val} 点 (基础)"
+                 used_success = True
+            elif item_type == "stat":
+                 val = 1
+                 self.cultivator.modify_stat("body", val)
+                 msg = f"服用后感觉身体强壮了一些，体魄+{val} (基础)"
                  used_success = True
                  
-        elif item_type == "breakthrough":
-             # 突破逻辑
-             chance_percent = effects.get("chance", 0)
-             base_rate = chance_percent / 100.0
-             
-             success, res_msg = self.cultivator.attempt_breakthrough(base_rate)
-             msg = res_msg
-             
-             # 如果成功，consumable 逻辑下面会自动减1; 
-             # 但如果 "can_breakthrough" 返回 False (修为不够)，虽然 used_success=True 会导致扣减，这不太合理。
-             # 我们应该只在尝试了突破（无论成败）时才扣减。
-             # 如果返回 "修为不足"，则不扣减。
-             
-             if not success and "修为" in res_msg: #  有点蹩脚的判断，但暂时有效
-                 msg = res_msg
-                 used_success = False # 不扣物品
-             else:
-                 used_success = True # 尝试了，扣物品
-             
+            # Fallback
+            if not used_success:
+                 msg = "物品已使用，但好像没发生什么 (暂无效果)。"
+                 used_success = True
         if used_success:
             self.cultivator.inventory[item_id] -= 1
             logger.info(f"使用了物品: {info['name']}")
