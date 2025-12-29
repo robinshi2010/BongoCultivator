@@ -103,7 +103,10 @@
 - [x] **[Plan 14: 轮回继承](plan14_done.md)** (Legacy System, Death/Rebirth Logic)
 - [x] **[Plan 15: 物品价值与经济循环](plan15_item_economy.md)** (Item Utility, Market Selling, Interactive Events)
 - [x] **[Plan 17: 经济平衡与事件修复](plan17_done.md)** (Event Logic Fix, Economy Safeguard)
-- [x] **[Plan 18: 修复物品使用逻辑](plan18_inventory_use.md)** (Fix Pill Consumption, Map Item Types)
+- [x] **[Plan 18: 修复物品使用逻辑](plan18_done.md)** (Fix Pill Consumption, Map Item Types)
+- [x] **[Plan 19: 物品使用反馈](plan19_done.md)** (Visual Notifications for Item Usage)
+- [x] **[Plan 20: 完善丹药效果](plan20_fix_effects.md)** (Inject Effects for Empty Items)
+- [x] **[Plan 21: 物品详情优化](plan21_ui_details.md)** (Rich Text Description in UI)
 
 ### 待执行 (Pending / In Progress)
 

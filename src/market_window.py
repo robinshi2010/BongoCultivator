@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, 
-                             QHBoxLayout, QTabWidget, QMessageBox, QListWidgetItem)
+                             QHBoxLayout, QTabWidget, QMessageBox, QListWidgetItem, QTextEdit)
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QPainter, QColor, QPen, QBrush
 from src.logger import logger
@@ -17,7 +17,7 @@ class MarketWindow(QWidget):
         
         self.cultivator = cultivator
         self.item_manager = cultivator.item_manager
-        self.resize(300, 400)
+        self.resize(360, 480) # Widen for details
         
         self.init_ui()
 
@@ -104,7 +104,15 @@ class MarketWindow(QWidget):
         
         self.goods_list = QListWidget()
         self.style_list_widget(self.goods_list)
+        self.goods_list.itemClicked.connect(self.show_buy_detail)
         layout.addWidget(self.goods_list)
+        
+        # Detail View
+        self.buy_detail = QTextEdit()
+        self.buy_detail.setReadOnly(True)
+        self.buy_detail.setStyleSheet("background: transparent; border: none; color: #DDD;")
+        self.buy_detail.setFixedHeight(120)
+        layout.addWidget(self.buy_detail)
         
         self.buy_btn = QPushButton("购买选定")
         self.buy_btn.clicked.connect(self.buy_item)
@@ -139,6 +147,16 @@ class MarketWindow(QWidget):
             
         self.update_money()
 
+    def show_buy_detail(self, item):
+        idx = item.data(Qt.ItemDataRole.UserRole)
+        if idx >= len(self.cultivator.market_goods): return
+        
+        goods = self.cultivator.market_goods[idx]
+        item_id = goods["id"]
+        
+        html = self.item_manager.get_item_details_html(item_id)
+        self.buy_detail.setHtml(html)
+
     def buy_item(self):
         current_item = self.goods_list.currentItem()
         if not current_item:
@@ -171,7 +189,15 @@ class MarketWindow(QWidget):
         
         self.sell_list = QListWidget()
         self.style_list_widget(self.sell_list)
+        self.sell_list.itemClicked.connect(self.show_sell_detail)
         layout.addWidget(self.sell_list)
+        
+        # Detail View
+        self.sell_detail = QTextEdit()
+        self.sell_detail.setReadOnly(True)
+        self.sell_detail.setStyleSheet("background: transparent; border: none; color: #DDD;")
+        self.sell_detail.setFixedHeight(120)
+        layout.addWidget(self.sell_detail)
         
         btn_box = QHBoxLayout()
         self.sell_one_btn = QPushButton("出售 1 个")
@@ -223,6 +249,11 @@ class MarketWindow(QWidget):
                 self.sell_list.addItem(item)
         
         self.update_money()
+
+    def show_sell_detail(self, item):
+        item_id = item.data(Qt.ItemDataRole.UserRole)
+        html = self.item_manager.get_item_details_html(item_id)
+        self.sell_detail.setHtml(html)
 
     def _get_selected_item_info(self):
         current_item = self.sell_list.currentItem()

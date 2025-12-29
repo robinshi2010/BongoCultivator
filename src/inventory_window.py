@@ -1,11 +1,12 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QHBoxLayout, QMessageBox, QGraphicsDropShadowEffect, QListWidgetItem
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QHBoxLayout, QMessageBox, QGraphicsDropShadowEffect, QListWidgetItem, QTextEdit
 from PyQt6.QtCore import Qt, QPoint
 from PyQt6.QtGui import QPainter, QColor, QPen, QBrush, QAction
 from src.logger import logger
 
 class InventoryWindow(QWidget):
-    def __init__(self, cultivator, parent=None):
+    def __init__(self, cultivator, pet_window=None, parent=None):
         super().__init__(parent)
+        self.pet_window = pet_window
         
         self.setWindowFlags(
             Qt.WindowType.Tool | 
@@ -56,10 +57,13 @@ class InventoryWindow(QWidget):
         main_layout.addWidget(self.item_list)
         
         # 底部：详情与操作
-        self.detail_label = QLabel("选择物品...")
-        self.detail_label.setWordWrap(True)
-        self.detail_label.setStyleSheet("color: #DDD; font-size: 12px; padding: 5px; min-height: 40px;")
-        main_layout.addWidget(self.detail_label)
+        # 底部：详情与操作
+        self.detail_text = QTextEdit()
+        self.detail_text.setReadOnly(True)
+        self.detail_text.setStyleSheet("background-color: transparent; border: none; color: #DDD;")
+        # Fix height to allow scroll
+        self.detail_text.setFixedHeight(100)
+        main_layout.addWidget(self.detail_text)
         
         btn_layout = QHBoxLayout()
         
@@ -146,18 +150,11 @@ class InventoryWindow(QWidget):
         if not info:
             return
             
-        name = info.get("name", "未知")
-        desc = info.get("desc", "没有描述")
+        # New HTML display
+        html = self.item_manager.get_item_details_html(item_id)
+        self.detail_text.setHtml(html)
+        
         item_type = info.get("type", "misc")
-        
-        type_str = ""
-        if item_type == "material": type_str = "[材料]"
-        elif item_type == "consumable": type_str = "[消耗品]"
-        elif item_type == "junk": type_str = "[杂物]"
-        elif item_type in ["breakthrough", "break"]: type_str = "[珍稀]"
-        elif item_type in ["exp", "stat", "buff", "recov", "utility", "special", "cosmetic"]: type_str = "[丹药]"
-        
-        self.detail_label.setText(f"【{name}】{type_str}\n{desc}")
         
         # 允许使用的类型扩展
         allowed_types = [
@@ -283,11 +280,15 @@ class InventoryWindow(QWidget):
             self.cultivator.inventory[item_id] -= 1
             logger.info(f"使用了物品: {info['name']}")
             
-            self.detail_label.setText(msg)
+            # Optional: update detail text to show used feedback if needed, 
+            # but usually we just keep the item description.
+            # self.detail_text.setHtml(msg) # Maybe not needed clutter
+            if self.pet_window:
+                self.pet_window.show_notification(msg)
             self.refresh_list()
             
             if self.cultivator.inventory[item_id] <= 0:
-                self.detail_label.setText("物品已用完")
+                self.detail_text.setHtml("<b>物品已用完</b>")
                 self.use_btn.setEnabled(False)
 
     def translate_legacy_id(self, item_id):

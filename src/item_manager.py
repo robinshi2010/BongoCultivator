@@ -105,6 +105,59 @@ class ItemManager:
     def get_item(self, item_id):
         return self.flat_items.get(item_id)
 
+    def get_item_details_html(self, item_id):
+        info = self.get_item(item_id)
+        if not info:
+            return "<b>未知物品</b>"
+            
+        name = info.get("name", "未知")
+        tier = info.get("tier", 0)
+        item_type = info.get("type", "misc")
+        price = info.get("price", 0)
+        desc = info.get("desc", "暂无描述")
+        effects = info.get("effect", {})
+        
+        # Translate Types
+        type_cn = {
+            "spirit": "灵植", "mineral": "矿石", "monster": "妖丹", 
+            "exp": "修为丹", "stat": "属性丹", "buff": "增益丹",
+            "recov": "恢复丹", "break": "突破丹", "breakthrough": "突破丹",
+            "utility": "功能丹", "special": "特殊", "cosmetic": "外观",
+            "junk": "杂物", "material": "材料"
+        }.get(item_type, item_type.capitalize())
+        
+        # Format Effects
+        effect_str = ""
+        if effects:
+            effect_list = []
+            if "exp" in effects or "exp_gain" in effects:
+                val = effects.get("exp", effects.get("exp_gain"))
+                suffix = "%" if val < 1.0 else ""
+                val_disp = int(val * 100) if val < 1 else val
+                effect_list.append(f"修为 +{val_disp}{suffix}")
+            
+            if "stat_body" in effects: effect_list.append(f"体魄 +{effects['stat_body']}")
+            if "mind_heal" in effects: effect_list.append(f"心魔 -{effects['mind_heal']}")
+            if "affection" in effects: effect_list.append(f"好感 +{effects['affection']}")
+            if "breakthrough_chance" in effects: 
+                val = effects['breakthrough_chance']
+                effect_list.append(f"突破成功率 +{int(val*100)}%")
+                
+            if effect_list:
+                effect_str = "<br><b>【功效】</b> " + " ".join(effect_list)
+        
+        html = f"""
+        <div style='font-family: Microsoft YaHei; color: #EEE;'>
+            <div style='font-size: 16px; color: #FFD700;'><b>{name}</b> <span style='font-size:12px; color:#AAA;'>[{tier}阶 {type_cn}]</span></div>
+            <div style='color: #AAA; margin-top: 5px;'>价值: {price} 灵石</div>
+            <hr style='border: 1px solid #555;'>
+            <div style='line-height: 1.4;'>{desc}</div>
+            <div style='margin-top: 8px; color: #00FF7F;'>{effect_str}</div>
+        </div>
+        """
+        return html
+
+
     def get_random_material(self, tier):
         """Randomly return a material ID from the specified tier"""
         candidates = self.tier_lists.get(tier, {}).get("materials", [])

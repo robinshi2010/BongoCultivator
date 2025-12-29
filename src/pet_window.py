@@ -241,7 +241,7 @@ class PetWindow(QWidget):
         
         # 单例/缓存处理：如果还没创建过，就创建
         if not hasattr(self, 'inventory_window') or self.inventory_window is None:
-            self.inventory_window = InventoryWindow(self.cultivator, None) # parent=None 保证它是独立窗口，不受主窗口裁剪限制
+            self.inventory_window = InventoryWindow(self.cultivator, pet_window=self) # parent=None 保证它是独立窗口，不受主窗口裁剪限制
             
         x, y = self._calculate_safe_pos(self.inventory_window, prefer_side='right')
         self.inventory_window.move(x, y)
