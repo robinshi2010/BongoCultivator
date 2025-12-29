@@ -106,7 +106,8 @@
 - [x] **[Plan 18: 修复物品使用逻辑](plan18_done.md)** (Fix Pill Consumption, Map Item Types)
 - [x] **[Plan 19: 物品使用反馈](plan19_done.md)** (Visual Notifications for Item Usage)
 - [x] **[Plan 20: 完善丹药效果](plan20_fix_effects.md)** (Inject Effects for Empty Items)
-- [x] **[Plan 21: 物品详情优化](plan21_ui_details.md)** (Rich Text Description in UI)
+- [x] **[Plan 21: 物品详情优化](plan21_done.md)** (Rich Text Description in UI)
+- [x] **[Plan 22: 数据持久化与存档迁移](plan22_data_persistence.md)** (Local AppData Storage)
 
 ### 待执行 (Pending / In Progress)
 

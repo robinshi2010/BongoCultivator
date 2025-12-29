@@ -21,21 +21,39 @@ def get_resource_path(relative_path):
         
     return os.path.join(base_path, relative_path)
 
-def get_user_data_dir():
-    """
-    获取用户数据存储目录 (用于存档数据库等)。
-    在 Mac 上通常是 ~/Library/Application Support/BongoCultivation
-    在 Win 上是 AppData/Local/...
-    或者为了简单，如果是 Portable 模式，就放在可执行文件旁边。
-    
-    这里我们暂时使用简单的策略：
-    1. 开发环境: 项目根目录
-    2. 打包环境: 可执行文件所在目录 (sys.executable 的 dirname)
-    """
+import platform
+from pathlib import Path
+
+def get_legacy_data_dir():
+    """获取旧版数据目录 (用于迁移)"""
     if hasattr(sys, '_MEIPASS'):
-        # 打包环境，使用 exe 所在目录
         return os.path.dirname(sys.executable)
     else:
-        # 开发环境
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        return os.path.dirname(os.path.dirname(current_dir))
+        # src/utils/path_helper.py -> src/utils -> src -> root
+        return os.path.dirname(os.path.dirname(os.path.dirname(current_dir)))
+
+def get_user_data_dir():
+    """
+    获取标准化的用户数据存储目录。
+    macOS: ~/Library/Application Support/BongoCultivation
+    Windows: %LOCALAPPDATA%/BongoCultivation
+    """
+    app_name = "BongoCultivation"
+    system = platform.system()
+    
+    if system == "Windows":
+        base_path = Path(os.getenv('LOCALAPPDATA')) / app_name
+    elif system == "Darwin":
+        base_path = Path.home() / "Library" / "Application Support" / app_name
+    else:
+        base_path = Path.home() / ".local" / "share" / app_name
+        
+    try:
+        base_path.mkdir(parents=True, exist_ok=True)
+    except Exception as e:
+        print(f"Error creating data dir {base_path}: {e}")
+        # Fallback to tmp or legacy if permission denied?
+        return get_legacy_data_dir()
+        
+    return str(base_path)
