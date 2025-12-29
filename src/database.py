@@ -116,6 +116,22 @@ class DatabaseManager:
                     )
                 """)
 
+                # 7. Game Events
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS event_definitions (
+                        id TEXT PRIMARY KEY,
+                        type TEXT,
+                        weight INTEGER,
+                        data_json TEXT
+                    )
+                """)
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS event_history (
+                        event_id TEXT PRIMARY KEY,
+                        triggered_at INTEGER
+                    )
+                """)
+
                 # Migration for equipped_title
                 try:
                     cursor.execute("ALTER TABLE player_status ADD COLUMN equipped_title TEXT")

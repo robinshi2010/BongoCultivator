@@ -97,6 +97,7 @@
 - [x] **[Plan 12: 视觉素材扩展](plan12.md)** (Phase 2 & 3 Tribulation Assets)
 - [x] **[Plan 14: 轮回继承](plan14_done.md)** (Legacy System, Death/Rebirth Logic)
 - [x] **[Plan 15: 物品价值与经济循环](plan15_item_economy.md)** (Item Utility, Market Selling, Interactive Events)
+- [x] **[Plan 16: 数据加载修复与数值调整](docs/16_done.md)** (Data Integration, Experience Curve Tuning)
 
 ### 待执行 (Pending / In Progress)
 

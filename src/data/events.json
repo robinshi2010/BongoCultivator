@@ -1,0 +1,524 @@
+[
+    {
+        "id": "evt_t0_c1",
+        "title": "灵气复苏",
+        "type": "Common",
+        "text": "今日晨练时感觉神清气爽，似乎空气中的灵气浓度有所上升。",
+        "weight": 10,
+        "min_layer": 0,
+        "max_layer": 0,
+        "chance": 0.05,
+        "effects": {
+            "exp": 50,
+            "mind": -2
+        }
+    },
+    {
+        "id": "evt_t0_c2",
+        "title": "误食野果",
+        "type": "Common",
+        "text": "你在路边发现一颗颜色鲜艳的果实，饥渴难耐下吞服了它。",
+        "weight": 10,
+        "min_layer": 0,
+        "max_layer": 0,
+        "chance": 0.05,
+        "effects": {}
+    },
+    {
+        "id": "evt_t0_r1",
+        "title": "兽冢拾荒",
+        "type": "Rare",
+        "text": "你误入一处荒废的兽冢，在白骨堆中发现了一颗泛着红光的残齿。",
+        "weight": 10,
+        "min_layer": 0,
+        "max_layer": 1,
+        "state": "WORK",
+        "chance": 0.01,
+        "effects": {
+            "items": {
+                "part_wolf_tooth": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t0_r2",
+        "title": "神秘符箓",
+        "type": "Rare",
+        "text": "一位路过的云游道士看你骨骼惊奇，随手丢给你一张破旧符纸。",
+        "weight": 10,
+        "min_layer": 0,
+        "max_layer": 1,
+        "mind_max": 20,
+        "chance": 0.02,
+        "effects": {
+            "items": {
+                "misc_talisman_old": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t0_u1",
+        "title": "洗髓机缘",
+        "type": "Unique",
+        "text": "你在深山瀑布下冲刷肉身时，意外发现瀑布后的一株幽蓝草药。",
+        "weight": 10,
+        "min_layer": 0,
+        "max_layer": 0,
+        "chance": 0.005,
+        "is_unique": true,
+        "effects": {
+            "items": {
+                "herb_marrow_0": 1
+            },
+            "exp": 500
+        }
+    },
+    {
+        "id": "evt_t1_c1",
+        "title": "地脉震动",
+        "type": "Common",
+        "text": "脚下的大地微微颤抖，似有地龙翻身，泄露出一丝精纯土灵气。",
+        "weight": 10,
+        "min_layer": 1,
+        "max_layer": 1,
+        "chance": 0.05,
+        "effects": {
+            "exp": 200
+        }
+    },
+    {
+        "id": "evt_t1_c2",
+        "title": "坊市捡漏",
+        "type": "Common",
+        "text": "在坊市角落的摊位上，你发现一块不起眼的矿石竟是赤铜精母。",
+        "weight": 10,
+        "min_layer": 1,
+        "max_layer": 2,
+        "state": "IDLE",
+        "chance": 0.05,
+        "effects": {
+            "money": -100,
+            "items": {
+                "ore_copper_red": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t1_r1",
+        "title": "寒潭奇遇",
+        "type": "Rare",
+        "text": "为了躲避仇家，你潜入寒潭深处，却意外发现寒气逼人的晶石。",
+        "weight": 10,
+        "min_layer": 1,
+        "max_layer": 2,
+        "state": "WORK",
+        "chance": 0.01,
+        "effects": {
+            "items": {
+                "ore_cold_crystal": 1
+            },
+            "body": 1
+        }
+    },
+    {
+        "id": "evt_t1_u1",
+        "title": "龙纹觉醒",
+        "type": "Unique",
+        "text": "你体内的灵力忽然自行运转，与手中的龙纹草产生共鸣，隐约听到了龙吟。",
+        "weight": 10,
+        "min_layer": 1,
+        "max_layer": 1,
+        "chance": 0.005,
+        "is_unique": true,
+        "effects": {
+            "items": {
+                "herb_dragon_1": 1
+            },
+            "exp": 2000
+        }
+    },
+    {
+        "id": "evt_t2_c1",
+        "title": "丹火试炼",
+        "type": "Common",
+        "text": "炉温突然升高，你急忙打出几道法诀稳住火候。",
+        "weight": 10,
+        "min_layer": 2,
+        "max_layer": 2,
+        "state": "ALCHEMY",
+        "chance": 0.1,
+        "effects": {
+            "exp": 500,
+            "mind": 1
+        }
+    },
+    {
+        "id": "evt_t2_r1",
+        "title": "天雷滚滚",
+        "type": "Rare",
+        "text": "晴空一声霹雳，一道落雷击中了你不远处的竹林！",
+        "weight": 10,
+        "min_layer": 2,
+        "max_layer": 3,
+        "chance": 0.01,
+        "effects": {
+            "items": {
+                "wood_sky_thunder": 1
+            },
+            "mind": 5
+        }
+    },
+    {
+        "id": "evt_t2_r2",
+        "title": "古修洞府",
+        "type": "Rare",
+        "text": "你挖掘到了一座坍塌的洞府，门口散落着几面残破的阵旗。",
+        "weight": 10,
+        "min_layer": 2,
+        "max_layer": 3,
+        "state": "WORK",
+        "chance": 0.01,
+        "effects": {
+            "items": {
+                "misc_array_flag": 1
+            },
+            "money": 500
+        }
+    },
+    {
+        "id": "evt_t2_u1",
+        "title": "金丹异象",
+        "type": "Unique",
+        "text": "你的金丹表面浮现出九窍玲珑之孔，贪婪地吞噬着周围的星辰之力。",
+        "weight": 10,
+        "min_layer": 2,
+        "max_layer": 2,
+        "chance": 0.005,
+        "is_unique": true,
+        "effects": {
+            "items": {
+                "ore_star_sand": 2
+            },
+            "exp": 5000
+        }
+    },
+    {
+        "id": "evt_t3_c1",
+        "title": "神游太虚",
+        "type": "Common",
+        "text": "闭关中，你的元婴离体而出，在天地间遨游了一圈。",
+        "weight": 10,
+        "min_layer": 3,
+        "max_layer": 3,
+        "state": "IDLE",
+        "chance": 0.05,
+        "effects": {
+            "exp": 1000,
+            "mind": -5
+        }
+    },
+    {
+        "id": "evt_t3_r1",
+        "title": "空间裂隙",
+        "type": "Rare",
+        "text": "面前的空间突然裂开一道细缝，掉落一块形状扭曲的石头。",
+        "weight": 10,
+        "min_layer": 3,
+        "max_layer": 4,
+        "chance": 0.01,
+        "effects": {
+            "items": {
+                "ore_void_stone": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t3_r2",
+        "title": "九曲灵踪",
+        "type": "Rare",
+        "text": "你看见一只白兔钻入土中消失不见，只留下一截红绳。",
+        "weight": 10,
+        "min_layer": 3,
+        "max_layer": 4,
+        "state": "WORK",
+        "chance": 0.01,
+        "effects": {
+            "items": {
+                "herb_soul_restore": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t3_u1",
+        "title": "黄泉回响",
+        "type": "Unique",
+        "text": "你的元婴误入黄泉河畔，被河水沾湿了衣角，却因祸得福凝练了魂体。",
+        "weight": 10,
+        "min_layer": 3,
+        "max_layer": 3,
+        "chance": 0.005,
+        "is_unique": true,
+        "effects": {
+            "items": {
+                "water_nether": 1
+            },
+            "mind": 10
+        }
+    },
+    {
+        "id": "evt_t4_c1",
+        "title": "道韵共鸣",
+        "type": "Common",
+        "text": "你观摩落叶飘零，心中忽然对枯荣法则多了一丝明悟。",
+        "weight": 10,
+        "min_layer": 4,
+        "max_layer": 4,
+        "chance": 0.05,
+        "effects": {
+            "exp": 3000
+        }
+    },
+    {
+        "id": "evt_t4_r1",
+        "title": "鲲鹏掠影",
+        "type": "Rare",
+        "text": "巨大的阴影遮蔽了天空，一根羽毛如山峰般坠落。",
+        "weight": 10,
+        "min_layer": 4,
+        "max_layer": 5,
+        "chance": 0.005,
+        "effects": {
+            "items": {
+                "part_kunpeng_feather": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t4_u1",
+        "title": "息壤再生",
+        "type": "Unique",
+        "text": "你得到的这捧泥土竟然在吞噬周围的岩石自我增殖！",
+        "weight": 10,
+        "min_layer": 4,
+        "max_layer": 4,
+        "chance": 0.005,
+        "is_unique": true,
+        "effects": {
+            "items": {
+                "soil_chaos": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t5_c1",
+        "title": "虚空乱流",
+        "type": "Common",
+        "text": "你在虚空穿行时遭遇了能量乱流，不得不消耗修为抵御。",
+        "weight": 10,
+        "min_layer": 5,
+        "max_layer": 5,
+        "state": "WORK",
+        "chance": 0.05,
+        "effects": {
+            "exp": -5000,
+            "body": 5
+        }
+    },
+    {
+        "id": "evt_t5_r1",
+        "title": "死星闪耀",
+        "type": "Rare",
+        "text": "远处一颗恒星熄灭了，你冒死捕获了它坍缩后的核心。",
+        "weight": 10,
+        "min_layer": 5,
+        "max_layer": 6,
+        "chance": 0.005,
+        "effects": {
+            "items": {
+                "core_star": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t5_r2",
+        "title": "彼岸花开",
+        "type": "Rare",
+        "text": "在神识恍惚间，你看到了一条满是红花的河流，想起了前世的名字。",
+        "weight": 10,
+        "min_layer": 5,
+        "max_layer": 6,
+        "mind_min": 50,
+        "chance": 0.01,
+        "effects": {
+            "items": {
+                "flower_other_shore": 1
+            },
+            "mind": -20
+        }
+    },
+    {
+        "id": "evt_t6_c1",
+        "title": "万兽朝苍",
+        "type": "Common",
+        "text": "你散发的威压让方圆百里的妖兽匍匐颤抖。",
+        "weight": 10,
+        "min_layer": 6,
+        "max_layer": 6,
+        "chance": 0.05,
+        "effects": {
+            "exp": 8000,
+            "luck": 1
+        }
+    },
+    {
+        "id": "evt_t6_r1",
+        "title": "麒麟献瑞",
+        "type": "Rare",
+        "text": "一头火麒麟踏云而来，吐出一块臂骨后消失在云端。",
+        "weight": 10,
+        "min_layer": 6,
+        "max_layer": 7,
+        "luck_min": 10,
+        "chance": 0.01,
+        "effects": {
+            "items": {
+                "bone_kirin_arm": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t6_u1",
+        "title": "三生石畔",
+        "type": "Unique",
+        "text": "你在梦中看到了自己的过去、未来，以及一块刻着名字的石头。",
+        "weight": 10,
+        "min_layer": 6,
+        "max_layer": 6,
+        "chance": 0.005,
+        "is_unique": true,
+        "effects": {
+            "items": {
+                "stone_three_life": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t7_c1",
+        "title": "时间停滞",
+        "type": "Common",
+        "text": "你感觉到周围的时间流动变慢了，落叶悬在空中久久不落。",
+        "weight": 10,
+        "min_layer": 7,
+        "max_layer": 7,
+        "chance": 0.05,
+        "effects": {
+            "exp": 15000
+        }
+    },
+    {
+        "id": "evt_t7_r1",
+        "title": "因果纠缠",
+        "type": "Rare",
+        "text": "你随手拨动的一根无形丝线，竟导致千里之外的一个宗门覆灭。",
+        "weight": 10,
+        "min_layer": 7,
+        "max_layer": 8,
+        "state": "WORK",
+        "chance": 0.01,
+        "effects": {
+            "items": {
+                "thread_karma": 1
+            },
+            "mind": 10
+        }
+    },
+    {
+        "id": "evt_t7_u1",
+        "title": "世界树语",
+        "type": "Unique",
+        "text": "巨大的世界树虚影向你展示了宇宙的生灭，落下一片枯叶。",
+        "weight": 10,
+        "min_layer": 7,
+        "max_layer": 7,
+        "chance": 0.005,
+        "is_unique": true,
+        "effects": {
+            "items": {
+                "leaf_world_tree": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t8_c1",
+        "title": "天道窥视",
+        "type": "Common",
+        "text": "天空中出现了一只巨大的眼睛，冷漠地注视着你。",
+        "weight": 10,
+        "min_layer": 8,
+        "max_layer": 8,
+        "chance": 0.05,
+        "effects": {
+            "mind": 20
+        }
+    },
+    {
+        "id": "evt_t8_r1",
+        "title": "鸿蒙初辟",
+        "type": "Rare",
+        "text": "你捕捉到了宇宙诞生之初残留的一缕紫气。",
+        "weight": 10,
+        "min_layer": 8,
+        "max_layer": 8,
+        "chance": 0.005,
+        "effects": {
+            "items": {
+                "gas_primordial": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t8_u1",
+        "title": "定界之锚",
+        "type": "Unique",
+        "text": "为了在飞升通道中不迷失方向，你炼化了一方小世界为锚点。",
+        "weight": 10,
+        "min_layer": 8,
+        "max_layer": 8,
+        "chance": 0.005,
+        "is_unique": true,
+        "effects": {
+            "items": {
+                "stone_destiny": 1
+            }
+        }
+    },
+    {
+        "id": "evt_t9_c1",
+        "title": "屏幕之外",
+        "type": "Common",
+        "text": "我仿佛看到屏幕外有一张巨大的脸在盯着我看...是你吗？",
+        "weight": 10,
+        "min_layer": 9,
+        "max_layer": 10,
+        "chance": 0.05,
+        "effects": {
+            "exp": 50000
+        }
+    },
+    {
+        "id": "evt_t9_u1",
+        "title": "作者的馈赠",
+        "type": "Unique",
+        "text": "你捡到了一支钢笔，上面刻着几个烫金小字：'Design Idea'。",
+        "weight": 10,
+        "min_layer": 9,
+        "max_layer": 10,
+        "chance": 0.01,
+        "is_unique": true,
+        "effects": {
+            "items": {
+                "pen_author": 1
+            }
+        }
+    }
+]

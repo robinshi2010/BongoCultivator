@@ -69,3 +69,15 @@ EXP_TABLE = [
 
 **后续优化建议**:
 - 需要将 `tools/tools_update_items_v3.py` 中的数据字典（`TIER_ITEMS` 和 `TIER_PILLS`）导出并固化为 `src/data/items.json`，确保打包时资源完整，避免依赖外部 `tools` 脚本。
+
+## 4. Bug 修复记录 (2025-12-29) - 储物袋物品显示英文
+**问题**:
+用户报告“储物袋里是英文”，这是因为 `player_inventory` 中存留了旧版本的 Item ID (如 `weed_wash`, `flower_blood`, `ore_iron`, `iron_essence`)，而新版数据库 (`item_definitions`) 中使用了新的 ID 规范 (如 `herb_marrow_0`, `flower_blood_0`, `ore_iron_essence`)。导致 `InventoryWindow` 无法查找到物品详情，fallback 回显为旧 ID 字符串。
+
+**解决措施**:
+1.  **编写迁移脚本**: 创建了 `tools/fix_inventory_ids.py`，建立旧 ID 到新 ID 的映射关系。
+    -   `weed_wash` -> `herb_marrow_0` (洗髓草)
+    -   `flower_blood` -> `flower_blood_0` (凝血花)
+    -   `ore_iron` / `iron_essence` -> `ore_iron_essence` (百炼铁精)
+2.  **执行迁移**: 运行脚本批量更新了 `user_data.db` 中的 `player_inventory` 表，修复了残留数据。
+3.  **验证**: 重启后，所有物品均可正确显示中文名称。

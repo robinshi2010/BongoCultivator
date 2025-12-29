@@ -18,6 +18,20 @@ def main():
     
     # 可以在这里做一些全局配置，比如样式表
     
+    # 1. 初始化/检查数据
+    from src.services.data_loader import DataLoader
+    from src.item_manager import ItemManager
+    
+    # 简单的检查: 实例化 ItemManager 会尝试加载，如果失败则 DataLoader
+    # 但由于 ItemManager 是 lazy load，我们在 main 显示调用一次确保数据准备好
+    # 或者直接调用 DataLoader.load_initial_data() ? ItemManager 内部有逻辑
+    # 让我们更明确一点：
+    im = ItemManager()
+    if not im.flat_items:
+        logger.info("主程序检测到数据为空，执行初始化...")
+        DataLoader.load_initial_data()
+        im.load_items() # Reload
+        
     pet = PetWindow()
     pet.show()
 
