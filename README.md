@@ -1,6 +1,6 @@
-# Bongo Cultivation (桌面修仙宠物)
+# BongoCultivator (桌面修仙宠物)
 
-Bongo Cultivation 是一款基于 PyQt6 开发的桌面宠物挂机游戏，结合了**修仙题材**与**生产力工具**属性。
+BongoCultivator 是一款基于 PyQt6 开发的桌面宠物挂机游戏，结合了**修仙题材**与**生产力工具**属性。
 它会在你的桌面上生成一个可爱的修仙小人，不仅能陪伴你工作/学习，还会根据你的键盘鼠标操作（APM）自动修炼、突破境界、寻宝炼丹。
 
 让你的每一次敲击代码，都成为飞升得道的基石！
@@ -57,7 +57,7 @@ Bongo Cultivation 是一款基于 PyQt6 开发的桌面宠物挂机游戏，结�
 ## 🚀 快速开始 (Quick Start)
 
 ### 1. 运行预编译版本 (macOS)
-在 `dist/` 目录下找到 `BongoCultivation.app`，直接双击运行即可。
+在 `dist/` 目录下找到 `BongoCultivator.app`，直接双击运行即可。
 
 ### 2. 源码运行 (Development)
 如果你想自己修改或调试：

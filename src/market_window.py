@@ -4,7 +4,9 @@ from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QPainter, QColor, QPen, QBrush
 from src.logger import logger
 
-class MarketWindow(QWidget):
+from src.ui.base_window import DraggableWindow
+
+class MarketWindow(DraggableWindow):
     def __init__(self, cultivator, parent=None):
         super().__init__(parent)
         
@@ -35,8 +37,21 @@ class MarketWindow(QWidget):
         
         top_layout.addWidget(title)
         top_layout.addStretch()
+        
+        # 刷新按钮 (Moved to top)
+        self.btn_refresh = QPushButton("刷新")
+        self.btn_refresh.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.btn_refresh.clicked.connect(self.request_manual_refresh)
+        self.btn_refresh.setFixedWidth(50)
+        top_layout.addWidget(self.btn_refresh)
+        
         top_layout.addWidget(self.money_label)
         main_layout.addLayout(top_layout)
+        
+        # Timer for button tick
+        self.refresh_timer = QTimer(self)
+        self.refresh_timer.timeout.connect(self.update_refresh_btn)
+        self.refresh_timer.start(1000)
         
         # Tab 分页
         self.tabs = QTabWidget()
@@ -114,15 +129,74 @@ class MarketWindow(QWidget):
         self.buy_detail.setFixedHeight(120)
         layout.addWidget(self.buy_detail)
         
+        action_layout = QHBoxLayout()
+        
+        # Buy Button
         self.buy_btn = QPushButton("购买选定")
         self.buy_btn.clicked.connect(self.buy_item)
         self.style_action_btn(self.buy_btn)
-        layout.addWidget(self.buy_btn)
+        action_layout.addWidget(self.buy_btn) 
         
-        self.buy_msg = QLabel("每日0点自动刷新")
+        layout.addLayout(action_layout)
+        
+        self.buy_msg = QLabel("每日0点自动刷新 or 点击刷新")
         self.buy_msg.setStyleSheet("color: #888; font-size: 10px;")
         self.buy_msg.setAlignment(Qt.AlignmentFlag.AlignRight)
         layout.addWidget(self.buy_msg)
+        
+        # Initial status check
+        self.update_refresh_btn()
+
+    def update_refresh_btn(self):
+        import time
+        now = time.time()
+        last = self.cultivator.last_market_refresh
+        diff = now - last
+        
+        cooldown = 3600 # 1 hour
+        if diff < cooldown:
+            remaining = int(cooldown - diff)
+            mins = remaining // 60
+            secs = remaining % 60
+            self.btn_refresh.setText(f"{mins}:{secs:02d}")
+            self.btn_refresh.setEnabled(False)
+            self.btn_refresh.setStyleSheet("""
+                QPushButton {
+                    background: rgba(100, 100, 100, 20);
+                    border: 1px solid #666;
+                    color: #888;
+                    border-radius: 4px;
+                    padding: 2px;
+                    font-size: 10px;
+                }
+            """)
+        else:
+            self.btn_refresh.setText("刷新")
+            self.btn_refresh.setEnabled(True)
+            self.btn_refresh.setStyleSheet("""
+                QPushButton {
+                    background: rgba(255, 215, 0, 20);
+                    border: 1px solid #FFD700;
+                    color: #FFD700;
+                    border-radius: 4px;
+                    padding: 2px;
+                    font-size: 10px;
+                }
+                QPushButton:hover {
+                    background: rgba(255, 215, 0, 50);
+                }
+            """)
+
+    def request_manual_refresh(self):
+        # Double check cd logic handled by cultivator? 
+        # Cultivator just does refresh. Logic is usually in UI or check method.
+        # Let's enforce it here or updated cultivator.refresh_market to check? 
+        # Cultivator.refresh_market just sets time. 
+        
+        self.cultivator.refresh_market()
+        self.refresh_buy_list()
+        self.buy_msg.setText("坊市已刷新! 看看有什么好东西?")
+        self.update_refresh_btn()
 
     def refresh_buy_list(self):
         self.goods_list.clear()

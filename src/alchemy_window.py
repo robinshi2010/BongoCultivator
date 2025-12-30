@@ -5,7 +5,9 @@ from PyQt6.QtGui import QPainter, QColor, QPen, QBrush
 from src.state import PetState
 from src.logger import logger
 
-class AlchemyWindow(QWidget):
+from src.ui.base_window import DraggableWindow
+
+class AlchemyWindow(DraggableWindow):
     def __init__(self, cultivator, pet_window, parent=None):
         super().__init__(parent)
         

@@ -21,6 +21,7 @@
     - 右键菜单 (Context Menu) - 动态境界文案
     - 托盘图标控制 (System Tray) - 悬浮显示详细属性
     - 窗口置顶且不抢占焦点
+    - **统一拖拽**: 所有子窗口 (Inventory, Market, Alchemy, Stats, Talent) 均支持鼠标按住拖拽。
 
 2. **修仙核心 (Cultivation Core)**:
     - **状态机**: IDLE (闭关), COMBAT (斗法), WORK (历练), READ (悟道) 基于 APM 自动切换。
@@ -109,16 +110,16 @@
 - [x] **[Plan 21: 物品详情优化](plan21_done.md)** (Rich Text Description in UI)
 - [x] **[Plan 22: 数据持久化与存档迁移](plan22_done.md)** (Local AppData Storage)
 - [x] **[Plan 23: 数据自动同步](plan23_done.md)** (Version Control for Static Data)
+- [x] **[Plan 24: 每日奖励修复](plan24_done.md)** (Fix Daily Reward Duplicate Claim)
+- [x] **[Plan 26: 坊市刷新机制](plan26_done.md)** (Market Refresh & Dynamic Tier)
+- [x] **[Plan 27: 统一窗口拖拽](plan27_done.md)** (Unified Draggable Windows)
 
 ### 待执行 (Pending / In Progress)
 
-#### 1. 系统深度化 (Priority: Medium)
-*   (Plan 15 已完成，进入维护阶段)
 
-#### 2. 遗留任务 from Plan 2/8
-- [ ] **Plan 2 (Phase 8)**: 桌面互动 (窗口吸附) / 放置深度化 (灵田)。
-- [ ] **Plan 8 (Windows)**: 在 Windows 环境下运行打包脚本。
+#### 4. 优化 (Plan 25)
+- [ ] **[Plan 25]**: 使用 Supabase 完成邮箱验证注册功能，留存用户数据，并在菜单中增加入口。
 
-3.关闭游戏再打开之后，还能重复领取修仙记录里的灵石奖励。
+
 ---
-(最后更新: 2025-12-29 10:17)
+(最后更新: 2025-12-30 18:08)

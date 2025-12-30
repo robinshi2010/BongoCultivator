@@ -96,18 +96,32 @@ class Cultivator:
         self.last_market_refresh = time.time()
         self.market_goods = []
         
-        # 随机生成 6 个商品
-        # 逻辑：3个材料，2个消耗品，1个珍稀(低概率)
-        # 随机生成 6 个商品
-        current_tier = min(self.layer_index, 8)
+
+
+        # 动态Tier匹配 (Plan 26)
+        # 允许范围: [Current Tier - 1, Current Tier + 1]
+        player_tier = min(self.layer_index, 8)
+        min_tier = max(0, player_tier - 1)
+        max_tier = min(8, player_tier + 1)
         
         for _ in range(6):
             # 随机决定类型
             roll = random.random()
+            
+            # 随机决定此商品的 Tier
+            # 权重: 同阶 60%, 低阶 30%, 高阶 10%
+            tier_roll = random.random()
+            target_tier = player_tier
+            if tier_roll < 0.3:
+                 target_tier = min_tier
+            elif tier_roll > 0.9:
+                 target_tier = max_tier
+                 
+            item_id = None
             if roll < 0.6: # 60% 材料
-                item_id = self.item_manager.get_random_material(current_tier)
+                item_id = self.item_manager.get_random_material(target_tier)
             else: # 40% 丹药
-                candidates = self.item_manager.tier_lists.get(current_tier, {}).get("pills", [])
+                candidates = self.item_manager.tier_lists.get(target_tier, {}).get("pills", [])
                 item_id = random.choice(candidates) if candidates else None
                 
             if item_id:
@@ -124,7 +138,9 @@ class Cultivator:
                     "discount": discount
                 })
         
-        logger.info("坊市商品已刷新")
+        # 立即保存进数据库，防止刷新后只在内存
+        self.save_data()
+        logger.info(f"坊市商品已刷新 (Tier {min_tier}-{max_tier})")
 
     def check_daily_refresh(self):
         """检查是否需要每日自动刷新"""
@@ -562,14 +578,18 @@ class Cultivator:
                         stat_body = ?, stat_mind = ?, stat_luck = ?,
                         talent_points = ?, talent_json = ?,
                         last_save_time = ?, equipped_title = ?,
-                        death_count = ?, legacy_points = ?
+                        death_count = ?, legacy_points = ?,
+                        daily_reward_claimed = ?,
+                        last_market_refresh_time = ?
                     WHERE id = 1
                 """, (
                     self.layer_index, self.exp, self.money,
                     self.body, self.mind, self.affection,
                     self.talent_points, talent_json,
                     current_time, self.equipped_title,
-                    self.death_count, self.legacy_points
+                    self.death_count, self.legacy_points,
+                    self.daily_reward_claimed,
+                    self.last_market_refresh
                 ))
                 
                 # 2. Update Inventory
@@ -590,6 +610,16 @@ class Cultivator:
                     else:
                         cursor.execute("DELETE FROM player_inventory WHERE item_id = ?", (item_id,))
                         
+                # 3. Update Market Stock (Plan 26)
+                # Clear old stock first to handle sold items
+                cursor.execute("DELETE FROM market_stock")
+                if self.market_goods:
+                    for goods in self.market_goods:
+                         cursor.execute("""
+                            INSERT INTO market_stock (item_id, count, price, discount)
+                            VALUES (?, ?, ?, ?)
+                         """, (goods['id'], 1, goods['price'], goods['discount']))
+                
                 conn.commit()
                 logger.info("数据已保存至数据库")
         except Exception as e:
@@ -626,6 +656,8 @@ class Cultivator:
                     self.equipped_title = status.get('equipped_title')
                     self.death_count = status.get('death_count', 0)
                     self.legacy_points = status.get('legacy_points', 0)
+                    self.daily_reward_claimed = status.get('daily_reward_claimed')
+                    self.last_market_refresh = status.get('last_market_refresh_time', 0)
                     
                     last_time = status['last_save_time']
                     
@@ -633,6 +665,19 @@ class Cultivator:
                     cursor.execute("SELECT * FROM player_inventory")
                     inv_rows = cursor.fetchall()
                     self.inventory = {row['item_id']: row['count'] for row in inv_rows}
+                    
+                    self.inventory = {row['item_id']: row['count'] for row in inv_rows}
+                    
+                    # Load Market Stock (Plan 26)
+                    cursor.execute("SELECT * FROM market_stock")
+                    market_rows = cursor.fetchall()
+                    self.market_goods = []
+                    for row in market_rows:
+                        self.market_goods.append({
+                            "id": row['item_id'],
+                            "price": row['price'],
+                            "discount": row['discount']
+                        })
                     
                     loaded_from_db = True
                     

@@ -21,7 +21,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='BongoCultivation',
+    name='BongoCultivator',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -41,13 +41,13 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='BongoCultivation',
+    name='BongoCultivator',
 )
 app = BUNDLE(
     coll,
-    name='BongoCultivation.app',
+    name='BongoCultivator.app',
     icon='assets/icon.icns',
-    bundle_identifier='com.robin.bongo',
+    bundle_identifier='com.robin.bongocultivator',
     info_plist={
         'NSHighResolutionCapable': 'True',
         'NSAppleEventsUsageDescription': '需要控制事件以模拟操作。',

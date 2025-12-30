@@ -139,6 +139,17 @@ class DatabaseManager:
                     )
                 """)
 
+                # 8. Market Stock (Plan 26)
+                cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS market_stock (
+                        slot_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        item_id TEXT,
+                        count INTEGER DEFAULT 1,
+                        price INTEGER,
+                        discount REAL
+                    )
+                """)
+
                 # Migration for equipped_title
                 try:
                     cursor.execute("ALTER TABLE player_status ADD COLUMN equipped_title TEXT")
@@ -152,6 +163,18 @@ class DatabaseManager:
                     pass
                 try:
                     cursor.execute("ALTER TABLE player_status ADD COLUMN legacy_points INTEGER DEFAULT 0")
+                except Exception:
+                    pass
+
+                # Migration for Plan 24: Fix Daily Reward Persistence
+                try:
+                    cursor.execute("ALTER TABLE player_status ADD COLUMN daily_reward_claimed TEXT")
+                except Exception:
+                    pass
+
+                # Migration for Plan 26: Market Refresh Timer
+                try:
+                    cursor.execute("ALTER TABLE player_status ADD COLUMN last_market_refresh_time INTEGER DEFAULT 0")
                 except Exception:
                     pass
 

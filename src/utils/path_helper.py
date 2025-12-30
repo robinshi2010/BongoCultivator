@@ -39,7 +39,7 @@ def get_user_data_dir():
     macOS: ~/Library/Application Support/BongoCultivation
     Windows: %LOCALAPPDATA%/BongoCultivation
     """
-    app_name = "BongoCultivation"
+    app_name = "BongoCultivator"
     system = platform.system()
     
     if system == "Windows":

@@ -2,7 +2,9 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout, QPushButt
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QPainter, QColor, QPen, QBrush
 
-class TalentWindow(QWidget):
+from src.ui.base_window import DraggableWindow
+
+class TalentWindow(DraggableWindow):
     def __init__(self, cultivator, parent=None):
         super().__init__(parent)
         self.cultivator = cultivator

@@ -3,7 +3,9 @@ from PyQt6.QtCore import Qt, QPoint
 from PyQt6.QtGui import QPainter, QColor, QPen, QBrush, QAction
 from src.logger import logger
 
-class InventoryWindow(QWidget):
+from src.ui.base_window import DraggableWindow
+
+class InventoryWindow(DraggableWindow):
     def __init__(self, cultivator, pet_window=None, parent=None):
         super().__init__(parent)
         self.pet_window = pet_window

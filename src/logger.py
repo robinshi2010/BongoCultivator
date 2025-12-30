@@ -21,7 +21,7 @@ def setup_logging():
     log_file = os.path.join(log_dir, 'app.log')
 
     # 3. 配置 Logger
-    logger = logging.getLogger('BongoPet')
+    logger = logging.getLogger('BongoCultivator')
     logger.setLevel(logging.DEBUG)
 
     # 防止重复添加 handler

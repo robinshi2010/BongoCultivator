@@ -16,7 +16,9 @@ plt.style.use('dark_background')
 from src.services.stats_analyzer import stats_analyzer
 from src.ui.merit_tab import MeritTab
 
-class StatsWindow(QWidget):
+from src.ui.base_window import DraggableWindow
+
+class StatsWindow(DraggableWindow):
     def __init__(self, cultivator=None, parent=None):
         super().__init__(parent)
         self.cultivator = cultivator
@@ -341,6 +343,18 @@ class StatsWindow(QWidget):
         # Draw Chart
         self.plot_today_chart(data['hourly_trend'])
         
+        # Check Daily Reward Status
+        if self.cultivator:
+             import datetime
+             today_str = datetime.date.today().strftime("%Y-%m-%d")
+             if self.cultivator.daily_reward_claimed == today_str:
+                 self.btn_claim.setText("今日已领取")
+                 self.btn_claim.setEnabled(False)
+             else:
+                 # New Day or Not Claimed
+                 self.btn_claim.setEnabled(True)
+                 self.btn_claim.setText("领取今日勤勉赏 (需 >2000 操作)")
+        
     def plot_today_chart(self, trend_data):
         self.figure_today.clear()
         ax = self.figure_today.add_subplot(111)
@@ -368,13 +382,4 @@ class StatsWindow(QWidget):
         
         self.canvas_today.draw()
 
-    # Allow dragging window
-    def mousePressEvent(self, event):
-        if event.button() == Qt.MouseButton.LeftButton:
-            self.drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
-            event.accept()
 
-    def mouseMoveEvent(self, event):
-        if event.buttons() == Qt.MouseButton.LeftButton:
-            self.move(event.globalPosition().toPoint() - self.drag_pos)
-            event.accept()
