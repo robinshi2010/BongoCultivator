@@ -29,6 +29,7 @@
     - **物品系统 (Tier 0-8)**: 
         - 9套标准物品 (灵草/元果/丹药) 存入 SQLite。
         - 动态掉落池: 根据当前境界掉落对应物资 (80%同阶, 15%低阶, 5%高阶)。
+        - **资源闭环**: 为Tier 0-8增加通用采集/挖矿/狩猎事件，确保基础材料稳定产出。
     - **炼丹系统**: 
         - 基于配方的炼丹界面 (`AlchemyWindow`)。
         - 丹药效果: 经验 (1%-5%)、状态恢复、Buff。
@@ -57,6 +58,10 @@
     - **天道功德**: 追踪累计点击/按键/在线时长，解锁 20+ 个成就。
     - **头衔系统**: 佩戴头衔 (如"筑基·初窥") 获取被动属性加成 (EXP/灵石/掉率)。
     - **UI集成**: `StatsWindow` 新增成就管理页签，实时查看进度与奖励。
+    
+6. **动态对话 (Dynamic Dialogue)**:
+    - **数据库驱动**: `dialogue_definitions` 表存储对话。
+    - **上下文感知**: 根据 境界 (Realm 0-8), 心魔 (Mind), 勤勉度 (Clicks) 和 行为状态 (State) 触发不同语音。
 
 ## 置顶显示且不影响操作其他软件 (macOS 实现要点)
 目标：小人窗口始终在最前端，同时不抢焦点，用户仍可正常操作其他应用。
@@ -113,7 +118,9 @@
 - [x] **[Plan 24: 每日奖励修复](plans/archive/plan24_done.md)** (Fix Daily Reward Duplicate Claim)
 - [x] **[Plan 26: 坊市刷新机制](plans/archive/plan26_done.md)** (Market Refresh & Dynamic Tier)
 - [x] **[Plan 27: 统一窗口拖拽](plans/archive/plan27_done.md)** (Unified Draggable Windows)
-- [x] **[Plan 28: 核心重构与 SQLModel](plans/archive/plan28_done.md)** (ORM Migration, EventEngine Fix)
+- [x] **[Plan 30: 探险与经济平衡](plans/archive/plan30_done.md)** (Economy Rebalance, Generic Resource Events)
+- [x] **[Plan 31: 动态对话系统](plans/archive/plan31_done.md)** (Dynamic Dialogue, Context-Aware)
+- [x] **[Plan 29: 坊市体验优化](plans/archive/plan29_done.md)** (Market UX Fixes, Chinese Tiers)
 
 ### 待执行 (Pending / In Progress)
 
@@ -121,6 +128,5 @@
 #### 4. 优化 (Plan 25)
 - [ ] **[Plan 25]**: [用户注册与数据留存 (Supabase)](plans/active/plan25.md)
 
-
 ---
-(最后更新: 2025-12-30 18:08)
+(最后更新: 2025-12-31 14:06)

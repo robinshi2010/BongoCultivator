@@ -1,0 +1,239 @@
+[
+    {
+        "id": "dia_common_01",
+        "text": "道可道，非常道...",
+        "type": "common",
+        "weight": 10
+    },
+    {
+        "id": "dia_common_02",
+        "text": "别摸了，贫道要走火入魔了！",
+        "type": "common",
+        "weight": 10
+    },
+    {
+        "id": "dia_common_03",
+        "text": "这位道友，我看你骨骼精奇...",
+        "type": "common",
+        "weight": 10
+    },
+    {
+        "id": "dia_common_04",
+        "text": "修仙本是逆天而行...",
+        "type": "common",
+        "weight": 10
+    },
+    {
+        "id": "dia_common_05",
+        "text": "道友，今天也要加油修仙哦。",
+        "type": "common",
+        "weight": 10
+    },
+    {
+        "id": "dia_common_06",
+        "text": "摸摸头会长不高的...",
+        "type": "common",
+        "weight": 10
+    },
+    
+    {
+        "id": "dia_realm_0_1",
+        "text": "灵气...这里的灵气太稀薄了。",
+        "type": "realm",
+        "conditions": {"min_layer": 0, "max_layer": 0},
+        "weight": 20
+    },
+    {
+        "id": "dia_realm_0_2",
+        "text": "我要努力筑基，从此不再是凡人！",
+        "type": "realm",
+        "conditions": {"min_layer": 0, "max_layer": 0},
+        "weight": 20
+    },
+    {
+        "id": "dia_realm_0_3",
+        "text": "这引气入体怎么这么难？",
+        "type": "realm",
+        "conditions": {"min_layer": 0, "max_layer": 0},
+        "weight": 20
+    },
+    
+    {
+        "id": "dia_realm_1_1",
+        "text": "筑成大道之基，方知仙途漫漫。",
+        "type": "realm",
+        "conditions": {"min_layer": 1, "max_layer": 1},
+        "weight": 20
+    },
+    {
+        "id": "dia_realm_1_2",
+        "text": "这点法力，也就够点个灯的。",
+        "type": "realm",
+        "conditions": {"min_layer": 1, "max_layer": 1},
+        "weight": 20
+    },
+    
+    {
+        "id": "dia_realm_2_1",
+        "text": "一粒金丹吞入腹，我命由我不由天！",
+        "type": "realm",
+        "conditions": {"min_layer": 2, "max_layer": 2},
+        "weight": 20
+    },
+    {
+        "id": "dia_realm_2_2",
+        "text": "金丹九转，每一转都是一次蜕变。",
+        "type": "realm",
+        "conditions": {"min_layer": 2, "max_layer": 2},
+        "weight": 20
+    },
+    
+    {
+        "id": "dia_realm_3_1",
+        "text": "元神出窍，遨游太虚...咦，那是什么？",
+        "type": "realm",
+        "conditions": {"min_layer": 3, "max_layer": 3},
+        "weight": 20
+    },
+    {
+        "id": "dia_realm_3_2",
+        "text": "区区心魔，何足挂齿，给我破！",
+        "type": "realm",
+        "conditions": {"min_layer": 3, "max_layer": 3},
+        "weight": 20
+    },
+    
+    {
+        "id": "dia_realm_4_1",
+        "text": "天地与我并生，而万物与我为一。",
+        "type": "realm",
+        "conditions": {"min_layer": 4, "max_layer": 4},
+        "weight": 20
+    },
+    {
+        "id": "dia_realm_4_2",
+        "text": "这种境界...凡人是不会懂的。",
+        "type": "realm",
+        "conditions": {"min_layer": 4, "max_layer": 4},
+        "weight": 20
+    },
+    
+    {
+        "id": "dia_realm_5plus_1",
+        "text": "天劫将至，道友可愿助我一臂之力？",
+        "type": "realm",
+        "conditions": {"min_layer": 5, "max_layer": 99},
+        "weight": 20
+    },
+    {
+        "id": "dia_realm_5plus_2",
+        "text": "不论成仙成魔，我自一剑斩之！",
+        "type": "realm",
+        "conditions": {"min_layer": 5, "max_layer": 99},
+        "weight": 20
+    },
+    
+    {
+        "id": "dia_mind_high_1",
+        "text": "别吵！让我静静...",
+        "type": "state",
+        "conditions": {"min_mind": 50},
+        "weight": 50
+    },
+    {
+        "id": "dia_mind_high_2",
+        "text": "为什么...他们都要害我？",
+        "type": "state",
+        "conditions": {"min_mind": 50},
+        "weight": 50
+    },
+    
+    {
+        "id": "dia_mind_crazy_1",
+        "text": "杀...杀尽天下负心人...",
+        "type": "state",
+        "conditions": {"min_mind": 80},
+        "weight": 100
+    },
+    {
+        "id": "dia_mind_crazy_2",
+        "text": "我是谁？我在哪？我是不是已经死了？",
+        "type": "state",
+        "conditions": {"min_mind": 80},
+        "weight": 100
+    },
+    {
+        "id": "dia_mind_crazy_3",
+        "text": "嘿嘿嘿...这血红色的月亮真好看...",
+        "type": "state",
+        "conditions": {"min_mind": 80},
+        "weight": 100
+    },
+    
+    {
+        "id": "dia_clicks_high_1",
+        "text": "道友手速惊人，定是单身多年！",
+        "type": "state",
+        "conditions": {"min_daily_clicks": 5000},
+        "weight": 50
+    },
+    {
+        "id": "dia_clicks_ultra_1",
+        "text": "别点了...要...要坏掉了！",
+        "type": "state",
+        "conditions": {"min_daily_clicks": 10000},
+        "weight": 100
+    },
+    {
+        "id": "dia_clicks_ultra_2",
+        "text": "你是触手怪转世吗？恐怖如斯！",
+        "type": "state",
+        "conditions": {"min_daily_clicks": 10000},
+        "weight": 100
+    },
+    
+    {
+        "id": "dia_state_idle_1",
+        "text": "呼...还是躺着舒服。",
+        "type": "state",
+        "conditions": {"required_state": "IDLE"},
+        "weight": 30
+    },
+    {
+        "id": "dia_state_idle_2",
+        "text": "修行之道，一张一弛。今天就休息吧。",
+        "type": "state",
+        "conditions": {"required_state": "IDLE"},
+        "weight": 30
+    },
+    
+    {
+        "id": "dia_state_combat_1",
+        "text": "吃我一记雷法！",
+        "type": "state",
+        "conditions": {"required_state": "COMBAT"},
+        "weight": 50
+    },
+    {
+        "id": "dia_state_combat_2",
+        "text": "妖孽！哪里跑！",
+        "type": "state",
+        "conditions": {"required_state": "COMBAT"},
+        "weight": 50
+    },
+    
+    {
+        "id": "dia_state_work_1",
+        "text": "火候到了，开炉！",
+        "type": "state",
+        "conditions": {"required_state": "WORK"},
+        "weight": 50
+    },
+    {
+        "id": "dia_state_work_2",
+        "text": "这炉丹药要是炸了，我就破产了...",
+        "type": "state",
+        "conditions": {"required_state": "WORK"},
+        "weight": 50
+    }
+]

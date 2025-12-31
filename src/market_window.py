@@ -117,6 +117,12 @@ class MarketWindow(DraggableWindow):
         layout = QVBoxLayout(self.buy_tab)
         layout.setContentsMargins(0, 10, 0, 0)
         
+        # 提示信息 (Moved to top by user request)
+        self.buy_msg = QLabel("每日0点自动刷新 or 点击刷新")
+        self.buy_msg.setStyleSheet("color: #888; font-size: 10px;")
+        self.buy_msg.setAlignment(Qt.AlignmentFlag.AlignRight)
+        layout.addWidget(self.buy_msg)
+        
         self.goods_list = QListWidget()
         self.style_list_widget(self.goods_list)
         self.goods_list.itemClicked.connect(self.show_buy_detail)
@@ -138,11 +144,6 @@ class MarketWindow(DraggableWindow):
         action_layout.addWidget(self.buy_btn) 
         
         layout.addLayout(action_layout)
-        
-        self.buy_msg = QLabel("每日0点自动刷新 or 点击刷新")
-        self.buy_msg.setStyleSheet("color: #888; font-size: 10px;")
-        self.buy_msg.setAlignment(Qt.AlignmentFlag.AlignRight)
-        layout.addWidget(self.buy_msg)
         
         # Initial status check
         self.update_refresh_btn()
@@ -300,10 +301,20 @@ class MarketWindow(DraggableWindow):
         layout.addWidget(self.sell_msg)
 
     def refresh_sell_list(self):
-        self.sell_list.clear()
+        current_row = self.sell_list.currentRow()
+        current_item = self.sell_list.currentItem()
+        selected_item_id = current_item.data(Qt.ItemDataRole.UserRole) if current_item else None
+
+        self.sell_list.clear() # Clears list but we have the ID
+
         # Sort items? By Tier/Name
         # inventory is dict {id: count}
         # Let's simple list
+        
+        tier_map = {0: "凡", 1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九"}
+
+        restore_item = None
+
         for item_id, count in self.cultivator.inventory.items():
             if count > 0:
                 info = self.item_manager.get_item(item_id)
@@ -314,13 +325,22 @@ class MarketWindow(DraggableWindow):
                 sell_price = max(1, int(base_price * 0.5))
                 
                 # Show Tier
-                tier_str = f"[一阶]" if tier == 1 else f"[{tier}阶]" if tier > 0 else "[凡物]"
+                cn_tier = tier_map.get(tier, str(tier))
+                tier_str = f"[{cn_tier}{'阶' if tier > 0 else '物'}]"
                 
                 text = f"{tier_str} {name} x{count}\n售价: {sell_price} 灵石/个"
                 
                 item = QListWidgetItem(text)
                 item.setData(Qt.ItemDataRole.UserRole, item_id)
                 self.sell_list.addItem(item)
+                
+                if selected_item_id and item_id == selected_item_id:
+                    restore_item = item
+        
+        if restore_item:
+            self.sell_list.setCurrentItem(restore_item)
+            self.sell_list.scrollToItem(restore_item)
+
         
         self.update_money()
 

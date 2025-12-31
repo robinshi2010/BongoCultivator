@@ -39,3 +39,11 @@ class EventDefinition(SQLModel, table=True):
     type: str
     weight: int
     data_json: str
+
+class DialogueDefinition(SQLModel, table=True):
+    __tablename__ = "dialogue_definitions"
+    id: str = Field(primary_key=True)
+    text: str
+    type: str
+    conditions_json: Optional[str] = None
+    weight: int = 10

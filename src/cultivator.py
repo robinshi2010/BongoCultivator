@@ -3,6 +3,7 @@ from src.logger import logger
 from src.item_manager import ItemManager
 from src.services.event_engine import EventEngine
 from src.services.achievement_manager import achievement_manager
+from src.services.dialogue_manager import dialogue_manager
 from src.database import DB_FILE 
 from src.config import LAYERS, EXP_TABLE
 
@@ -499,6 +500,8 @@ class Cultivator:
             # Map code to state string
             state_map = {0: "IDLE", 1: "COMBAT", 2: "WORK", 3: "READ"}
             state_name = state_map.get(current_state_code, "IDLE")
+            self.current_state_name = state_name # Stored for dialogue context
+            
             
             event = self.event_manager.check_triggers(self, state_name)
             if event:
@@ -532,18 +535,7 @@ class Cultivator:
             self.events.append(f"闭关结束，离线 {diff // 60} 分钟，获得 {exp_gain} 修为")
             
     def get_random_dialogue(self):
-        dialogues = [
-            "道可道，非常道...",
-            "别摸了，贫道要走火入魔了！",
-            "今日宜修炼，忌摸鱼。",
-            "我感觉我要突破了！",
-            "这位道友，我看你骨骼精奇...",
-            "还不快去写代码？",
-            "只有充钱才能变得更强（误",
-            "修仙本是逆天而行...",
-            "灵气...这里的灵气太稀薄了。",
-        ]
-        return random.choice(dialogues)
+        return dialogue_manager.get_random_dialogue(self)
 
     def save_data(self, filepath=None):
         # filepath is ignored

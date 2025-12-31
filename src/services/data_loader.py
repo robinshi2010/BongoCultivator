@@ -11,7 +11,7 @@ class DataLoader:
     主要用于初始化或数据迁移。
     """
     
-    DATA_VERSION = "001" # 初始版本号，每次修改静态数据(JSON)请递增
+    DATA_VERSION = "002" # 初始版本号，每次修改静态数据(JSON)请递增
 
     @staticmethod
     def check_data_update():
@@ -56,12 +56,15 @@ class DataLoader:
         items_v1_path = get_resource_path("src/data/items.json")
         items_v2_path = get_resource_path("src/data/items_v2.json")
         events_path = get_resource_path("src/data/events.json")
+        dialogues_path = get_resource_path("src/data/dialogues.json")
         achievements_path = get_resource_path("src/data/achievements.json") # 如果有
 
         # 2. 加载 JSON
         v1_items = DataLoader.load_json(items_v1_path)
         v2_items = DataLoader.load_json(items_v2_path)
+
         events_data = DataLoader.load_json(events_path)
+        dialogues_data = DataLoader.load_json(dialogues_path)
         
         # 3. 处理物品数据合并
         combined_items = {}
@@ -153,6 +156,33 @@ class DataLoader:
                         VALUES (?, ?, ?, ?)
                     """, (evt_id, evt_type, evt_weight, evt_json))
                     count_events += 1
+
+
+            # --- Dialogues ---
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS dialogue_definitions (
+                    id TEXT PRIMARY KEY,
+                    text TEXT,
+                    type TEXT,
+                    conditions_json TEXT,
+                    weight INTEGER
+                )
+            """)
+            
+            count_dialogues = 0
+            if isinstance(dialogues_data, list):
+                for dia in dialogues_data:
+                    did = dia.get("id")
+                    dtext = dia.get("text")
+                    dtype = dia.get("type")
+                    dweight = dia.get("weight", 10)
+                    dcond = json.dumps(dia.get("conditions", {}))
+                    
+                    cursor.execute("""
+                        INSERT OR REPLACE INTO dialogue_definitions (id, text, type, conditions_json, weight)
+                        VALUES (?, ?, ?, ?, ?)
+                    """, (did, dtext, dtype, dcond, dweight))
+                    count_dialogues += 1
             
             # Set initial version if not present
             cursor.execute("INSERT OR IGNORE INTO system_metadata (key, value) VALUES ('data_version', ?)", (DataLoader.DATA_VERSION,))
@@ -160,7 +190,7 @@ class DataLoader:
             conn.commit()
             conn.close()
             
-            logger.info(f"数据库数据加载完成: Items={count_items}, Recipes={count_recipes}, Events={count_events}")
+            logger.info(f"数据库数据加载完成: Items={count_items}, Recipes={count_recipes}, Events={count_events}, Dialogues={count_dialogues}")
             return True
             
         except Exception as e:
