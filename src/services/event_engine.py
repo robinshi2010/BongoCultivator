@@ -149,13 +149,13 @@ class EventEngine:
                 cultivator.gain_exp(val)
                 logs.append(f"修为 {'+' if val>0 else ''}{val}")
             elif k == "money":
-                cultivator.money += val
+                cultivator.money = max(0, cultivator.money + val)
                 logs.append(f"灵石 {'+' if val>0 else ''}{val}")
             elif k == "mind":
-                cultivator.mind += val
+                cultivator.modify_stat("mind", val)
                 logs.append(f"心魔 {'+' if val>0 else ''}{val}")
             elif k == "body":
-                cultivator.body += val
+                cultivator.modify_stat("body", val)
                 logs.append(f"体魄 {'+' if val>0 else ''}{val}")
             elif k == "items":
                 # items: { "id": count }

@@ -63,6 +63,10 @@
     - **数据库驱动**: `dialogue_definitions` 表存储对话。
     - **上下文感知**: 根据 境界 (Realm 0-8), 心魔 (Mind), 勤勉度 (Clicks) 和 行为状态 (State) 触发不同语音。
 
+7. **事件系统 (Events)**:
+    - **分级文案**: 通用事件 (T0-T8) 拥有差异化文案，涵盖山野/秘境/虚空/法则等主题。
+    - **权重平衡**: 调整了 Common/Uncommon/Rare/Unique 事件的权重，保证资源获取。
+
 ## 置顶显示且不影响操作其他软件 (macOS 实现要点)
 目标：小人窗口始终在最前端，同时不抢焦点，用户仍可正常操作其他应用。
 
@@ -120,6 +124,7 @@
 - [x] **[Plan 27: 统一窗口拖拽](plans/archive/plan27_done.md)** (Unified Draggable Windows)
 - [x] **[Plan 30: 探险与经济平衡](plans/archive/plan30_done.md)** (Economy Rebalance, Generic Resource Events)
 - [x] **[Plan 31: 动态对话系统](plans/archive/plan31_done.md)** (Dynamic Dialogue, Context-Aware)
+- [x] **[Plan 32: 事件文案差异化](plans/archive/plan32_done.md)** (Rich Event Content, Tier-based)
 - [x] **[Plan 29: 坊市体验优化](plans/archive/plan29_done.md)** (Market UX Fixes, Chinese Tiers)
 
 ### 待执行 (Pending / In Progress)
@@ -129,4 +134,4 @@
 - [ ] **[Plan 25]**: [用户注册与数据留存 (Supabase)](plans/active/plan25.md)
 
 ---
-(最后更新: 2025-12-31 14:06)
+(最后更新: 2025-12-31 14:10)

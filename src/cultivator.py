@@ -255,7 +255,7 @@ class Cultivator:
         return self.EXP_TABLE[-1]
 
     def gain_exp(self, amount):
-        self.exp += amount
+        self.exp = max(0, self.exp + amount)
         
         # 达到瓶颈
         if self.exp >= self.max_exp:
@@ -612,10 +612,10 @@ class Cultivator:
                 if player and player.last_save_time:
                     self.layer_index = player.layer_index
                     self.exp = player.current_exp
-                    self.money = player.money
-                    self.body = player.stat_body
-                    self.mind = player.stat_mind
-                    self.affection = player.stat_luck
+                    self.money = max(0, player.money)
+                    self.body = max(1, player.stat_body)
+                    self.mind = max(0, min(100, player.stat_mind))
+                    self.affection = max(0, min(100, player.stat_luck))
                     self.talent_points = player.talent_points
                     if player.talent_json:
                         self.talents = json.loads(player.talent_json)
