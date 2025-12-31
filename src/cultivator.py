@@ -3,25 +3,12 @@ from src.logger import logger
 from src.item_manager import ItemManager
 from src.services.event_engine import EventEngine
 from src.services.achievement_manager import achievement_manager
-from src.database import DB_FILE
+from src.database import DB_FILE 
+from src.config import LAYERS, EXP_TABLE
 
 class Cultivator:
-    LAYERS = [
-        "炼气期", "筑基期", "金丹期", "元婴期", "化神期", "炼虚期", "合体期", "大乘期", "渡劫期"
-    ]
-    
-    # Based on Plan 4 & 6 (Standardized 9 Tiers)
-    EXP_TABLE = [
-        30000,       # 0: 炼气 (Target: ~1h)
-        120000,      # 1: 筑基 (Target: ~3h)
-        800000,      # 2: 金丹 (Target: ~24h)
-        2500000,     # 3: 元婴
-        8000000,     # 4: 化神
-        20000000,    # 5: 炼虚
-        50000000,    # 6: 合体
-        100000000,   # 7: 大乘
-        999999999    # 8: 渡劫 (Max)
-    ]
+    LAYERS = LAYERS
+    EXP_TABLE = EXP_TABLE
     
     def __init__(self):
         self.exp = 0
@@ -559,169 +546,120 @@ class Cultivator:
         return random.choice(dialogues)
 
     def save_data(self, filepath=None):
-        # filepath argument is kept for compatibility but ignored for SQLite
+        # filepath is ignored
         from src.database import db_manager
+        from src.models import PlayerStatus, PlayerInventory, MarketStock
+        from sqlmodel import delete
         import json
         import time
         
         current_time = int(time.time())
-        talent_json = json.dumps(self.talents)
+        talent_json_str = json.dumps(self.talents)
         
         try:
-            with db_manager._get_conn() as conn:
-                cursor = conn.cursor()
+            with db_manager.get_session() as session:
+                # 1. Update PlayerStatus
+                player = session.get(PlayerStatus, 1)
+                if not player:
+                    player = PlayerStatus(id=1)
+                    session.add(player)
                 
-                # 1. Update Status
-                cursor.execute("""
-                    UPDATE player_status
-                    SET layer_index = ?, current_exp = ?, money = ?,
-                        stat_body = ?, stat_mind = ?, stat_luck = ?,
-                        talent_points = ?, talent_json = ?,
-                        last_save_time = ?, equipped_title = ?,
-                        death_count = ?, legacy_points = ?,
-                        daily_reward_claimed = ?,
-                        last_market_refresh_time = ?
-                    WHERE id = 1
-                """, (
-                    self.layer_index, self.exp, self.money,
-                    self.body, self.mind, self.affection,
-                    self.talent_points, talent_json,
-                    current_time, self.equipped_title,
-                    self.death_count, self.legacy_points,
-                    self.daily_reward_claimed,
-                    self.last_market_refresh
-                ))
+                player.layer_index = self.layer_index
+                player.current_exp = self.exp
+                player.money = self.money
+                player.stat_body = self.body
+                player.stat_mind = self.mind
+                player.stat_luck = self.affection
+                player.talent_points = self.talent_points
+                player.talent_json = talent_json_str
+                player.last_save_time = current_time
+                player.equipped_title = self.equipped_title
+                player.death_count = self.death_count
+                player.legacy_points = self.legacy_points
+                player.daily_reward_claimed = self.daily_reward_claimed
+                player.last_market_refresh_time = int(self.last_market_refresh)
+                
+                session.add(player)
                 
                 # 2. Update Inventory
-                # Strategy: Clear existing inventory for this user (or simple item-by-item upsert)
-                # Since inventory is simple, let's just upsert all items.
-                # But to handle deleted items (count 0), we should probably delete all first?
-                # Actually, our inventory dict keeps 0 count items sometimes.
-                # Let's clean up: remove items with <= 0 count from DB, upsert > 0.
+                # Clear and re-insert
+                session.exec(delete(PlayerInventory))
                 
-                # First, upsert non-zero items
-                for item_id, count in self.inventory.items():
+                for iid, count in self.inventory.items():
                     if count > 0:
-                        cursor.execute("""
-                            INSERT INTO player_inventory (item_id, count)
-                            VALUES (?, ?)
-                            ON CONFLICT(item_id) DO UPDATE SET count = excluded.count
-                        """, (item_id, count))
-                    else:
-                        cursor.execute("DELETE FROM player_inventory WHERE item_id = ?", (item_id,))
+                        inv_item = PlayerInventory(item_id=iid, count=count)
+                        session.add(inv_item)
                         
-                # 3. Update Market Stock (Plan 26)
-                # Clear old stock first to handle sold items
-                cursor.execute("DELETE FROM market_stock")
-                if self.market_goods:
-                    for goods in self.market_goods:
-                         cursor.execute("""
-                            INSERT INTO market_stock (item_id, count, price, discount)
-                            VALUES (?, ?, ?, ?)
-                         """, (goods['id'], 1, goods['price'], goods['discount']))
+                # 3. Update Market Stock
+                session.exec(delete(MarketStock))
+                for goods in self.market_goods:
+                    stock = MarketStock(
+                        item_id=goods['id'],
+                        price=goods['price'],
+                        discount=goods['discount']
+                    )
+                    session.add(stock)
                 
-                conn.commit()
-                logger.info("数据已保存至数据库")
+                session.commit()
+                # logger.debug("数据已保存 (SQLModel)")
+                
         except Exception as e:
             logger.error(f"保存失败: {e}")
 
     def load_data(self, filepath=None):
         from src.database import db_manager
+        from src.models import PlayerStatus, PlayerInventory, MarketStock
+        from sqlmodel import select
         import json
-        import os
-        import time
         
-        # 1. Try to load from DB
-        loaded_from_db = False
         try:
-            with db_manager._get_conn() as conn:
-                conn.row_factory = lambda c, r: dict(zip([col[0] for col in c.description], r))
-                cursor = conn.cursor()
+            with db_manager.get_session() as session:
+                # 1. Load Status
+                player = session.get(PlayerStatus, 1)
                 
-                cursor.execute("SELECT * FROM player_status WHERE id = 1")
-                status = cursor.fetchone()
-                
-                if status and status['last_save_time']: 
-                    # DB has data
-                    self.layer_index = status['layer_index']
-                    self.exp = status['current_exp']
-                    self.money = status['money']
-                    self.body = status['stat_body']
-                    self.mind = status['stat_mind']
-                    self.affection = status['stat_luck']
-                    self.talent_points = status['talent_points']
-                    if status['talent_json']:
-                        self.talents = json.loads(status['talent_json'])
+                if player and player.last_save_time:
+                    self.layer_index = player.layer_index
+                    self.exp = player.current_exp
+                    self.money = player.money
+                    self.body = player.stat_body
+                    self.mind = player.stat_mind
+                    self.affection = player.stat_luck
+                    self.talent_points = player.talent_points
+                    if player.talent_json:
+                        self.talents = json.loads(player.talent_json)
                         
-                    self.equipped_title = status.get('equipped_title')
-                    self.death_count = status.get('death_count', 0)
-                    self.legacy_points = status.get('legacy_points', 0)
-                    self.daily_reward_claimed = status.get('daily_reward_claimed')
-                    self.last_market_refresh = status.get('last_market_refresh_time', 0)
+                    self.equipped_title = player.equipped_title
+                    self.death_count = player.death_count
+                    self.legacy_points = player.legacy_points
+                    self.daily_reward_claimed = player.daily_reward_claimed
+                    self.last_market_refresh = player.last_market_refresh_time
                     
-                    last_time = status['last_save_time']
+                    # 2. Load Inventory
+                    inv_items = session.exec(select(PlayerInventory)).all()
+                    self.inventory = {item.item_id: item.count for item in inv_items}
                     
-                    # Load Inventory
-                    cursor.execute("SELECT * FROM player_inventory")
-                    inv_rows = cursor.fetchall()
-                    self.inventory = {row['item_id']: row['count'] for row in inv_rows}
-                    
-                    self.inventory = {row['item_id']: row['count'] for row in inv_rows}
-                    
-                    # Load Market Stock (Plan 26)
-                    cursor.execute("SELECT * FROM market_stock")
-                    market_rows = cursor.fetchall()
+                    # 3. Load Market
+                    market_items = session.exec(select(MarketStock)).all()
                     self.market_goods = []
-                    for row in market_rows:
+                    for m in market_items:
                         self.market_goods.append({
-                            "id": row['item_id'],
-                            "price": row['price'],
-                            "discount": row['discount']
+                            "id": m.item_id,
+                            "price": m.price,
+                            "discount": m.discount
                         })
-                    
-                    loaded_from_db = True
-                    
+                        
                     # Offline Progress
-                    if last_time > 0:
-                        self.calculate_offline_progress(last_time)
-        except Exception as e:
-            logger.error(f"从数据库加载失败: {e}")
-
-        # 2. If DB empty, check for JSON migration
-        if not loaded_from_db and filepath and os.path.exists(filepath):
-            logger.info("数据库无存档，尝试迁移旧 JSON 存档...")
-            try:
-                with open(filepath, 'r') as f:
-                    data = json.load(f)
-                    self.exp = data.get("exp", 0)
-                    self.layer_index = data.get("layer_index", 0)
-                    self.money = data.get("money", 0)
-                    self.inventory = data.get("inventory", {})
-                    # ... other fields ...
-                    stats = data.get("stats", {})
-                    self.mind = stats.get("mind", 0)
-                    self.body = stats.get("body", 10)
-                    self.affection = stats.get("affection", 0)
-                    self.talents = data.get("talents", {"exp": 0, "drop": 0})
-                    self.talent_points = data.get("talent_points", 0)
+                    if player.last_save_time > 0:
+                        self.calculate_offline_progress(player.last_save_time)
+                else:
+                    logger.info("新存档 (或数据为空)，初始化...")
+                    self.refresh_market()
                     
-                # Save immediately to DB
-                self.save_data()
-                # Rename old file to backup
-                os.rename(filepath, filepath + ".bak")
-                logger.info("迁移完成，旧存档已备份已 .bak")
-                
-                # Check Offline for JSON migration too if needed, but let's assume save_data sets current time.
-                # If we want offline progress from JSON time:
-                last_time = data.get("last_save_time", 0)
-                if last_time > 0:
-                     self.calculate_offline_progress(last_time)
-                     
-            except Exception as e:
-                logger.error(f"JSON 迁移失败: {e}")
-        
-        # 3. Validation
+        except Exception as e:
+            logger.error(f"加载失败: {e}")
+            
         self.check_daily_refresh()
+
 
     def reset_to_beginning(self):
         """

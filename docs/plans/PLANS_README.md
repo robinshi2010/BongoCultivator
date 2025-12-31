@@ -24,6 +24,7 @@
 
 | Plan ID | 标题 (Title) | 关键功能 (Key Features) | 链接 (Link) |
 | :--- | :--- | :--- | :--- |
+| **Plan 28** | 核心重构与 SQLModel | ORM 数据库层重构与 Bug 修复。 | [plan28_done.md](archive/plan28_done.md) |
 | **Plan 27** | 统一窗口拖拽 | 实现所有子窗口的统一拖拽逻辑。 | [plan27_done.md](archive/plan27_done.md) |
 | **Plan 26** | 坊市刷新机制 | 坊市物品刷新逻辑与动态梯度。 | [plan26_done.md](archive/plan26_done.md) |
 | **Plan 24** | 每日奖励修复 | 修复每日奖励重复领取的问题。 | [plan24_done.md](archive/plan24_done.md) |

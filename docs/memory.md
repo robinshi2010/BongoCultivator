@@ -113,6 +113,7 @@
 - [x] **[Plan 24: 每日奖励修复](plans/archive/plan24_done.md)** (Fix Daily Reward Duplicate Claim)
 - [x] **[Plan 26: 坊市刷新机制](plans/archive/plan26_done.md)** (Market Refresh & Dynamic Tier)
 - [x] **[Plan 27: 统一窗口拖拽](plans/archive/plan27_done.md)** (Unified Draggable Windows)
+- [x] **[Plan 28: 核心重构与 SQLModel](plans/archive/plan28_done.md)** (ORM Migration, EventEngine Fix)
 
 ### 待执行 (Pending / In Progress)
 
