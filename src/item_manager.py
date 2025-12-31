@@ -123,7 +123,7 @@ class ItemManager:
             "exp": "修为丹", "stat": "属性丹", "buff": "增益丹",
             "recov": "恢复丹", "break": "突破丹", "breakthrough": "突破丹",
             "utility": "功能丹", "special": "特殊", "cosmetic": "外观",
-            "junk": "杂物", "material": "材料"
+            "junk": "杂物", "material": "材料", "liquid": "灵液"
         }.get(item_type, item_type.capitalize())
         
         # Format Effects

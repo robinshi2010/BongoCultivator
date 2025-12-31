@@ -10,7 +10,7 @@
 
 ---
 ## 📝 计划
-1. 
+1. 现在打包之后的体积还很大有没有优化的可能？
 2. 
 
 ## 🚀 进行中 (Active)
@@ -29,6 +29,7 @@
 
 | Plan ID | 标题 (Title) | 关键功能 (Key Features) | 链接 (Link) |
 | :--- | :--- | :--- | :--- |
+| **Plan 33** | UI细节修复与图标更新 | 修复 Liquid 显示问题，更新应用图标。 | [plan33_done.md](archive/plan33_done.md) |
 | **Plan 32** | 事件文案差异化 | 优化 T0-T8 通用事件文案，使其符合修仙境界。 | [plan32_done.md](archive/plan32_done.md) |
 | **Plan 31** | 动态对话系统 | 数据库驱动的上下文敏感对话系统。 | [plan31_done.md](archive/plan31_done.md) |
 | **Plan 30** | 探险与经济平衡 | 重构事件概率，增加通用资源掉落。 | [plan30_done.md](archive/plan30_done.md) |

@@ -1,9 +1,8 @@
 import sys
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import QTimer
-from src.pet_window import PetWindow
 from src.logger import logger  # 初始化日志
-from src.tray_icon import SystemTray
+
 
 import signal
 import sys
@@ -18,6 +17,11 @@ def main():
     DataLoader.check_data_update()
 
     logger.info("启动应用程序...")
+    
+    # 延迟导入，防止 DatabaseManager 过早初始化导致迁移失效
+    from src.pet_window import PetWindow
+    from src.tray_icon import SystemTray
+    
     app = QApplication(sys.argv)
     
     # 防止关闭唯一的可视窗口 (StatsWindow) 时导致程序退出

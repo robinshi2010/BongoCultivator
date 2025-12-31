@@ -716,19 +716,19 @@ class Cultivator:
              self.reset_to_beginning()
              return True, "已转世重修。"
 
-        # 5. Unconditional Level Up (Debug)
-        elif code == "haiwangdashabi":
-             if self.layer_index < 8:
-                 self.layer_index += 1
-                 self.exp = 0
-                 self.body += 10
-                 self.mind = 0
-                 self.talent_points += 1
-                 current_layer_name = self.LAYERS[self.layer_index]
-                 msg = f"【天道作弊】海王大傻逼显灵！强行晋升至【{current_layer_name}】！"
-                 self.events.append(msg)
-                 return True, msg
-             else:
-                 return False, "已达巅峰，无法再升！"
+        # # 5. Unconditional Level Up (Debug)
+        # elif code == "haiwangdashabi":
+        #      if self.layer_index < 8:
+        #          self.layer_index += 1
+        #          self.exp = 0
+        #          self.body += 10
+        #          self.mind = 0
+        #          self.talent_points += 1
+        #          current_layer_name = self.LAYERS[self.layer_index]
+        #          msg = f"【天道作弊】海王大傻逼显灵！强行晋升至【{current_layer_name}】！"
+        #          self.events.append(msg)
+        #          return True, msg
+        #      else:
+        #          return False, "已达巅峰，无法再升！"
              
         return False, "天机不可泄露 (无效密令)"

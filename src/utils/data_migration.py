@@ -36,29 +36,75 @@ def check_and_migrate_data():
             logger.error(f"创建数据目录失败: {e}")
             return
 
+    import sqlite3
+    
+    def get_db_progress(db_path):
+        """返回 (layer_index, exp)，出错或空则返回 (-1, -1)"""
+        if not os.path.exists(db_path): return -1, -1
+        try:
+            conn = sqlite3.connect(db_path)
+            cur = conn.cursor()
+            # 检查表是否存在
+            cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='player_status'")
+            if not cur.fetchone(): 
+                conn.close()
+                return -1, -1
+            
+            cur.execute("SELECT layer_index, current_exp FROM player_status WHERE id=1")
+            row = cur.fetchone()
+            conn.close()
+            if row: return row[0], row[1]
+        except Exception as e:
+            # logger.warning(f"Check db progress failed for {db_path}: {e}")
+            pass
+        return 0, 0 # 默认初始状态
+        
     for source_dir in source_dirs:
-        logger.info(f"尝试从 {source_dir} 迁移数据...")
+        # logger.info(f"检查旧数据目录: {source_dir}")
         for filename in files_to_migrate:
             new_path = os.path.join(new_dir, filename)
             old_path = os.path.join(source_dir, filename)
             
-            # 只有当新文件不存在，旧文件存在时才迁移
-            if not os.path.exists(new_path) and os.path.exists(old_path):
+            if not os.path.exists(old_path):
+                continue
+                
+            do_migrate = False
+            
+            if not os.path.exists(new_path):
+                do_migrate = True
+            elif filename == "user_data.db":
+                # 智能判断: 如果新档是初始状态，旧档有进度，则覆盖
+                n_layer, n_exp = get_db_progress(new_path)
+                o_layer, o_exp = get_db_progress(old_path)
+                
+                # 新档几乎没玩 (Layer0, Exp<100)，且旧档明显玩过
+                is_new_empty = (n_layer == 0 and n_exp < 100) or (n_layer == -1)
+                is_old_valid = (o_layer > 0) or (o_layer == 0 and o_exp > 100)
+                
+                if is_new_empty and is_old_valid:
+                    logger.info(f"检测到新存档为空 (L{n_layer}), 旧存档有进度 (L{o_layer})，执行强制迁移覆盖。")
+                    # 备份一下新档以防万一
+                    try:
+                        shutil.move(new_path, new_path + ".bak_empty")
+                    except: pass
+                    do_migrate = True
+            
+            if do_migrate:
                 try:
-                    logger.info(f"正在迁移 {filename} ...")
+                    logger.info(f"正在迁移 {filename} 从 {source_dir} ...")
                     shutil.copy2(old_path, new_path)
                     logger.info(f"成功迁移 {filename}")
                     migrated_count += 1
                 except Exception as e:
                     logger.error(f"迁移 {filename} 失败: {e}")
-            elif os.path.exists(new_path):
-                 pass # 已存在，忽略
+            else:
+                 pass # 已存在且有数据，跳过
 
     if migrated_count > 0:
         logger.info(f"数据迁移完成，共迁移 {migrated_count} 个文件。")
     else:
         logger.info("无需执行数据迁移或新位置已有数据。")
-    return # 结束
+    return
 
 # 保留旧函数签名以便兼容，下面是覆盖原逻辑
 def check_and_migrate_data_legacy_backup():
