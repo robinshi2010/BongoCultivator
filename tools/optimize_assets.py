@@ -18,12 +18,15 @@ def optimize_images(directory):
                     continue
 
                 with Image.open(filepath) as img:
+                    # Resize if too large (PetWindow max display is around 200x200, so 512 is plenty for HighDPI)
+                    if img.width > 512 or img.height > 512:
+                        print(f"Resizing {filename} from {img.size} to (512, 512) max")
+                        img.thumbnail((512, 512), Image.Resampling.LANCZOS)
+                        
                     # Optimize content
                     # Identify if image has transparency
                     if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
                         # For PNGs with transparency, we can use optimize=True
-                        # reducing colors/palette is risky for visuals without manual check, 
-                        # so we rely on zlib compression level optimization by PIL
                         img.save(filepath, optimize=True, quality=85)
                     else:
                         img.save(filepath, optimize=True, quality=85)

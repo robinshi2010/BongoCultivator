@@ -29,6 +29,9 @@
 
 | Plan ID | 标题 (Title) | 关键功能 (Key Features) | 链接 (Link) |
 | :--- | :--- | :--- | :--- |
+| **Plan 38** | 事件日志修复 | 修复事件触发时结果显示重复的 Bug。 | [plan38_event_log_fix_done.md](archive/plan38_event_log_fix_done.md) |
+| **Plan 37** | 托盘与窗口置顶修复 | 修复对话框显示状态同步及 macOS 窗口置顶切换失效问题。 | [plan37_tray_fixes_done.md](archive/plan37_tray_fixes_done.md) |
+| **Plan 36** | 项目体积优化 | 剔除冗余依赖，压缩图片资源，使包体 <150MB。 | [plan36_size_optimization_done.md](archive/plan36_size_optimization_done.md) |
 | **Plan 35** | UI与体验优化 | 修复Windows输入框、多屏支持、托盘增强及事件日志。 | [plan35_done.md](archive/plan35_done.md) |
 | **Plan 34** | 修复废丹显示 (Fix Pill Waste) | 修复废丹显示为英文的问题，并添加物品定义。 | [plan34_done.md](archive/plan34_done.md) |
 | **Plan 33** | UI细节修复与图标更新 | 修复 Liquid 显示问题，更新应用图标。 | [plan33_done.md](archive/plan33_done.md) |

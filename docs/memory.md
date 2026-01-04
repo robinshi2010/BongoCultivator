@@ -12,6 +12,7 @@
 ## 维护工具 (Maintenance Tools)
 - `tools/generate_json_assets.py`: 从代码重建 `src/data/` 下缺失的 items/events JSON 文件 (Fix missing data)。
 - `tools/fix_inventory_ids.py`: 迁移旧存档 `player_inventory` 中的过期 ID 到新规范 (Fix English names)。
+- `tools/optimize_assets.py`: 自动化资源压缩工具，从 assets 目录备份并压缩/缩放图片 (>512px -> 512px)。
 - `DataLoader`: 集成在启动流程中，自动检测并修复空数据库。
 
 ## 已完成功能 (Completed Features)
@@ -66,6 +67,15 @@
 7. **事件系统 (Events)**:
     - **分级文案**: 通用事件 (T0-T8) 拥有差异化文案，涵盖山野/秘境/虚空/法则等主题。
     - **权重平衡**: 调整了 Common/Uncommon/Rare/Unique 事件的权重，保证资源获取。
+    - **日志系统**: 修复了事件结果显示重复的问题，并在 UI 和数据库中记录单次精确结果。
+
+8. **性能与体积优化 (Optimization)**:
+    - **体积瘦身**: 通过移除冗余依赖 (numpy, pandas 等) 和压缩资源，将 macOS 应用包体积从 240MB 降至 125MB。
+    - **资源管理**: 实现了资源加载的按需优化 (Scale)。
+
+9. **平台兼容性 (Platform Compatibility)**:
+    - **macOS Window Level**: 实现了动态切换窗口层级 (`kCGFloatingWindowLevelKey` vs `kCGNormalWindowLevelKey`) 以修复“始终置顶”功能的开关失效问题。
+    - **Tray Sync**: 托盘菜单状态与窗口实际状态 (Notifications) 的双向同步。
 
 ## 置顶显示且不影响操作其他软件 (macOS 实现要点)
 目标：小人窗口始终在最前端，同时不抢焦点，用户仍可正常操作其他应用。
@@ -128,6 +138,9 @@
 - [x] **[Plan 29: 坊市体验优化](plans/archive/plan29_done.md)** (Market UX Fixes, Chinese Tiers)
 - [x] **[Plan 34: 修复废丹显示](plans/archive/plan34_done.md)** (Fix Pill Waste Translation)
 - [x] **[Plan 35: UI与体验优化](plans/archive/plan35_done.md)** (Windows Fixes, Multi-screen, Tray, Logs)
+- [x] **[Plan 36: 项目体积优化](plans/archive/plan36_size_optimization_done.md)** (App Size < 150MB, Asset Compression)
+- [x] **[Plan 37: 托盘与窗口置顶修复](plans/archive/plan37_tray_fixes_done.md)** (Tray State Sync, macOS Toggle Logic)
+- [x] **[Plan 38: 事件日志修复](plans/archive/plan38_event_log_fix_done.md)** (Fix Log Deplication)
 
 ### 待执行 (Pending / In Progress)
 
@@ -136,4 +149,4 @@
 - [ ] **[Plan 25]**: [用户注册与数据留存 (Supabase)](plans/active/plan25.md)
 
 ---
-(最后更新: 2025-12-31 14:10)
+(最后更新: 2026-01-04 12:56)

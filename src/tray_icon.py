@@ -49,7 +49,11 @@ class SystemTray(QObject):
         # 显示气泡/对话
         self.notify_action = QAction("显示对话", self)
         self.notify_action.setCheckable(True)
-        self.notify_action.setChecked(True)
+        # Apply initial state from PetWindow
+        if hasattr(self.pet_window, 'notifications_enabled'):
+            self.notify_action.setChecked(self.pet_window.notifications_enabled)
+        else:
+            self.notify_action.setChecked(True)
         self.notify_action.triggered.connect(self.pet_window.toggle_notifications)
         menu.addAction(self.notify_action)
 

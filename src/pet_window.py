@@ -59,6 +59,7 @@ class PetWindow(QWidget):
         # Windows
         self.stats_window = None
         self.tray = None
+        self.notifications_enabled = True
 
     def set_tray(self, tray):
         self.tray = tray
@@ -533,8 +534,14 @@ class PetWindow(QWidget):
             cg_window_level_for_key.argtypes = [c_int]
             cg_window_level_for_key.restype = c_int
 
+            # Check if AlwaysStatusTop is enabled in Qt flags
+            should_be_on_top = bool(self.windowFlags() & Qt.WindowType.WindowStaysOnTopHint)
+            
+            # Normal level = 0, Floating = 5
+            kCGNormalWindowLevelKey = 0
             kCGFloatingWindowLevelKey = 5
-            level_key = kCGFloatingWindowLevelKey
+            
+            level_key = kCGFloatingWindowLevelKey if should_be_on_top else kCGNormalWindowLevelKey
             level = cg_window_level_for_key(level_key)
 
             sel_set_level = sel_register_name(b"setLevel:")

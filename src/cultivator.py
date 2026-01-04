@@ -525,8 +525,6 @@ class Cultivator:
                 event_msg = f"【机缘】{event['title']}\n{event['text']}"
                 if result_msg:
                      event_msg += f"\n> {result_msg}"
-                if result_msg:
-                     event_msg += f"\n> {result_msg}"
                 self._log_event("event", event_msg)
                 
                 # Make sure to show it in UI
