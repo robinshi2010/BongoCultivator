@@ -88,9 +88,7 @@
                 "tier": 0,
                 "price": 100,
                 "desc": "未落地便被收集的露水，纯净无垢，是调和药性的良溶剂。",
-                "effect": {
-                    "mind_heal": 5
-                },
+                "effect": {},
                 "recipe": {}
             },
             {
@@ -110,9 +108,7 @@
                 "tier": 0,
                 "price": 1,
                 "desc": "炼丹失败的产物，散发着焦糊味，毫无药用价值。",
-                "effect": {
-                    "mind_heal": -5
-                },
+                "effect": {},
                 "recipe": {}
             }
         ],
@@ -152,9 +148,7 @@
                 "tier": 0,
                 "price": 500,
                 "desc": "服下后双腿轻盈如风，感觉不到重力的束缚。",
-                "effect": {
-                    "mind_heal": 5
-                },
+                "effect": {},
                 "recipe": {
                     "part_bat_wing": 2,
                     "herb_marrow_0": 1
@@ -167,9 +161,7 @@
                 "tier": 0,
                 "price": 500,
                 "desc": "含在口中可过滤瘴气，探险必备。",
-                "effect": {
-                    "stat_body": 1
-                },
+                "effect": {},
                 "recipe": {
                     "herb_ghost_vine": 2,
                     "water_dew_morning": 2
@@ -242,9 +234,7 @@
                 "tier": 1,
                 "price": 400,
                 "desc": "万年岩层滴落的乳白色液体，一滴重达千钧。",
-                "effect": {
-                    "stat_body": 2
-                },
+                "effect": {},
                 "recipe": {}
             },
             {
@@ -347,9 +337,7 @@
                 "tier": 1,
                 "price": 2000,
                 "desc": "涂抹眼部，黑暗视物如同白昼。",
-                "effect": {
-                    "affection": 2
-                },
+                "effect": {},
                 "recipe": {
                     "part_snake_skin": 1,
                     "herb_illusory": 1
@@ -499,9 +487,7 @@
                 "tier": 2,
                 "price": 8000,
                 "desc": "虽然对修为无益，但能将容貌永远定格在服用的一刻。",
-                "effect": {
-                    "affection": 5
-                },
+                "effect": {},
                 "recipe": {
                     "water_glacier": 1,
                     "herb_purple_mky": 1,
@@ -515,10 +501,7 @@
                 "tier": 2,
                 "price": 8000,
                 "desc": "透支生命潜能换取短暂的爆发力，副作用极大。",
-                "effect": {
-                    "exp_gain": 0.05,
-                    "stat_body": -2
-                },
+                "effect": {},
                 "recipe": {
                     "beast_core_gold": 1,
                     "herb_fire_lotus": 2
@@ -547,9 +530,7 @@
                 "tier": 2,
                 "price": 8000,
                 "desc": "短暂蒙蔽天机，此时开箱、掉落会有意想不到的好运。",
-                "effect": {
-                    "affection": 10
-                },
+                "effect": {},
                 "recipe": {
                     "herb_purple_mky": 2,
                     "ore_star_sand": 1
@@ -596,10 +577,7 @@
                 "tier": 3,
                 "price": 6400,
                 "desc": "来自幽冥界的浑浊河水，能腐蚀修士的法宝灵光。",
-                "effect": {
-                    "mind_heal": -10,
-                    "stat_body": 3
-                },
+                "effect": {},
                 "recipe": {}
             },
             {
@@ -699,9 +677,7 @@
                 "tier": 3,
                 "price": 32000,
                 "desc": "吞服后可瞬间移动（极高闪避）。",
-                "effect": {
-                    "exp": 1000
-                },
+                "effect": {},
                 "recipe": {
                     "ore_void_stone": 2,
                     "part_bat_wing": 10
@@ -730,9 +706,7 @@
                 "tier": 3,
                 "price": 32000,
                 "desc": "制造一个拥有本体30%实力的幻影协助战斗。",
-                "effect": {
-                    "exp_gain": 0.1
-                },
+                "effect": {},
                 "recipe": {
                     "herb_soul_restore": 1,
                     "water_nether": 2
@@ -789,9 +763,7 @@
                 "tier": 4,
                 "price": 25600,
                 "desc": "至阴至寒，一滴可化沧海，能压碎普通的空间戒指。",
-                "effect": {
-                    "stat_body": 5
-                },
+                "effect": {},
                 "recipe": {}
             },
             {
@@ -848,9 +820,7 @@
                 "tier": 4,
                 "price": 128000,
                 "desc": "服用后短时间内无视一切法则压制。",
-                "effect": {
-                    "mind_heal": 30
-                },
+                "effect": {},
                 "recipe": {
                     "beast_core_void": 1,
                     "misc_broken_divine": 1
@@ -983,10 +953,7 @@
                 "tier": 5,
                 "price": 512000,
                 "desc": "只要元神不灭，肉身化为灰烬亦可瞬间重聚。",
-                "effect": {
-                    "stat_body": 20,
-                    "mind_heal": 20
-                },
+                "effect": {},
                 "recipe": {
                     "fungus_heaven": 1,
                     "flower_other_shore": 1
@@ -999,9 +966,7 @@
                 "tier": 5,
                 "price": 512000,
                 "desc": "短时间内完全融入虚空，不受任何物理干涉。",
-                "effect": {
-                    "affection": 15
-                },
+                "effect": {},
                 "recipe": {
                     "part_void_dragon": 1,
                     "dust_void": 2
@@ -1064,10 +1029,7 @@
                 "tier": 6,
                 "price": 409600,
                 "desc": "据说能点化顽石，赋予死物灵智。",
-                "effect": {
-                    "stat_body": 10,
-                    "affection": 10
-                },
+                "effect": {},
                 "recipe": {}
             },
             {
@@ -1114,11 +1076,7 @@
                 "tier": 6,
                 "price": 2048000,
                 "desc": "丹成九转，鬼神皆惊，拥有起死人肉白骨的逆天功效。",
-                "effect": {
-                    "stat_body": 10,
-                    "mind_heal": 50,
-                    "exp_gain": 0.1
-                },
+                "effect": {},
                 "recipe": {
                     "fruit_yin_yang": 1,
                     "water_creation": 3
@@ -1231,9 +1189,7 @@
                 "tier": 7,
                 "price": 8192000,
                 "desc": "能将自身状态回溯到10秒之前，堪称后悔药。",
-                "effect": {
-                    "mind_heal": 100
-                },
+                "effect": {},
                 "recipe": {
                     "sand_time": 3,
                     "thread_karma": 1
@@ -1246,9 +1202,7 @@
                 "tier": 7,
                 "price": 8192000,
                 "desc": "服用后寿元无尽，心魔不再滋生，真正的大逍遥。",
-                "effect": {
-                    "stat_body": 50
-                },
+                "effect": {},
                 "recipe": {
                     "leaf_world_tree": 1,
                     "blood_ancestor": 1
@@ -1281,10 +1235,7 @@
                 "tier": 8,
                 "price": 6553600,
                 "desc": "渡劫成功后，劫云消散时滴落的金色液体，蕴含毁灭与新生。",
-                "effect": {
-                    "stat_body": 20,
-                    "exp_gain": 0.2
-                },
+                "effect": {},
                 "recipe": {}
             },
             {
@@ -1336,9 +1287,7 @@
                 "tier": 8,
                 "price": 32768000,
                 "desc": "欺骗天机，使天劫威力削弱三层，渡劫成功率大幅提升。",
-                "effect": {
-                    "breakthrough_chance": 0.3
-                },
+                "effect": {},
                 "recipe": {
                     "lotus_chaos": 1,
                     "frag_heaven_way": 1
@@ -1351,9 +1300,7 @@
                 "tier": 8,
                 "price": 32768000,
                 "desc": "虽然名字叫飞升丹，但其实是让人在不飞升的情况下拥有仙人法力。",
-                "effect": {
-                    "exp_gain": 0.5
-                },
+                "effect": {},
                 "recipe": {
                     "gas_primordial": 1,
                     "stone_destiny": 1

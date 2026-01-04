@@ -17,7 +17,6 @@
 
 | Plan ID | 标题 (Title) | 描述 (Description) | 链接 (Link) |
 | :--- | :--- | :--- | :--- |
-| **Plan 44** | 丹药效果实装 | 为所有丹药配置实际属性效果，支持混合效果。 | [plan44_pills_update.md](active/plan44_pills_update.md) |
 | **Plan 25** | 用户系统 (User System) | 使用 Supabase 完成邮箱验证注册功能，留存用户数据。 | [plan25.md](active/plan25.md) |
 
 ---
@@ -26,9 +25,15 @@
 
 这些计划已经完成开发。如果需要回溯逻辑或查找最初的设计意图，请查阅以下文档。
 
+### ✅ 已完成 (Completed)
+| Plan ID | 标题 (Title) | 描述 (Description) | 链接 (Link) |
+| :--- | :--- | :--- | :--- |
+| **Plan 44** | 丹药效果实装 | 为所有丹药配置实际属性效果，支持混合效果。 | [plan44_pills_update.md](archive/plan44_pills_update.md) |
+| **Plan 43** | 炼丹 UI 修复 | 修复炼丹按钮连点及 UI 状态同步问题。 | [plan43_fix_alchemy_ui.md](archive/plan43_fix_alchemy_ui.md) |
+
+### 📜 历史归档 (Historical Archive)
 | Plan ID | 标题 (Title) | 关键功能 (Key Features) | 链接 (Link) |
 | :--- | :--- | :--- | :--- |
-| **Plan 43** | 炼丹 UI 修复 | 修复炼丹按钮状态不同步问题。 | [plan43_fix_alchemy_ui_done.md](archive/plan43_fix_alchemy_ui_done.md) |
 | **Plan 42** | 修复逻辑 Bug (Fix Logic) | 修复炼丹/交易可能导致资源负数的 Bug。 | [plan42_fix_app_logic_done.md](archive/plan42_fix_app_logic_done.md) |
 | **Plan 41** | 修复日志窗口报错 | 修复 QTableWidgetItem 作用域问题。 | [plan41_fix_log_error_done.md](archive/plan41_fix_log_error_done.md) |
 | **Plan 40** | 界面与交互修复 | 修复重修弹窗及移除 MPL 依赖。 | [plan40_ui_fixes_done.md](archive/plan40_ui_fixes_done.md) |

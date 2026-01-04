@@ -151,6 +151,7 @@
 - [x] **[Plan 41: 修复日志窗口报错](plans/archive/plan41_fix_log_error_done.md)** (Fixed Import Scope)
 - [x] **[Plan 42: 修复逻辑 Bug](plans/archive/plan42_fix_app_logic_done.md)** (Safe Resource Consumption)
 - [x] **[Plan 43: 炼丹 UI 修复](plans/archive/plan43_fix_alchemy_ui_done.md)** (Sync UI State)
+- [x] **[Plan 44: 丹药效果实装](plans/archive/plan44_pills_update.md)** (Updated Pill Effects & Docs)
 - [ ] **[Plan 25]**: [用户注册与数据留存 (Supabase)](plans/active/plan25.md)
 
 ---

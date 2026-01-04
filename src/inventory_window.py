@@ -262,22 +262,25 @@ class InventoryWindow(DraggableWindow):
                     msg = "已洗髓伐骨，天赋点已重置！"
                     used_success = True
             
-            # 7. Fallback for valid types but empty effects (e.g. placeholder items)
-            elif item_type == "recov":
-                 val = 10
-                 self.cultivator.modify_stat("mind", -val)
-                 msg = f"神清气爽，心魔减少了 {val} 点 (基础)"
-                 used_success = True
-            elif item_type == "stat":
-                 val = 1
-                 self.cultivator.modify_stat("body", val)
-                 msg = f"服用后感觉身体强壮了一些，体魄+{val} (基础)"
-                 used_success = True
-                 
-            # Fallback
+            # 9. Fallback Logic for items with NO specific effect keys but valid types
             if not used_success:
-                 msg = "物品已使用，但好像没发生什么 (暂无效果)。"
-                 used_success = True
+                if item_type == "recov":
+                     val = 10
+                     self.cultivator.modify_stat("mind", -val)
+                     msg_parts.append(f"心魔-{val}(基础)")
+                     used_success = True
+                elif item_type == "stat":
+                     val = 1
+                     self.cultivator.modify_stat("body", val)
+                     msg_parts.append(f"体魄+{val}(基础)")
+                     used_success = True
+
+            if used_success:
+                msg = f"服用了 {info['name']}: " + ", ".join(msg_parts)
+            else:
+                msg = "物品已使用，但好像没发生什么。"
+                used_success = True # Consume it anyway? Or prevent?
+                
         if used_success:
             self.cultivator.inventory[item_id] -= 1
             logger.info(f"使用了物品: {info['name']}")
