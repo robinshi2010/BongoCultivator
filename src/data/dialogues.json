@@ -235,5 +235,27 @@
         "type": "state",
         "conditions": {"required_state": "WORK"},
         "weight": 50
+    },
+
+    {
+        "id": "dia_easter_robin_1",
+        "text": "robinshi2009... 仿佛在这个世界的深处，听到了这个名字。",
+        "type": "realm",
+        "conditions": {"min_layer": 6, "max_layer": 99},
+        "weight": 10
+    },
+    {
+        "id": "dia_easter_robin_2",
+        "text": "传说这方天地，皆由一位代号 'robinshi2009' 的大能所创。",
+        "type": "realm",
+        "conditions": {"min_layer": 6, "max_layer": 99},
+        "weight": 10
+    },
+    {
+        "id": "dia_easter_robin_3",
+        "text": "你有没有觉得...我们的命运似乎被 'robinshi2009' 操控着？",
+        "type": "realm",
+        "conditions": {"min_layer": 6, "max_layer": 99},
+        "weight": 10
     }
 ]

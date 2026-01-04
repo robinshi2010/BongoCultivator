@@ -146,6 +146,7 @@
 
 
 #### 4. 优化 (Plan 25)
+- [x] **[Plan 39: 制作人彩蛋](plans/archive/plan39_creator_easter_egg_done.md)** (Added Creator Easter Egg Dialogues)
 - [ ] **[Plan 25]**: [用户注册与数据留存 (Supabase)](plans/active/plan25.md)
 
 ---
