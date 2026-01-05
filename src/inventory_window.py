@@ -205,61 +205,67 @@ class InventoryWindow(DraggableWindow):
 
         # Consumable Logic (All other types)
         else:
+            msg_parts = []
+            
             # 1. EXP
             if "exp" in effects:
                 val = effects["exp"]
                 self.cultivator.gain_exp(val)
-                msg = f"服用了 {info['name']}, 修为增加 {val}!"
+                msg_parts.append(f"修为+{val}")
                 used_success = True
-            elif "exp_gain" in effects:
+                
+            if "exp_gain" in effects:
                 val = effects["exp_gain"]
-                # If < 1.0, treat as percentage of max_exp
                 if val < 1.0:
                     amount = int(self.cultivator.max_exp * val)
                 else:
                     amount = int(val)
                 self.cultivator.gain_exp(amount)
-                msg = f"服用了 {info['name']}, 修为精进 {amount}!"
+                msg_parts.append(f"修为精进 {amount}")
                 used_success = True
-
+            
             # 2. Stat
-            elif "stat_body" in effects:
+            if "stat_body" in effects:
                 val = effects["stat_body"]
                 self.cultivator.modify_stat("body", val)
-                msg = f"体魄增加了 {val} 点 (永久)"
+                sign = "+" if val >= 0 else ""
+                msg_parts.append(f"体魄{sign}{val}")
                 used_success = True
             
             # 3. Heal/Recover
-            elif "heal" in effects:
-                val = effects["heal"]
-                msg = f"恢复了 {val} 点状态 (暂无实效)"
-                used_success = True
-            elif "mind_heal" in effects:
+            if "heal" in effects:
+                # val = effects["heal"]
+                # Generic heal not fully impl
+                pass
+                
+            if "mind_heal" in effects:
                 val = effects["mind_heal"]
                 self.cultivator.modify_stat("mind", -val)
-                msg = f"心魔减少了 {val} 点"
+                # Display logic: -val means reduction of negative status (good)
+                # But to user we usually say "Mind -10" meaning it went down.
+                msg_parts.append(f"心魔-{val}")
                 used_success = True
             
             # 4. Buffs
-            elif "buff" in effects:
+            if "buff" in effects:
                 buff_name = effects["buff"]
                 duration = effects.get("duration", 0)
-                msg = f"获得了增益 [{buff_name}] 持续 {duration//60} 分钟 (开发中)"
+                msg_parts.append(f"增益[{buff_name}]")
                 used_success = True
                 
             # 5. Affection
-            elif "affection" in effects:
+            if "affection" in effects:
                 val = effects["affection"]
                 self.cultivator.modify_stat("affection", val)
-                msg = f"宠物好感度增加 {val} 点"
+                msg_parts.append(f"好感+{val}")
                 used_success = True
                 
             # 6. Special Actions
-            elif "action" in effects:
+            if "action" in effects:
                 action = effects["action"]
                 if action == "reset_talent":
                     self.cultivator.modify_stat("reset_talent", 0)
-                    msg = "已洗髓伐骨，天赋点已重置！"
+                    msg_parts.append("天赋已重置")
                     used_success = True
             
             # 9. Fallback Logic for items with NO specific effect keys but valid types

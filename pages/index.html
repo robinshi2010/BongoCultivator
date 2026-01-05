@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你的桌面修仙传 | Desktop Cultivator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&family=Zhi+Mang+Xing&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #050510;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+
+            --accent-cyan: #00f2ea;
+            --accent-purple: #bc13fe;
+            --accent-gold: #ffd700;
+            --accent-red: #ff4757;
+
+            --glass-bg: rgba(20, 20, 35, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+
+            --font-display: 'Zhi Mang Xing', cursive;
+            --font-body: 'Noto Sans SC', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Ambient & Effects --- */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 50% 50%, #0d1126 0%, #000000 100%);
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float-orb 20s infinite alternate;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--accent-purple);
+            top: -200px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-cyan);
+            bottom: -100px;
+            right: -200px;
+            animation-duration: 25s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-gold);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+        }
+
+        @keyframes float-orb {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 30px);
+            }
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+        }
+
+        /* --- Components --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            padding: 0.3em 1em;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            border: 1px solid currentColor;
+        }
+
+        .tag-cyan {
+            color: var(--accent-cyan);
+            border-color: rgba(0, 242, 234, 0.3);
+            background: rgba(0, 242, 234, 0.05);
+        }
+
+        .tag-gold {
+            color: var(--accent-gold);
+            border-color: rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .tag-purple {
+            color: var(--accent-purple);
+            border-color: rgba(188, 19, 254, 0.3);
+            background: rgba(188, 19, 254, 0.05);
+        }
+
+        .image-glow {
+            filter: drop-shadow(0 0 20px rgba(0, 242, 234, 0.3));
+            transition: all 0.5s ease;
+        }
+
+        .image-glow:hover {
+            filter: drop-shadow(0 0 40px rgba(0, 242, 234, 0.6));
+            transform: scale(1.02);
+        }
+
+        /* --- Typography --- */
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 10vw, 7rem);
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(188, 19, 254, 0.4);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gold {
+            color: var(--accent-gold);
+        }
+
+        /* --- Header --- */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 4rem;
+        }
+
+        .avatar-container {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 2rem;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Rotating Ring behind Avatar */
+        .ring {
+            position: absolute;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .ring-1 {
+            width: 100%;
+            height: 100%;
+            border-dasharray: 20 10;
+            animation: spin 20s linear infinite;
+        }
+
+        .ring-2 {
+            width: 80%;
+            height: 80%;
+            border-color: var(--accent-purple);
+            border-dasharray: 50 20;
+            animation: spin 15s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .main-avatar {
+            height: 100%;
+            object-fit: contain;
+            z-index: 2;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* --- Sections --- */
+        .feature-section {
+            padding: 8rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .feature-section.reverse {
+            direction: rtl;
+        }
+
+        .feature-section.reverse .feature-text {
+            direction: ltr;
+        }
+
+        .feature-visual {
+            position: relative;
+            height: 500px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-visual img {
+            max-height: 90%;
+            max-width: 90%;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+
+        .feature-visual:hover img {
+            transform: scale(1.05);
+        }
+
+        .feature-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, #000 0%, transparent 100%);
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        /* --- Specific Section Styles --- */
+
+        /* APM Growth */
+        .apm-graph {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 200px;
+            width: 300px;
+        }
+
+        .bar {
+            width: 100%;
+            background: #333;
+            transition: height 0.5s;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .bar.active {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 15px var(--accent-cyan);
+            animation: pulse-bar 2s infinite;
+        }
+
+        @keyframes pulse-bar {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Alchemy */
+        .alchemy-circle {
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .alchemy-circle::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 1px dashed var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 30s linear infinite;
+        }
+
+        /* Market Items */
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            width: 80%;
+        }
+
+        .market-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        .market-item strong {
+            display: block;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 6rem 0;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: #020205;
+        }
+
+        @media (max-width: 900px) {
+            .feature-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .feature-section.reverse {
+                direction: ltr;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            .feature-visual {
+                height: 350px;
+            }
+
+            p {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- HERO -->
+    <header class="container">
+        <div class="avatar-container">
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+            <!-- Using user's asset -->
+            <img src="../assets/cultivator_idle.png" alt="Cultivator" class="main-avatar image-glow">
+        </div>
+
+        <h1>
+            你的<span class="text-gradient">桌面</span>修仙传
+        </h1>
+        <p style="font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem;">Desktop Cultivator</p>
+        <p class="subtitle">
+            不只是挂机。不仅是陪伴。<br>
+            这是一款由<strong>PyQt6</strong>驱动，将你的<strong>生产力 (APM)</strong> 转化为<strong>修为</strong>的桌面伴侣。
+        </p>
+    </header>
+
+    <main class="container">
+
+        <!-- 1. 工作即修行 (Work/APM) -->
+        <section class="feature-section">
+            <div class="feature-text">
+                <span class="tag tag-cyan">Core Logic</span>
+                <h2>工作即修行<br><span style="font-size: 0.6em; color: var(--accent-cyan);">INPUT DRIVEN GROWTH</span></h2>
+                <p>
+                    并没有所谓的“自动挂机”。你的每一次键盘敲击，每一次鼠标点击，都会被系统捕获并转化为天地灵气。
+                    <br><br>
+                    <strong>APM (Actions Per Minute)</strong> 决定了你的修炼效率。
+                    <br>
+                    摸鱼时只能缓慢积累，唯有全神贯注的工作（或激烈的游戏），才能引发灵气潮汐，助你突破瓶颈。
+                </p>
+            </div>
+            <div class="feature-visual">
+                <!-- Abstract Graph Visualization -->
+                <div class="apm-graph">
+                    <div class="bar" style="height: 30%"></div>
+                    <div class="bar" style="height: 45%"></div>
+                    <div class="bar" style="height: 25%"></div>
+                    <div class="bar" style="height: 60%"></div>
+                    <div class="bar active" style="height: 90%"></div>
+                    <div class="bar" style="height: 55%"></div>
+                    <div class="bar" style="height: 40%"></div>
+                </div>
+                <div class="feature-overlay">
+                    > Monitor.Active: True<br>
+                    > Current APM: 420<br>
+                    > Efficiency: <span style="color:#fff">200% (High)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 炼丹 (Alchemy) -->
+        <section class="feature-section reverse">
+            <div class="feature-text">
+                <span class="tag tag-gold">Alchemy System</span>
+                <h2>丹道通神<br><span style="font-size: 0.6em; color: var(--accent-gold);">CRAFTING & RISKS</span></h2>
+                <p>
+                    修仙岂能无丹？收集天材地宝，按照上古丹方开炉炼丹。
+                    <br><br>
+                    注意火候。完美品质的<strong>筑基丹</strong>能让你一步登天，而稍有不慎，炼出的<strong>废丹</strong>不仅浪费材料，还有可能...产生不可预知的副作用。
+                    <br><br>
+                    更有视觉进阶：随着境界提升，你的炼丹炉和特效也会进化。
+                </p>
+            </div>
+            <div class="feature-visual">
+                <img src="../assets/cultivator_alchemy_high.png" alt="Alchemy High Level"
+                    style="filter: drop-shadow(0 0 30px rgba(255,215,0,0.4));">
+                <div class="feature-overlay" style="color: var(--accent-gold);">
+                    > Status: 炼制中...<br>
+                    > Rate: 极品 (5%) / 上品 (20%)<br>
+                    > <span style="animation: blink 1s infinite">炉温过高! Warning!</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 坊市与经济 (Market) -->
+        <section class="feature-section">
+            <div class="feature-text">
+                <span class="tag tag-purple">Economy & Trade</span>
+                <h2>坊市万象<br><span style="font-size: 0.6em; color: var(--accent-purple);">MARKETPLACE</span></h2>
+                <p>
+                    探索未知的秘境，获取稀有战利品。多余的法宝和草药可以在坊市变现。
+                    <br><br>
+                    动态的市场经济系统。你可以从黑市商人手中淘到<strong>残缺的功法</strong>，也可以斥巨资购买<strong>天阶灵草</strong>。
+                    <br>
+                    甚至，坊市本身也会刷新各种随机事件。
+                </p>
+            </div>
+            <div class="feature-visual">
+                <div class="item-grid">
+                    <div class="market-item">
+                        <strong>凝神草</strong>
+                        <span style="color:#aaa">50 灵石</span>
+                    </div>
+                    <div class="market-item" style="border-color: var(--accent-gold); background: rgba(255,215,0,0.1);">
+                        <strong>金元丹</strong>
+                        <span style="color: var(--accent-gold)">800 灵石</span>
+                    </div>
+                    <div class="market-item">
+                        <strong>玄铁矿</strong>
+                        <span style="color:#aaa">120 灵石</span>
+                    </div>
+                    <div class="market-item">
+                        <strong>无名兽骨</strong>
+                        <span style="color:#aaa">300 灵石</span>
+                    </div>
+                    <div class="market-item" style="border-color: var(--accent-red); background: rgba(255,71,87,0.1);">
+                        <strong>??残卷</strong>
+                        <span style="color: var(--accent-red)">9999 灵石</span>
+                    </div>
+                    <div class="market-item">
+                        <strong>清心符</strong>
+                        <span style="color:#aaa">20 灵石</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 随机事件 (Events) -->
+        <section class="feature-section reverse">
+            <div class="feature-text">
+                <span class="tag tag-cyan">Rogue-like Events</span>
+                <h2>机缘与天命<br><span style="font-size: 0.6em; color: var(--accent-cyan);">RANDOM ENCOUNTERS</span></h2>
+                <p>
+                    这是一个“活着”的世界。你可以选择挂机闭关，也可以选择外出历练。
+                    <br><br>
+                    <strong>超过 60 种随机事件</strong>：
+                    <br>
+                    你可能在深山遭遇<strong>地龙翻身</strong>，发现灵脉；也可能误入<strong>上古遗阵</strong>，九死一生。
+                    <br>
+                    每一个选择，都构成了你独一无二的修仙传记。
+                </p>
+            </div>
+            <div class="feature-visual">
+                <div
+                    style="width: 80%; font-family: 'Courier New', monospace; font-size: 0.9rem; color: #ccc; text-align: left;">
+                    <p style="margin-bottom: 10px;">[10:42] 开始历练...</p>
+                    <p style="margin-bottom: 10px; color: var(--accent-purple);">[10:45] 遭遇事件：【仙人遗蜕】</p>
+                    <p style="padding-left: 15px; border-left: 2px solid #555; margin-bottom: 10px;">
+                        你在断崖下发现一具散发着金光的骸骨。
+                        <br>
+                        > <span
+                            style="color: var(--accent-cyan); cursor: pointer; text-decoration: underline;">搜寻宝物</span><br>
+                        > <span style="color: #666; cursor: pointer;">恭敬掩埋</span>
+                    </p>
+                    <p style="color: var(--accent-gold);">[Result] 获得：太乙神针 x1，道心 +10</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 渡劫 (Tribulation) -->
+        <section class="feature-section" style="text-align: center; display: block;">
+            <span class="tag tag-gold" style="margin-bottom: 2rem;">Ascension</span>
+            <h2 style="margin-bottom: 4rem;">九重雷劫，逆天而行</h2>
+
+            <div style="position: relative; max-width: 800px; margin: 0 auto;">
+                <!-- Lightning Effects -->
+                <div
+                    style="position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 2px; height: 100px; background: #fff; box-shadow: 0 0 30px #fff; animation: strike 3s infinite;">
+                </div>
+
+                <img src="../assets/tribulation_8_ascension.png" alt="Ascension"
+                    style="width: 100%; max-width: 500px; filter: drop-shadow(0 0 50px rgba(188,19,254,0.5));">
+
+                <div style="margin-top: 2rem; font-size: 1.2rem; color: var(--text-secondary);">
+                    炼气 -> 筑基 -> 金丹 -> 元婴 -> 化神 -> 炼虚 -> 合体 -> 大乘 -> 渡劫
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 1rem; color: #fff;">你的桌面修仙传</p>
+        <p>Bongo Cultivator Team © 2026</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'all 0.8s ease-out';
+            observer.observe(el);
+        });
+
+        // Simple blink animation for warning
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+            @keyframes strike { 
+                0% { opacity: 0; height: 0; } 
+                10% { opacity: 1; height: 100px; } 
+                20% { opacity: 0; } 
+                100% { opacity: 0; } 
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
