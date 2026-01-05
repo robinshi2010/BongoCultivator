@@ -105,9 +105,14 @@ class AlchemyWindow(DraggableWindow):
         for pill_id in pills:
             info = self.item_manager.get_item(pill_id)
             name = info.get("name", pill_id)
+            recipe = info.get("recipe", {})
             
+            # Skip items without a recipe (cannot be drafted)
+            if not recipe:
+                continue
+
             # Check if craftable
-            can_craft = self.check_ingredients(info.get("recipe", {}))
+            can_craft = self.check_ingredients(recipe)
             
             status_str = " [可炼制]" if can_craft else " [材料不足]"
             color_code = "#00FF00" if can_craft else "#888888"

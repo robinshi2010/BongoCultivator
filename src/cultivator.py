@@ -505,12 +505,22 @@ class Cultivator:
             current_state_code = 2 
             base_exp = 5
             
-            # Plan 45: 气运加成掉落率 (每点气运 +0.5% 掉落概率)
+            # Plan 45: 气运加成掉落率 (每点气运 +0.1% 掉落概率, 原0.5%有点太高)
             # Base 0.5% per second (~once per 3 mins)
-            luck_drop_bonus = self.affection * 0.005  # 0.5% per point
+            luck_drop_bonus = self.affection * 0.001  # 0.1% per point
             drop_bonus = luck_drop_bonus + (talent_drop_bonus * 0.1) 
             
-            if random.random() < (0.005 + drop_bonus):
+            # 添加最小掉落间隔 (防刷屏)
+            import time
+            current_time = time.time()
+            if not hasattr(self, 'last_drop_time'):
+                self.last_drop_time = 0
+                
+            can_drop = (current_time - self.last_drop_time) > 5.0 # 至少间隔 5 秒
+            
+            if can_drop and random.random() < (0.005 + drop_bonus):
+                self.last_drop_time = current_time # Update cooldown
+                
                 # Dynamic Drop Pool (Plan 6)
                 # 80% Current, 15% Low, 5% High
                 roll = random.random()
@@ -523,7 +533,6 @@ class Cultivator:
                 drop_id = self.item_manager.get_random_material(drop_tier)
                 if drop_id:
                     self.gain_item(drop_id)
-                    name = self.item_manager.get_item_name(drop_id)
                     name = self.item_manager.get_item_name(drop_id)
                     gain_msg = f"探险发现: {name}!"
                     self._log_event("drop", gain_msg)

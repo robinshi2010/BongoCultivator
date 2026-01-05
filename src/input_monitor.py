@@ -11,6 +11,9 @@ class InputMonitor:
         self.last_error = None
         self.permission_denied = False
         
+        # Debounce: Track currently pressed keys
+        self.pressed_keys = set()
+        
         # 滑动窗口记录 (最近 5 次调用的数据)
         # 如果 get_stats 每秒调用一次，平滑窗口就是 5 秒
         from collections import deque
@@ -23,7 +26,10 @@ class InputMonitor:
         self._acc_mouse_count = 0
         
         # 监听器
-        self.kb_listener = keyboard.Listener(on_press=self.on_press)
+        self.kb_listener = keyboard.Listener(
+            on_press=self.on_press,
+            on_release=self.on_release
+        )
         self.kb_listener.daemon = True
         self.mouse_listener = mouse.Listener(
             on_click=self.on_click,
@@ -37,6 +43,8 @@ class InputMonitor:
         self.running = True
         self.last_error = None
         self.permission_denied = False
+        self.pressed_keys.clear()
+        
         # 清空历史
         self.kb_history.clear()
         self.mouse_history.clear()
@@ -67,9 +75,31 @@ class InputMonitor:
         self.mouse_listener.stop()
 
     def on_press(self, key):
+        # 使用 key hash 或 str 作为 ID
+        # key 可以是 KeyCode 或 Key 对象
+        try:
+            k_id = key.char
+        except AttributeError:
+            k_id = str(key)
+            
         with self._lock:
+            # 如果按键已经在集合中，说明是长按重复的一帧，忽略
+            if k_id in self.pressed_keys:
+                return
+            
+            self.pressed_keys.add(k_id)
             self._kb_count += 1
             self._acc_kb_count += 1
+            
+    def on_release(self, key):
+        try:
+            k_id = key.char
+        except AttributeError:
+            k_id = str(key)
+            
+        with self._lock:
+            if k_id in self.pressed_keys:
+                self.pressed_keys.remove(k_id)
 
     def on_click(self, x, y, button, pressed):
         if pressed:

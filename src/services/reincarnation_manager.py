@@ -62,43 +62,8 @@ class ReincarnationManager:
         # Plan 45: 计算新生气运 (0-99)
         new_luck = random.randint(0, 99)
         
-        # 2. 重置数据库
+        # 2. 刷新内存中的 Cultivator
         try:
-            with db_manager._get_conn() as conn:
-                cursor = conn.cursor()
-                
-                # Update player_status but keep legacy fields
-                # Reset layer=0, exp=0, body=10, talents cleared
-                # Set talent_points = new_legacy_points
-                cursor.execute("""
-                    UPDATE player_status
-                    SET layer_index=0, current_exp=0, 
-                        money=?, 
-                        stat_body=10, stat_mind=0, stat_luck=?,
-                        talent_points=?, talent_json='{"exp":0,"drop":0}',
-                        last_save_time=?,
-                        death_count=?, legacy_points=?
-                    WHERE id=1
-                """, (
-                    new_money,
-                    new_luck,
-                    new_legacy_points, 
-                    int(time.time()),
-                    new_death_count,
-                    new_legacy_points
-                ))
-                
-                # Clear Inventory Table (Wipe all items)
-                cursor.execute("DELETE FROM player_inventory")
-                
-                # Plan 45: 清空本世使用过的"一面之缘"物品记录
-                cursor.execute("DELETE FROM used_once_items")
-                
-                conn.commit()
-                
-            logger.info(f"轮回成功 ({reason}): 继承AP={new_legacy_points}, 继承灵石={new_money}, 新气运={new_luck}")
-            
-            # 3. 刷新内存中的 Cultivator
             cultivator.exp = 0
             cultivator.layer_index = 0
             cultivator.money = new_money
@@ -113,6 +78,11 @@ class ReincarnationManager:
             cultivator.legacy_points = new_legacy_points
             # Plan 45: 清空"一面之缘"使用记录
             cultivator.used_once_items = set()
+            
+            # 3. 保存到数据库 (使用 Cultivator 自身的保存逻辑确保一致性)
+            cultivator.save_data()
+                
+            logger.info(f"轮回成功 ({reason}): 继承AP={new_legacy_points}, 继承灵石={new_money}, 新气运={new_luck}")
             
             # Log event
             msg = f"【轮回】第{new_death_count}世终了，{reason=='rebirth' and '兵解重修' or '身死道消'}。\n保留天赋点: {new_legacy_points} (继承率 {int(legacy['rate_used']*100)}%)\n本世气运: {cultivator.affection}"

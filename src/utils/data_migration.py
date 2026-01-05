@@ -50,14 +50,29 @@ def check_and_migrate_data():
                 conn.close()
                 return -1, -1
             
-            cur.execute("SELECT layer_index, current_exp FROM player_status WHERE id=1")
+            cur.execute("SELECT layer_index, current_exp, death_count FROM player_status WHERE id=1")
             row = cur.fetchone()
             conn.close()
-            if row: return row[0], row[1]
+            # Handle case where death_count column might be missing in very old DBs (though schema migration runs before this? No, migration runs first)
+            # Actually schema migration runs in database.py init, which is AFTER this.
+            # So selecting death_count might fail on old DBs.
+            # We should wrap in try/except or select *
+            if row: 
+                return row[0], row[1], row[2]
         except Exception as e:
+            # Try fallback for older schema without death_count
+            try:
+                conn = sqlite3.connect(db_path)
+                cur = conn.cursor()
+                cur.execute("SELECT layer_index, current_exp FROM player_status WHERE id=1")
+                row = cur.fetchone()
+                conn.close()
+                if row: return row[0], row[1], 0 # Default death_count 0
+            except:
+                pass
             # logger.warning(f"Check db progress failed for {db_path}: {e}")
             pass
-        return 0, 0 # 默认初始状态
+        return 0, 0, 0 # 默认初始状态
         
     for source_dir in source_dirs:
         # logger.info(f"检查旧数据目录: {source_dir}")
@@ -74,12 +89,13 @@ def check_and_migrate_data():
                 do_migrate = True
             elif filename == "user_data.db":
                 # 智能判断: 如果新档是初始状态，旧档有进度，则覆盖
-                n_layer, n_exp = get_db_progress(new_path)
-                o_layer, o_exp = get_db_progress(old_path)
+                n_layer, n_exp, n_death = get_db_progress(new_path)
+                o_layer, o_exp, o_death = get_db_progress(old_path)
                 
-                # 新档几乎没玩 (Layer0, Exp<100)，且旧档明显玩过
-                is_new_empty = (n_layer == 0 and n_exp < 100) or (n_layer == -1)
-                is_old_valid = (o_layer > 0) or (o_layer == 0 and o_exp > 100)
+                # 新档几乎没玩 (Layer0, Exp<100) 且 没死过 (Death=0)
+                # 如果 Death > 0 说明是转世档，不能覆盖
+                is_new_empty = (n_layer == 0 and n_exp < 100 and n_death == 0) or (n_layer == -1)
+                is_old_valid = (o_layer > 0) or (o_layer == 0 and o_exp > 100) or (o_death > 0)
                 
                 if is_new_empty and is_old_valid:
                     logger.info(f"检测到新存档为空 (L{n_layer}), 旧存档有进度 (L{o_layer})，执行强制迁移覆盖。")

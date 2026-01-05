@@ -1101,28 +1101,7 @@ class PetWindow(QWidget):
          self.set_state(PetState.IDLE)
          self.show_notification("转世重生，再踏仙途...")
 
-    def on_attempt_breakthrough(self):
-        # 1. Start Tribulation Effect first
-        self.effect_widget.trigger_tribulation()
-        
-        # Delay the actual calculation slightly to show off the effect?
-        # Or just do it.
-        success, msg = self.cultivator.attempt_breakthrough()
-        
-        if not success and msg == "DEATH":
-             self.handle_death()
-             return
 
-        self.show_notification(msg)
-        
-        if success:
-            # 2. Success Effect
-            QTimer.singleShot(1000, self.effect_widget.trigger_breakthrough_success)
-            # Revert to idle after some time
-            QTimer.singleShot(3000, lambda: self.set_state(PetState.IDLE))
-        else:
-            # Failed
-            QTimer.singleShot(2000, lambda: self.set_state(PetState.IDLE))
 
     # --- Window Shake Logic ---
     def on_shake_requested(self, intensity, duration):

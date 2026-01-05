@@ -11,7 +11,7 @@ class DataLoader:
     主要用于初始化或数据迁移。
     """
     
-    DATA_VERSION = "005" # 初始版本号，每次修改静态数据(JSON)请递增
+    DATA_VERSION = "006" # 初始版本号，每次修改静态数据(JSON)请递增
 
     @staticmethod
     def check_data_update():

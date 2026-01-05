@@ -774,6 +774,21 @@
                     "once_per_life": true
                 },
                 "recipe": {}
+            },
+            {
+                "id": "pill_body_nether",
+                "name": "幽冥锻体丹",
+                "type": "stat",
+                "tier": 3,
+                "price": 32000,
+                "desc": "引用黄泉鬼水之力淬炼肉身，过程痛苦无比。（体魄+3）",
+                "effect": {
+                    "stat_body": 3
+                },
+                "recipe": {
+                    "water_nether": 2,
+                    "herb_soul_restore": 1
+                }
             }
         ]
     },
@@ -922,6 +937,21 @@
                     "ore_sky_crystal_sand": 1,
                     "water_heavy_yuan": 1,
                     "soil_chaos": 1
+                }
+            },
+            {
+                "id": "pill_body_heavy",
+                "name": "重元霸体丹",
+                "type": "stat",
+                "tier": 4,
+                "price": 128000,
+                "desc": "融合了一元重水的重量，让每一寸肌肉都如钢铁般坚硬。（体魄+4）",
+                "effect": {
+                    "stat_body": 4
+                },
+                "recipe": {
+                    "water_heavy_yuan": 2,
+                    "beast_core_void": 1
                 }
             }
         ]
@@ -1442,6 +1472,21 @@
                     "once_per_life": true
                 },
                 "recipe": {}
+            },
+            {
+                "id": "pill_body_star",
+                "name": "星辰不灭丹",
+                "type": "stat",
+                "tier": 8,
+                "price": 32768000,
+                "desc": "引星辰之力入体，成就星辰不灭金身。（体魄+5）",
+                "effect": {
+                    "stat_body": 5
+                },
+                "recipe": {
+                    "liquid_thunder": 3,
+                    "stone_destiny": 1
+                }
             }
         ]
     },
