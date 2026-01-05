@@ -87,7 +87,7 @@
                 "type": "liquid",
                 "tier": 0,
                 "price": 100,
-                "desc": "未落地便被收集的露水，纯净无垢，是调和药性的良溶剂。",
+                "desc": "未落地便被收集的露水，纯净无垢，是调和药性的良溶剂。（心魔-5）",
                 "effect": {
                     "mind_heal": 5
                 },
@@ -109,7 +109,7 @@
                 "type": "junk",
                 "tier": 0,
                 "price": 1,
-                "desc": "炼丹失败的产物，散发着焦糊味，毫无药用价值。",
+                "desc": "炼丹失败的产物，散发着焦糊味，毫无药用价值。（心魔+5）",
                 "effect": {
                     "mind_heal": -5
                 },
@@ -123,7 +123,7 @@
                 "type": "exp",
                 "tier": 0,
                 "price": 500,
-                "desc": "粗糙的粉末状药剂，入口极苦，强行扩充经脉以容纳灵气。",
+                "desc": "粗糙的粉末状药剂，入口极苦，强行扩充经脉以容纳灵气。（修为+5%）",
                 "effect": {
                     "exp_gain": 0.05
                 },
@@ -138,8 +138,10 @@
                 "type": "stat",
                 "tier": 0,
                 "price": 500,
-                "desc": "混合了兽骨粉的黑色药丸，大幅增强肌肉密度。",
-                "effect": {},
+                "desc": "混合了兽骨粉的黑色药丸，大幅增强肌肉密度。（体魄+1）",
+                "effect": {
+                    "stat_body": 1
+                },
                 "recipe": {
                     "part_wolf_tooth": 2,
                     "ore_iron_essence": 1
@@ -151,7 +153,7 @@
                 "type": "buff",
                 "tier": 0,
                 "price": 500,
-                "desc": "服下后双腿轻盈如风，感觉不到重力的束缚。",
+                "desc": "服下后双腿轻盈如风，感觉不到重力的束缚。（心魔-5）",
                 "effect": {
                     "mind_heal": 5
                 },
@@ -166,7 +168,7 @@
                 "type": "utility",
                 "tier": 0,
                 "price": 500,
-                "desc": "含在口中可过滤瘴气，探险必备。",
+                "desc": "含在口中可过滤瘴气，探险必备。（体魄+1）",
                 "effect": {
                     "stat_body": 1
                 },
@@ -181,7 +183,7 @@
                 "type": "break",
                 "tier": 0,
                 "price": 500,
-                "desc": "一碗浓稠的汤药，散发着令人心悸的灵压，是突破凡体的催化剂。使用后将立即引发天地异象，尝试筑基。",
+                "desc": "一碗浓稠的汤药，散发着令人心悸的灵压，是突破凡体的催化剂。使用后将立即引发天地异象，尝试筑基。（突破概率+20%）",
                 "effect": {
                     "breakthrough_chance": 0.2
                 },
@@ -241,7 +243,7 @@
                 "type": "liquid",
                 "tier": 1,
                 "price": 400,
-                "desc": "万年岩层滴落的乳白色液体，一滴重达千钧。",
+                "desc": "万年岩层滴落的乳白色液体，一滴重达千钧。（体魄+2）",
                 "effect": {
                     "stat_body": 2
                 },
@@ -305,7 +307,7 @@
                 "type": "exp",
                 "tier": 1,
                 "price": 2000,
-                "desc": "圆润的白色丹药，温和地滋养液态真元。",
+                "desc": "圆润的白色丹药，温和地滋养液态真元。（修为+10%）",
                 "effect": {
                     "exp_gain": 0.1
                 },
@@ -320,8 +322,10 @@
                 "type": "recov",
                 "tier": 1,
                 "price": 2000,
-                "desc": "清凉之气直冲天灵，平复体内躁动的元素乱流。",
-                "effect": {},
+                "desc": "清凉之气直冲天灵，平复体内躁动的元素乱流。（心魔-10）",
+                "effect": {
+                    "mind_heal": 10
+                },
                 "recipe": {
                     "herb_illusory": 2,
                     "ore_cold_crystal": 1
@@ -333,8 +337,10 @@
                 "type": "stat",
                 "tier": 1,
                 "price": 2000,
-                "desc": "皮肤泛起金属光泽，短时间内力量暴增。",
-                "effect": {},
+                "desc": "皮肤泛起金属光泽，短时间内力量暴增。（体魄+2）",
+                "effect": {
+                    "stat_body": 2
+                },
                 "recipe": {
                     "ore_copper_red": 2,
                     "part_spider_silk": 5
@@ -346,9 +352,10 @@
                 "type": "utility",
                 "tier": 1,
                 "price": 2000,
-                "desc": "涂抹眼部，黑暗视物如同白昼。",
+                "desc": "涂抹眼部，黑暗视物如同白昼。（一面之缘）（气运+1）",
                 "effect": {
-                    "affection": 2
+                    "affection": 1,
+                    "once_per_life": true
                 },
                 "recipe": {
                     "part_snake_skin": 1,
@@ -361,7 +368,7 @@
                 "type": "break",
                 "tier": 1,
                 "price": 2000,
-                "desc": "丹成龙虎现，金色的丹晕仿佛要吞噬周围的光线。使用后将立即引发雷劫，尝试结丹。",
+                "desc": "丹成龙虎现，金色的丹晕仿佛要吞噬周围的光线。使用后将立即引发雷劫，尝试结丹。（突破概率+20%）",
                 "effect": {
                     "breakthrough_chance": 0.2
                 },
@@ -377,7 +384,7 @@
                 "type": "consumable",
                 "tier": 1,
                 "price": 2000,
-                "desc": "夺天地之造化，微量提升本世气运。（一面之缘）",
+                "desc": "夺天地之造化，微量提升本世气运。（一面之缘）（气运+1）",
                 "effect": {
                     "affection": 1,
                     "once_per_life": true
@@ -496,7 +503,7 @@
                 "type": "exp",
                 "tier": 2,
                 "price": 8000,
-                "desc": "金黄剔透，入口即化，庞大的药力如黄河决堤般冲刷经脉。",
+                "desc": "金黄剔透，入口即化，庞大的药力如黄河决堤般冲刷经脉。（修为+15%）",
                 "effect": {
                     "exp_gain": 0.15000000000000002
                 },
@@ -511,9 +518,10 @@
                 "type": "cosmetic",
                 "tier": 2,
                 "price": 8000,
-                "desc": "虽然对修为无益，但能将容貌永远定格在服用的一刻。",
+                "desc": "虽然对修为无益，但能将容貌永远定格在服用的一刻。（一面之缘）（气运+3）",
                 "effect": {
-                    "affection": 5
+                    "affection": 3,
+                    "once_per_life": true
                 },
                 "recipe": {
                     "water_glacier": 1,
@@ -527,7 +535,7 @@
                 "type": "buff",
                 "tier": 2,
                 "price": 8000,
-                "desc": "透支生命潜能换取短暂的爆发力，副作用极大。",
+                "desc": "透支生命潜能换取短暂的爆发力，副作用极大。（修为+5%，体魄-2）",
                 "effect": {
                     "exp_gain": 0.05,
                     "stat_body": -2
@@ -543,7 +551,7 @@
                 "type": "break",
                 "tier": 2,
                 "price": 8000,
-                "desc": "丹药内部仿佛有一个婴儿在呼吸，是破丹成婴的关键。使用后将立即引发心魔劫，尝试碎丹成婴。",
+                "desc": "丹药内部仿佛有一个婴儿在呼吸，是破丹成婴的关键。使用后将立即引发心魔劫，尝试碎丹成婴。（突破概率+20%）",
                 "effect": {
                     "breakthrough_chance": 0.2
                 },
@@ -555,13 +563,14 @@
             },
             {
                 "id": "pill_luck_minor",
-                "name": "小气运丹",
+                "name": "中造化丹",
                 "type": "buff",
                 "tier": 2,
                 "price": 8000,
-                "desc": "短暂蒙蔽天机，此时开箱、掉落会有意想不到的好运。",
+                "desc": "比小造化丹稍强，微量提升本世气运。（一面之缘）（气运+2）",
                 "effect": {
-                    "affection": 10
+                    "affection": 2,
+                    "once_per_life": true
                 },
                 "recipe": {
                     "herb_purple_mky": 2,
@@ -608,7 +617,7 @@
                 "type": "liquid",
                 "tier": 3,
                 "price": 6400,
-                "desc": "来自幽冥界的浑浊河水，能腐蚀修士的法宝灵光。",
+                "desc": "来自幽冥界的浑浊河水，能腐蚀修士的法宝灵光。（心魔+10，体魄+3）",
                 "effect": {
                     "mind_heal": -10,
                     "stat_body": 3
@@ -683,7 +692,7 @@
                 "type": "exp",
                 "tier": 3,
                 "price": 32000,
-                "desc": "紫气东来，金光内敛，专补元婴本源。",
+                "desc": "紫气东来，金光内敛，专补元婴本源。（修为+20%）",
                 "effect": {
                     "exp_gain": 0.2
                 },
@@ -698,8 +707,10 @@
                 "type": "recov",
                 "tier": 3,
                 "price": 32000,
-                "desc": "在识海中形成一道屏障，抵御心魔入侵。",
-                "effect": {},
+                "desc": "在识海中形成一道屏障，抵御心魔入侵。（心魔-20）",
+                "effect": {
+                    "mind_heal": 20
+                },
                 "recipe": {
                     "herb_soul_restore": 1,
                     "wood_parasol": 1
@@ -711,9 +722,9 @@
                 "type": "utility",
                 "tier": 3,
                 "price": 32000,
-                "desc": "吞服后可瞬间移动（极高闪避）。",
+                "desc": "吞服后可瞬间移动（极高闪避）。（修为+10%）",
                 "effect": {
-                    "exp": 1000
+                    "exp_gain": 0.1
                 },
                 "recipe": {
                     "ore_void_stone": 2,
@@ -726,7 +737,7 @@
                 "type": "break",
                 "tier": 3,
                 "price": 32000,
-                "desc": "服下后会感到灵魂脱壳，直面天地法则的威压。使用后将立即引发化神天劫。",
+                "desc": "服下后会感到灵魂脱壳，直面天地法则的威压。使用后将立即引发化神天劫。（突破概率+20%）",
                 "effect": {
                     "breakthrough_chance": 0.2
                 },
@@ -742,7 +753,7 @@
                 "type": "special",
                 "tier": 3,
                 "price": 32000,
-                "desc": "制造一个拥有本体30%实力的幻影协助战斗。",
+                "desc": "制造一个拥有本体30%实力的幻影协助战斗。（修为+10%）",
                 "effect": {
                     "exp_gain": 0.1
                 },
@@ -757,7 +768,7 @@
                 "type": "consumable",
                 "tier": 3,
                 "price": 32000,
-                "desc": "蕴含天机之力的宝珠，服用可转运。（一面之缘）",
+                "desc": "蕴含天机之力的宝珠，服用可转运。（一面之缘）（气运+3）",
                 "effect": {
                     "affection": 3,
                     "once_per_life": true
@@ -814,9 +825,9 @@
                 "type": "liquid",
                 "tier": 4,
                 "price": 25600,
-                "desc": "至阴至寒，一滴可化沧海，能压碎普通的空间戒指。",
+                "desc": "至阴至寒，一滴可化沧海，能压碎普通的空间戒指。（体魄+3）",
                 "effect": {
-                    "stat_body": 5
+                    "stat_body": 3
                 },
                 "recipe": {}
             },
@@ -858,7 +869,7 @@
                 "type": "exp",
                 "tier": 4,
                 "price": 128000,
-                "desc": "包含了万种草木精华，吞服后仿佛经历了万次枯荣轮回。",
+                "desc": "包含了万种草木精华，吞服后仿佛经历了万次枯荣轮回。（修为+25%）",
                 "effect": {
                     "exp_gain": 0.25
                 },
@@ -873,7 +884,7 @@
                 "type": "special",
                 "tier": 4,
                 "price": 128000,
-                "desc": "服用后短时间内无视一切法则压制。",
+                "desc": "服用后短时间内无视一切法则压制。（心魔-30）",
                 "effect": {
                     "mind_heal": 30
                 },
@@ -888,8 +899,10 @@
                 "type": "recov",
                 "tier": 4,
                 "price": 128000,
-                "desc": "滋养刚刚诞生的元神领域，使其更加稳固。",
-                "effect": {},
+                "desc": "滋养刚刚诞生的元神领域，使其更加稳固。（心魔-25）",
+                "effect": {
+                    "mind_heal": 25
+                },
                 "recipe": {
                     "fruit_law": 1,
                     "water_heavy_yuan": 1
@@ -901,7 +914,7 @@
                 "type": "break",
                 "tier": 4,
                 "price": 128000,
-                "desc": "服用后肉身开始虚化，开始尝试与虚空同频率震动。使用后将立即尝试破碎虚空，晋升炼虚。",
+                "desc": "服用后肉身开始虚化，开始尝试与虚空同频率震动。使用后将立即尝试破碎虚空，晋升炼虚。（突破概率+20%）",
                 "effect": {
                     "breakthrough_chance": 0.2
                 },
@@ -993,13 +1006,13 @@
                 "type": "exp",
                 "tier": 5,
                 "price": 512000,
-                "desc": "丹药呈灰色漩涡状，入口即是虚无，直接补充本源损耗。",
+                "desc": "丹药呈灰色漩涡状，入口即是虚无，直接补充本源损耗。（修为+30%）",
                 "effect": {
                     "exp_gain": 0.30000000000000004
                 },
                 "recipe": {
-                    "dust_void": 5,
-                    "metal_taiyi": 1
+                    "dust_void": 10,
+                    "metal_taiyi": 3
                 }
             },
             {
@@ -1008,14 +1021,14 @@
                 "type": "recov",
                 "tier": 5,
                 "price": 512000,
-                "desc": "只要元神不灭，肉身化为灰烬亦可瞬间重聚。",
+                "desc": "只要元神不灭，肉身化为灰烬亦可瞬间重聚。（体魄+3，心魔-30）",
                 "effect": {
-                    "stat_body": 20,
-                    "mind_heal": 20
+                    "stat_body": 3,
+                    "mind_heal": 30
                 },
                 "recipe": {
-                    "fungus_heaven": 1,
-                    "flower_other_shore": 1
+                    "fungus_heaven": 3,
+                    "flower_other_shore": 3
                 }
             },
             {
@@ -1024,13 +1037,14 @@
                 "type": "buff",
                 "tier": 5,
                 "price": 512000,
-                "desc": "短时间内完全融入虚空，不受任何物理干涉。",
+                "desc": "短时间内完全融入虚空，不受任何物理干涉。（一面之缘）（气运+5）",
                 "effect": {
-                    "affection": 15
+                    "affection": 5,
+                    "once_per_life": true
                 },
                 "recipe": {
-                    "part_void_dragon": 1,
-                    "dust_void": 2
+                    "part_void_dragon": 2,
+                    "dust_void": 5
                 }
             },
             {
@@ -1039,14 +1053,14 @@
                 "type": "break",
                 "tier": 5,
                 "price": 512000,
-                "desc": "让肉身与元神完美融合，不分彼此。使用后将立即引发三九天劫，冲击合体期。",
+                "desc": "让肉身与元神完美融合，不分彼此。使用后将立即引发三九天劫，冲击合体期。（突破概率+20%）",
                 "effect": {
                     "breakthrough_chance": 0.2
                 },
                 "recipe": {
-                    "part_void_dragon": 1,
-                    "core_star": 1,
-                    "dust_void": 3
+                    "part_void_dragon": 2,
+                    "core_star": 2,
+                    "dust_void": 5
                 }
             },
             {
@@ -1055,7 +1069,7 @@
                 "type": "consumable",
                 "tier": 5,
                 "price": 200000,
-                "desc": "蕴含时间法则的丹药，可以从时间长河中重塑气运。（一面之缘）",
+                "desc": "蕴含时间法则的丹药，可以从时间长河中重塑气运。（一面之缘）（气运+5）",
                 "effect": {
                     "affection": 5,
                     "once_per_life": true
@@ -1102,9 +1116,9 @@
                 "type": "liquid",
                 "tier": 6,
                 "price": 409600,
-                "desc": "据说能点化顽石，赋予死物灵智。",
+                "desc": "据说能点化顽石，赋予死物灵智。（体魄+4，气运+10）",
                 "effect": {
-                    "stat_body": 10,
+                    "stat_body": 4,
                     "affection": 10
                 },
                 "recipe": {}
@@ -1137,13 +1151,13 @@
                 "type": "exp",
                 "tier": 6,
                 "price": 2048000,
-                "desc": "每一颗都需要在圣火中煅烧千年，药力浩瀚如海。",
+                "desc": "每一颗都需要在圣火中煅烧千年，药力浩瀚如海。（修为+35%）",
                 "effect": {
                     "exp_gain": 0.35000000000000003
                 },
                 "recipe": {
-                    "wood_world_tree": 1,
-                    "water_creation": 2
+                    "wood_world_tree": 3,
+                    "water_creation": 5
                 }
             },
             {
@@ -1152,15 +1166,15 @@
                 "type": "special",
                 "tier": 6,
                 "price": 2048000,
-                "desc": "丹成九转，鬼神皆惊，拥有起死人肉白骨的逆天功效。",
+                "desc": "丹成九转，鬼神皆惊，拥有起死人肉白骨的逆天功效。（体魄+4，心魔-50，修为+10%）",
                 "effect": {
-                    "stat_body": 10,
+                    "stat_body": 4,
                     "mind_heal": 50,
                     "exp_gain": 0.1
                 },
                 "recipe": {
-                    "fruit_yin_yang": 1,
-                    "water_creation": 3
+                    "fruit_yin_yang": 2,
+                    "water_creation": 8
                 }
             },
             {
@@ -1169,11 +1183,13 @@
                 "type": "stat",
                 "tier": 6,
                 "price": 2048000,
-                "desc": "将肉身强度提升至圣境，单凭肉体力量即可撕裂虚空。",
-                "effect": {},
+                "desc": "将肉身强度提升至圣境，单凭肉体力量即可撕裂虚空。（体魄+5）",
+                "effect": {
+                    "stat_body": 5
+                },
                 "recipe": {
-                    "bone_kirin_arm": 1,
-                    "horn_true_dragon": 1
+                    "bone_kirin_arm": 3,
+                    "horn_true_dragon": 3
                 }
             },
             {
@@ -1182,14 +1198,14 @@
                 "type": "break",
                 "tier": 6,
                 "price": 2048000,
-                "desc": "感悟圆满，从有限走向无限。使用后将立即引发大乘雷劫，成就大乘道果。",
+                "desc": "感悟圆满，从有限走向无限。使用后将立即引发大乘雷劫，成就大乘道果。（突破概率+20%）",
                 "effect": {
                     "breakthrough_chance": 0.2
                 },
                 "recipe": {
-                    "fruit_yin_yang": 2,
-                    "stone_three_life": 1,
-                    "wood_world_tree": 1
+                    "fruit_yin_yang": 5,
+                    "stone_three_life": 2,
+                    "wood_world_tree": 3
                 }
             }
         ]
@@ -1254,13 +1270,13 @@
                 "type": "exp",
                 "tier": 7,
                 "price": 8192000,
-                "desc": "无量光，无量寿，蕴含无法计算的庞大修为。",
+                "desc": "无量光，无量寿，蕴含无法计算的庞大修为。（修为+40%）",
                 "effect": {
                     "exp_gain": 0.4
                 },
                 "recipe": {
-                    "leaf_world_tree": 3,
-                    "crystal_origin": 1
+                    "leaf_world_tree": 10,
+                    "crystal_origin": 3
                 }
             },
             {
@@ -1269,13 +1285,13 @@
                 "type": "utility",
                 "tier": 7,
                 "price": 8192000,
-                "desc": "能将自身状态回溯到10秒之前，堪称后悔药。",
+                "desc": "能将自身状态回溯到10秒之前，堪称后悔药。（心魔-100）",
                 "effect": {
                     "mind_heal": 100
                 },
                 "recipe": {
-                    "sand_time": 3,
-                    "thread_karma": 1
+                    "sand_time": 10,
+                    "thread_karma": 3
                 }
             },
             {
@@ -1284,13 +1300,13 @@
                 "type": "special",
                 "tier": 7,
                 "price": 8192000,
-                "desc": "服用后寿元无尽，心魔不再滋生，真正的大逍遥。",
+                "desc": "服用后寿元无尽，心魔不再滋生，真正的大逍遥。（体魄+5）",
                 "effect": {
-                    "stat_body": 50
+                    "stat_body": 5
                 },
                 "recipe": {
-                    "leaf_world_tree": 1,
-                    "blood_ancestor": 1
+                    "leaf_world_tree": 5,
+                    "blood_ancestor": 5
                 }
             },
             {
@@ -1299,14 +1315,14 @@
                 "type": "break",
                 "tier": 7,
                 "price": 8192000,
-                "desc": "为最后的天劫做准备，凝聚全身精气神于一点。使用后将立即引发生死大劫，尝试飞升。",
+                "desc": "为最后的天劫做准备，凝聚全身精气神于一点。使用后将立即引发生死大劫，尝试飞升。（突破概率+20%）",
                 "effect": {
                     "breakthrough_chance": 0.2
                 },
                 "recipe": {
-                    "blood_ancestor": 1,
-                    "thread_karma": 3,
-                    "crystal_origin": 1
+                    "blood_ancestor": 3,
+                    "thread_karma": 10,
+                    "crystal_origin": 3
                 }
             }
         ]
@@ -1319,9 +1335,9 @@
                 "type": "liquid",
                 "tier": 8,
                 "price": 6553600,
-                "desc": "渡劫成功后，劫云消散时滴落的金色液体，蕴含毁灭与新生。",
+                "desc": "渡劫成功后，劫云消散时滴落的金色液体，蕴含毁灭与新生。（体魄+5，修为+20%）",
                 "effect": {
-                    "stat_body": 20,
+                    "stat_body": 5,
                     "exp_gain": 0.2
                 },
                 "recipe": {}
@@ -1374,13 +1390,13 @@
                 "type": "buff",
                 "tier": 8,
                 "price": 32768000,
-                "desc": "欺骗天机，使天劫威力削弱三层，渡劫成功率大幅提升。",
+                "desc": "欺骗天机，使天劫威力削弱三层，渡劫成功率大幅提升。（突破概率+30%）",
                 "effect": {
                     "breakthrough_chance": 0.3
                 },
                 "recipe": {
-                    "lotus_chaos": 1,
-                    "frag_heaven_way": 1
+                    "lotus_chaos": 3,
+                    "frag_heaven_way": 3
                 }
             },
             {
@@ -1389,13 +1405,13 @@
                 "type": "special",
                 "tier": 8,
                 "price": 32768000,
-                "desc": "虽然名字叫飞升丹，但其实是让人在不飞升的情况下拥有仙人法力。",
+                "desc": "虽然名字叫飞升丹，但其实是让人在不飞升的情况下拥有仙人法力。（修为+50%）",
                 "effect": {
                     "exp_gain": 0.5
                 },
                 "recipe": {
-                    "gas_primordial": 1,
-                    "stone_destiny": 1
+                    "gas_primordial": 2,
+                    "stone_destiny": 2
                 }
             },
             {
@@ -1404,14 +1420,14 @@
                 "type": "exp",
                 "tier": 8,
                 "price": 32768000,
-                "desc": "凡界炼丹术的尽头，吞服一颗便可抵万年苦修。",
+                "desc": "凡界炼丹术的尽头，吞服一颗便可抵万年苦修。（修为+45%）",
                 "effect": {
                     "exp_gain": 0.45
                 },
                 "recipe": {
-                    "liquid_thunder": 1,
-                    "lotus_chaos": 1,
-                    "gas_primordial": 1
+                    "liquid_thunder": 5,
+                    "lotus_chaos": 2,
+                    "gas_primordial": 2
                 }
             },
             {
@@ -1420,7 +1436,7 @@
                 "type": "consumable",
                 "tier": 8,
                 "price": 1000000,
-                "desc": "神秘且强大的气息，拥有逆天改命之效。（一面之缘）",
+                "desc": "神秘且强大的气息，拥有逆天改命之效。（一面之缘）（气运+10）",
                 "effect": {
                     "affection": 10,
                     "once_per_life": true

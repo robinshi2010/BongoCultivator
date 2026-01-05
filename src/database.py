@@ -29,6 +29,11 @@ class DatabaseManager:
 
     def _init_db(self):
         try:
+            # Plan 46: 自动执行 Schema 迁移 (在 SQLModel 初始化之前)
+            # 解决旧存档缺失新字段导致的问题
+            from src.utils.schema_migration import run_schema_migrations
+            run_schema_migrations(DB_FILE)
+            
             SQLModel.metadata.create_all(self.engine)
             
             # Ensure PlayerStatus exists

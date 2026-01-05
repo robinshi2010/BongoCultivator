@@ -167,7 +167,7 @@ def main():
         }
         
     # Write to file
-    out_path = os.path.join("src", "data", "items_v2.json")
+    out_path = os.path.join("src", "data", "items.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(full_data, f, indent=4, ensure_ascii=False)
     

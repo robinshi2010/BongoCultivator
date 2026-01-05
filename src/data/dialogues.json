@@ -293,7 +293,7 @@
     },
     {
         "id": "dia_easter_robin_1",
-        "text": "你有没有觉得...我们的命运似乎被 'robinshi2009' 操控着？",
+        "text": "听闻鸿蒙初开有一位大能创造了这方世界，后世称其为 'robinshi2009'。",
         "type": "realm",
         "conditions": {
             "min_layer": 6,

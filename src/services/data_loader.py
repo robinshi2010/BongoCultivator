@@ -54,14 +54,14 @@ class DataLoader:
         # 1. 获取资源路径
         # 注意: get_resource_path 会处理打包后的路径映射
         items_v1_path = get_resource_path("src/data/items.json")
-        items_v2_path = get_resource_path("src/data/items_v2.json")
+        # items_v2_path = get_resource_path("src/data/items_v2.json")
         events_path = get_resource_path("src/data/events.json")
         dialogues_path = get_resource_path("src/data/dialogues.json")
         achievements_path = get_resource_path("src/data/achievements.json") # 如果有
 
         # 2. 加载 JSON
         v1_items = DataLoader.load_json(items_v1_path)
-        v2_items = DataLoader.load_json(items_v2_path)
+        # v2_items = DataLoader.load_json(items_v2_path) # Merged
 
         events_data = DataLoader.load_json(events_path)
         dialogues_data = DataLoader.load_json(dialogues_path)
@@ -91,9 +91,9 @@ class DataLoader:
                             "recipe": recipe_val
                         }
 
-        # v2 first, then v1
-        for data in v2_items.values(): process_tier_data(data)
+        # v1 first (base), then v2 (override)
         for data in v1_items.values(): process_tier_data(data)
+        # for data in v2_items.values(): process_tier_data(data)
         
         logger.info(f"解析到 {len(combined_items)} 个物品定义")
 
