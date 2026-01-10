@@ -155,7 +155,9 @@
 - [x] **[Plan 44: 丹药效果实装](plans/archive/plan44_pills_update.md)** (Updated Pill Effects & Docs)
 - [x] **[Plan 45: 气运系统重构](plans/archive/plan45_luck_rework_done.md)** (Luck Overhaul, Per-Life Roguelike Stat)
 - [x] **[Plan 46: 进度迁移系统](plans/archive/plan46_progress_migration_done.md)** (轮回转世: 导出/导入 JSON 进度备份)
+- [x] **[Plan 47: 代码质量修复](plans/archive/plan47_code_quality_fix_done.md)** (修复重复代码/死代码/魔法数字)
+- [x] **[Plan 48: 游戏平衡性调整](plans/archive/plan48_balance_tuning_done.md)** (挂机+200%/坊市15分钟/心魔平衡/丹方优化)
 - [ ] **[Plan 25]**: [用户注册与数据留存 (Supabase)](plans/active/plan25.md)
 
 ---
-(最后更新: 2026-01-05 11:45)
+(最后更新: 2026-01-10 23:43)

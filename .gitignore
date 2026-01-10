@@ -17,7 +17,10 @@ logs/
 *.db
 user_data.db
 save_data.json
-save_data.json.bak
+
+# Backup files
+*.bak
+*.json.bak
 
 # Virtual Env
 venv/

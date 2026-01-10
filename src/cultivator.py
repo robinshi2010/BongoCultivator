@@ -5,7 +5,12 @@ from src.services.event_engine import EventEngine
 from src.services.achievement_manager import achievement_manager
 from src.services.dialogue_manager import dialogue_manager
 from src.database import DB_FILE 
-from src.config import LAYERS, EXP_TABLE
+from src.config import (
+    LAYERS, EXP_TABLE, 
+    EVENT_INTERVAL_SECONDS, MARKET_REFRESH_INTERVAL,
+    DAILY_REWARD_THRESHOLD, DAILY_REWARD_SMALL, DAILY_REWARD_BIG, DAILY_REWARD_BIG_THRESHOLD,
+    DROP_COOLDOWN_SECONDS
+)
 
 class Cultivator:
     LAYERS = LAYERS
@@ -29,7 +34,7 @@ class Cultivator:
         
         # 事件系统
         self.last_event_time = 0 
-        self.event_interval = 300 # 300秒(5分钟)触发一次随机事件 (测试可改为30)
+        self.event_interval = EVENT_INTERVAL_SECONDS
         
         # 初始化 ItemManager 和 EventEngine
         self.item_manager = ItemManager()
@@ -65,8 +70,6 @@ class Cultivator:
         
         # 2. Persist
         db_manager.log_event(event_type, msg, int(time.time()))
-        
-    # ... (properties methods) ...
 
     def modify_stat(self, stat, value):
         if stat == "mind":
@@ -155,9 +158,7 @@ class Cultivator:
     def check_daily_refresh(self):
         """检查是否需要每日自动刷新"""
         import time
-        # 简单判断: 超过24小时刷新? 或者每天0点?
-        # 这里用简单的时间间隔: 8小时刷新一次
-        if time.time() - self.last_market_refresh > 8 * 3600:
+        if time.time() - self.last_market_refresh > MARKET_REFRESH_INTERVAL:
             self.refresh_market()
 
     def claim_daily_work_reward(self, total_actions):
@@ -172,17 +173,14 @@ class Cultivator:
         if self.daily_reward_claimed == today_str:
             return False, "今日奖励已领取，明日再来吧！"
             
-        # 阈值设定: 比如 2000 操作算“勤勉”
-        threshold = 2000 
-        if total_actions < threshold:
-            return False, f"功力未够！今日仅 {total_actions} 操作，需 {threshold} 方可领赏。"
+        if total_actions < DAILY_REWARD_THRESHOLD:
+            return False, f"功力未够！今日仅 {total_actions} 操作，需 {DAILY_REWARD_THRESHOLD} 方可领赏。"
             
         # 发放奖励
-        reward_money = 100
-        # 额外：如果操作非常多 (>10000)，给大奖
-        is_big_win = total_actions > 10000
+        reward_money = DAILY_REWARD_SMALL
+        is_big_win = total_actions > DAILY_REWARD_BIG_THRESHOLD
         if is_big_win:
-            reward_money = 500
+            reward_money = DAILY_REWARD_BIG
             
         self.money += reward_money
         self.daily_reward_claimed = today_str
@@ -204,64 +202,6 @@ class Cultivator:
 
     def unequip_title(self):
         self.equipped_title = None
-
-    # ... (existing methods) ...
-
-    def save_data(self, filepath):
-        import json
-        import time
-        data = {
-            "exp": self.exp,
-            "layer_index": self.layer_index,
-            "money": self.money,
-            "inventory": self.inventory,
-            "last_save_time": time.time(),
-            "market_goods": self.market_goods,
-            "last_market_refresh": self.last_market_refresh
-        }
-        try:
-            with open(filepath, 'w') as f:
-                json.dump(data, f)
-            logger.info("数据已保存")
-        except Exception as e:
-            logger.error(f"保存失败: {e}")
-
-    def load_data(self, filepath):
-        import json
-        import os
-        if not os.path.exists(filepath):
-            # 新存档，初始化坊市
-            self.refresh_market()
-            return
-        
-        try:
-            with open(filepath, 'r') as f:
-                data = json.load(f)
-                self.exp = data.get("exp", 0)
-                self.layer_index = data.get("layer_index", 0)
-                self.money = data.get("money", 0)
-                self.inventory = data.get("inventory", {})
-                self.market_goods = data.get("market_goods", [])
-                self.last_market_refresh = data.get("last_market_refresh", 0)
-                
-                stats = data.get("stats", {})
-                self.mind = stats.get("mind", 0)
-                self.body = stats.get("body", 10)
-                self.affection = stats.get("affection", 0)
-                
-                # 结算离线
-                last_time = data.get("last_save_time", 0)
-                if last_time > 0:
-                    self.calculate_offline_progress(last_time)
-            
-            # 检查刷新
-            self.check_daily_refresh()
-            if not self.market_goods:
-                self.refresh_market()
-                
-            logger.info("数据已加载")
-        except Exception as e:
-            logger.error(f"加载失败: {e}")
 
     @property
     def current_layer(self):
@@ -289,10 +229,10 @@ class Cultivator:
     def can_breakthrough(self):
         return self.exp >= self.max_exp and self.layer_index < len(self.LAYERS) - 1
 
-    def attempt_breakthrough(self, base_success_rate=None):
+    def attempt_breakthrough(self, pill_success_bonus=0.0):
         """
         尝试渡劫/突破
-        :param base_success_rate: 如果提供 (0.0-1.0), 则使用此固定基础概率(丹药效果)，否则根据属性计算
+        :param pill_success_bonus: 丹药提供的额外成功率 (0.0-1.0)，例如 0.2 代表 +20%
         Return: (success: bool, message: str)
         """
         if not self.can_breakthrough():
@@ -301,24 +241,32 @@ class Cultivator:
             
         import random
         
-        if base_success_rate is not None:
-             # 丹药突破: 固定概率 + 体魄/心魔修正(稍微小一点影响)
-             # 既然是丹药，我们假设它主要看药效，但属性依然有微调
-             success_rate = base_success_rate + (self.body * 0.005) - (self.mind * 0.005)
-             method_str = "丹药辅助"
-        else:
-             # 自然突破
-             # 基础成功率 50%
-             # 体魄加成: 每点 +1% 
-             # 心魔惩罚: 每点 -0.5%
-             success_rate = 0.5 + (self.body * 0.01) - (self.mind * 0.005)
-             method_str = "顺其自然"
+        # 基础成功率 50%
+        base_rate = 0.5
         
+        # 丹药修正: 
+        # 之前逻辑错误导致丹药反而降低了成功率 (0.2 取代了 0.5)
+        # 现在逻辑: 基础50% + 丹药加成
+        if pill_success_bonus is None: pill_success_bonus = 0.0 # Safety check
+        
+        success_rate = base_rate + pill_success_bonus
+        
+        # 属性修正
+        # 体魄加成: 每点 +1% 
+        # 心魔惩罚: 每点 -0.5%
+        # (统一使用标准加成，不再因为吃药而降低体魄收益)
+        success_rate += (self.body * 0.01) 
+        success_rate -= (self.mind * 0.005)
+        
+        method_str = "顺其自然"
+        if pill_success_bonus > 0:
+             method_str = f"丹药辅助(+{int(pill_success_bonus*100)}%)"
+
         # Plan 45: 气运加成 (每点 +0.1%，上限 +10%)
         luck_bonus = min(self.affection * 0.001, 0.1)
         success_rate += luck_bonus
         if luck_bonus > 0:
-            method_str += f" 气运+{int(luck_bonus*100)}%"
+            method_str += f", 气运+{int(luck_bonus*100)}%"
               
         success_rate = max(0.01, min(0.99, success_rate)) # 限制范围
         
@@ -336,7 +284,6 @@ class Cultivator:
             self.talent_points += 1 # 获得天赋点
             
             msg = f"雷劫洗礼，金光护体！\n晋升【{self.current_layer}】\n体魄+2，天赋点+1"
-            msg = f"雷劫洗礼，金光护体！\n晋升【{self.current_layer}】\n体魄+2，天赋点+1"
             self._log_event("breakthrough", msg)
             return True, msg
         else:
@@ -351,7 +298,6 @@ class Cultivator:
             # self.body already decremented above
             self.mind = min(100, self.mind + 10)
             
-            msg = f"渡劫失败！天雷滚滚，肉身受损。\n修为-{loss}，体魄-1，心魔+10"
             msg = f"渡劫失败！天雷滚滚，肉身受损。\n修为-{loss}，体魄-1，心魔+10"
             self._log_event("breakthrough_fail", msg)
             return False, msg
@@ -494,10 +440,10 @@ class Cultivator:
         
         # 1. 判定状态
         if kb_apm < 30 and mouse_apm < 30:
-            # IDLE
+            # IDLE - 闭关修炼 (Plan 48: 提升挂机收益)
             current_state_code = 0 
-            base_exp = 1 
-            gain_msg = f"+{base_exp} 修为"
+            base_exp = 3  # Plan 48: 从1提升到3
+            gain_msg = f"+{base_exp} 修为 (闭关中)"
             if talent_exp_bonus > 1.0: gain_msg += " (天赋↑)"
             
         elif kb_apm >= 30 and mouse_apm < 30:
@@ -516,7 +462,7 @@ class Cultivator:
             if not hasattr(self, 'last_drop_time'):
                 self.last_drop_time = 0
                 
-            can_drop = (current_time - self.last_drop_time) > 5.0 # 至少间隔 5 秒
+            can_drop = (current_time - self.last_drop_time) > DROP_COOLDOWN_SECONDS
             
             if can_drop and random.random() < (0.005 + drop_bonus):
                 self.last_drop_time = current_time # Update cooldown
@@ -584,8 +530,6 @@ class Cultivator:
                  reward_desc = f"(奖励物品: {item_name} x{count})"
             elif ach['reward_type'] == 'title':
                  reward_desc = "(奖励称号)"
-            elif ach['reward_type'] == 'title':
-                 reward_desc = "(奖励称号)"
             self._log_event("achievement", f"{msg}\n{reward_desc}")
 
         # --- 随机事件系统 ---
@@ -627,7 +571,6 @@ class Cultivator:
         if diff > 60: # 离线超过1分钟才结算
             # 离线默认按打坐计算，但收益减半 (1.0 exp/s, Plan 4 benchmark)
             exp_gain = int(diff * 1.0)
-            self.gain_exp(exp_gain)
             self.gain_exp(exp_gain)
             self._log_event("offline", f"闭关结束，离线 {diff // 60} 分钟，获得 {exp_gain} 修为")
             
@@ -786,7 +729,6 @@ class Cultivator:
                 self.exp = 0
                 self.body += 5
                 self.mind = 0
-                self.talent_points += 1
                 self.talent_points += 1
                 msg = "【筑基宝典】天道灌顶！你已直接晋升筑基期！"
                 self._log_event("cheat", msg)

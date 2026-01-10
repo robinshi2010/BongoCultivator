@@ -1,3 +1,5 @@
 PyQt6>=6.4.0
 pynput>=1.7.6
 sqlmodel>=0.0.14
+matplotlib>=3.7.0
+Pillow>=9.5.0

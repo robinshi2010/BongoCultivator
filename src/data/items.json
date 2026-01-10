@@ -758,8 +758,9 @@
                     "exp_gain": 0.1
                 },
                 "recipe": {
-                    "herb_soul_restore": 1,
-                    "water_nether": 2
+                    "water_nether": 2,
+                    "herb_dragon_1": 1,
+                    "ore_void_stone": 1
                 }
             },
             {
@@ -786,8 +787,9 @@
                     "stat_body": 3
                 },
                 "recipe": {
-                    "water_nether": 2,
-                    "herb_soul_restore": 1
+                    "water_nether": 1,
+                    "bone_kirin_arm": 1,
+                    "ore_star_sand": 2
                 }
             }
         ]

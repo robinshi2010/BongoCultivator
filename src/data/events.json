@@ -426,11 +426,25 @@
         "title": "天道窥视",
         "type": "Common",
         "text": "天空中出现了一只巨大的眼睛，冷漠地注视着你。",
-        "weight": 100,
+        "weight": 80,
         "min_layer": 8,
         "max_layer": 8,
         "effects": {
-            "mind": 20
+            "mind": 5,
+            "exp": 8000
+        }
+    },
+    {
+        "id": "evt_t8_blessing",
+        "title": "天道庇佑",
+        "type": "Common",
+        "text": "或许是认可了你的努力，天道之眼中透出一丝温和。",
+        "weight": 80,
+        "min_layer": 8,
+        "max_layer": 8,
+        "effects": {
+            "exp": 20000,
+            "mind": -10
         }
     },
     {
@@ -838,6 +852,70 @@
         "state": "COMBAT",
         "effects": {
             "random_material": 1
+        }
+    },
+    {
+        "id": "evt_idle_meditation_1",
+        "title": "入定感悟",
+        "type": "Common",
+        "text": "在闭关中，你进入了深层入定状态，修为精进。",
+        "weight": 80,
+        "min_layer": 0,
+        "max_layer": 9,
+        "state": "IDLE",
+        "effects": {
+            "exp": [
+                100,
+                500
+            ],
+            "mind": -5
+        }
+    },
+    {
+        "id": "evt_idle_meditation_2",
+        "title": "天人合一",
+        "type": "Uncommon",
+        "text": "你的呼吸与天地灵气同频，修炼效率大幅提升。",
+        "weight": 30,
+        "min_layer": 1,
+        "max_layer": 9,
+        "state": "IDLE",
+        "effects": {
+            "exp": [
+                500,
+                2000
+            ]
+        }
+    },
+    {
+        "id": "evt_idle_enlightenment",
+        "title": "醐醐灌顶",
+        "type": "Rare",
+        "text": "冥冥中，你似乎触摸到了大道的边缘，修为大涨！",
+        "weight": 10,
+        "min_layer": 2,
+        "max_layer": 9,
+        "state": "IDLE",
+        "effects": {
+            "exp": [
+                2000,
+                10000
+            ],
+            "mind": -10
+        }
+    },
+    {
+        "id": "evt_idle_peace",
+        "title": "心如止水",
+        "type": "Common",
+        "text": "无欲无求，心如止水，心魔消弭。",
+        "weight": 60,
+        "min_layer": 0,
+        "max_layer": 9,
+        "state": "IDLE",
+        "effects": {
+            "mind": -8,
+            "exp": 200
         }
     }
 ]
