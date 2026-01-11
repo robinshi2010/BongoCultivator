@@ -88,6 +88,24 @@
 | **macOS (Intel)** | `BongoCultivator-intel.app` | Intel 芯片 |
 | **Windows** | `BongoCultivator.exe` | Windows 10/11 |
 
+#### ⚠️ macOS 安全提示
+
+由于应用未经 Apple 签名，首次打开时会提示 **"无法验证开发者"**。请按以下步骤操作：
+
+**方法一：右键打开（推荐）**
+1. 解压下载的 `.zip` 文件
+2. **右键点击**（或 Control + 点击）`BongoCultivator.app`
+3. 选择 **"打开"**
+4. 在弹出的对话框中点击 **"打开"** 确认
+
+**方法二：终端命令**
+```bash
+# 移除隔离属性（将路径替换为实际位置）
+xattr -cr ~/Downloads/BongoCultivator.app
+```
+
+> 💡 这是 macOS Gatekeeper 的安全机制，只需操作一次，之后可正常打开。
+
 ### 方式二：源码运行
 
 ```bash
