@@ -39,8 +39,8 @@ crash_*.txt
 .agent/
 AGENTS.md
 
-# 其他页面
-pages/
+# 其他页面（已启用）
+# pages/
 
 # 运行时数据目录（只排除根目录的 data）
 /data/
