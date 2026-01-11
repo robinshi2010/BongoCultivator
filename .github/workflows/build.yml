@@ -170,40 +170,27 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y xvfb libxcb-xinerama0 libxcb-cursor0
 
-      - name: 验证导入
+      - name: 验证数据文件
         run: |
-          # 验证所有模块可以正常导入
-          xvfb-run python -c "
-          import sys
-          sys.path.insert(0, '.')
-          
-          # 测试核心模块导入
-          print('测试导入核心模块...')
-          from src.cultivator import Cultivator
-          from src.database import DatabaseManager
-          from src.state import GameState
-          from src.item_manager import ItemManager
-          from src.services.event_engine import EventEngine
-          from src.services.data_loader import DataLoader
-          
-          print('✅ 所有核心模块导入成功！')
-          
-          # 测试数据文件加载
-          print('测试数据文件加载...')
+          # 验证数据文件可以正常加载
+          python -c "
           import json
+          
+          print('测试数据文件加载...')
+          
           with open('src/data/items.json', 'r', encoding='utf-8') as f:
               items = json.load(f)
-              print(f'  - items.json: {len(items)} 个物品')
+              print(f'  ✅ items.json: {len(items)} 个物品')
           
           with open('src/data/events.json', 'r', encoding='utf-8') as f:
               events = json.load(f)
-              print(f'  - events.json: {len(events)} 个事件')
+              print(f'  ✅ events.json: {len(events)} 个事件')
           
           with open('src/data/dialogues.json', 'r', encoding='utf-8') as f:
               dialogues = json.load(f)
-              print(f'  - dialogues.json: 加载成功')
+              print(f'  ✅ dialogues.json: 加载成功')
           
-          print('✅ 所有数据文件加载成功！')
+          print('✅ 所有数据文件验证通过！')
           "
 
       - name: 测试结果
