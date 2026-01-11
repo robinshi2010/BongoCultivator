@@ -35,7 +35,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-# icon=['assets/icon.icns'],
+    icon='assets/tray_icon.ico',
 )
 # coll = COLLECT(
 #     exe,
