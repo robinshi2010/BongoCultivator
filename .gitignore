@@ -8,6 +8,7 @@ __pycache__/
 # Build Artifacts
 build/
 dist/
+*.zip
 
 # Logs
 logs/

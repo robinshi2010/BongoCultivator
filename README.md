@@ -1,4 +1,4 @@
-# 🧘 BongoCultivator (修仙桌宠)
+#  BongoCultivator (修仙桌宠)
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -16,7 +16,7 @@
 
 ---
 
-## ✨ 核心特色
+## 核心特色
 
 ### ⌨️ 工作即修行 (Input Driven Growth)
 
@@ -31,15 +31,15 @@
 | 📖 **悟道 (Read)** | 频繁鼠标操作 | 触发顿悟 |
 | 🔥 **斗法 (Combat)** | 极高 APM（打游戏） | 灵气潮汐 |
 
-### 🐱 桌面陪伴 (Desktop Companion)
+### 桌面陪伴 (Desktop Companion)
 
 一只可爱的修仙小人常驻桌面：
-- 🪟 始终置顶但不抢占焦点
-- 🎨 背景透明、可自由拖拽
-- 🎭 多种状态动画（呼吸、施法、炼丹、睡眠）
-- ✨ 粒子特效（雷劫、火焰、金光）
+- 始终置顶但不抢占焦点
+- 背景透明、可自由拖拽
+- 多种状态动画（呼吸、施法、炼丹、睡眠）
+- 粒子特效（雷劫、火焰、金光）
 
-### ⚗️ 丹道通神 (Alchemy System)
+### 丹道通神 (Alchemy System)
 
 修仙岂能无丹？收集天材地宝，按照上古丹方开炉炼丹。
 
@@ -67,7 +67,7 @@
 
 ---
 
-## 🎮 九重境界
+## 九重境界
 
 ```
 炼气期 → 筑基期 → 金丹期 → 元婴期 → 化神期 → 炼虚期 → 合体期 → 大乘期 → 渡劫期 → ✨ 飞升仙界
@@ -104,7 +104,7 @@
 xattr -cr ~/Downloads/BongoCultivator.app
 ```
 
-> 💡 这是 macOS Gatekeeper 的安全机制，只需操作一次，之后可正常打开。
+> 这是 macOS Gatekeeper 的安全机制，只需操作一次，之后可正常打开。
 
 ### 方式二：源码运行
 
@@ -144,7 +144,7 @@ pyinstaller BongoCultivator-win.spec
 
 ---
 
-## 🔐 权限设置
+## 权限设置
 
 ### macOS 权限配置（重要！）
 
@@ -153,10 +153,10 @@ pyinstaller BongoCultivator-win.spec
 1. 打开 **系统设置** (System Settings)
 2. 进入 **隐私与安全性** → **输入监控** (Input Monitoring)
 3. 点击 **+** 添加 `BongoCultivator.app`（或终端/IDE，如果是源码运行）
-4. ✅ 勾选启用
+4. 勾选启用
 5. **重启应用**使权限生效
 
-> 💡 如果运行后发现 APM 始终为 0，很可能是权限未正确授予。
+> 如果运行后发现 APM 始终为 0，很可能是权限未正确授予。
 
 ### Windows 注意事项
 
@@ -166,7 +166,7 @@ pyinstaller BongoCultivator-win.spec
 
 ---
 
-## 🎮 操作指南
+## 操作指南
 
 | 操作 | 说明 |
 |------|------|
@@ -187,7 +187,7 @@ pyinstaller BongoCultivator-win.spec
 
 ---
 
-## 🛠 技术栈
+## 技术栈
 
 | 组件 | 技术 |
 |------|------|
@@ -210,7 +210,7 @@ Pillow>=9.5.0
 
 ---
 
-## 📂 项目结构
+## 项目结构
 
 ```
 BongoCultivator/
@@ -234,7 +234,7 @@ BongoCultivator/
 
 ---
 
-## ❓ 常见问题 (FAQ)
+## 常见问题 (FAQ)
 
 ### Q: 为什么我的 APM 一直是 0？
 **A:** 请检查是否已授予输入监控权限（见上方"权限设置"章节）。macOS 用户需要在系统设置中明确授权。
@@ -279,12 +279,22 @@ BongoCultivator/
 
 ---
 
-## 📧 联系
+## 联系
 
 - GitHub: [@robinshi2010](https://github.com/robinshi2010)
 
 ---
 
+## 灵感来源
+
+本项目的灵感来源于 [BongoCat](https://github.com/ayangweb/BongoCat) 这个非常受欢迎的桌面键盘猫项目。看到那只可爱的敲键盘的小猫后，作为一个修仙小说爱好者，突发奇想：为何不做一个修仙小人呢？
+
+于是就有了这个**赛博修仙桌宠**——让你在上班摸鱼的同时也能感受修仙的乐趣，在敲代码的间隙积累修为，在 996 的苦海中寻得一丝仙缘。
+
+感谢 BongoCat 项目带来的灵感，也感谢每一位在网文世界中陪伴我们的修仙前辈们。
+
+---
+
 <p align="center">
-  <strong>愿道友早日飞升 🌟</strong>
+  <strong>祝各位道友都修炼有成，得证大道</strong>
 </p>
