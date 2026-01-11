@@ -10,13 +10,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  # ==================== macOS 构建 ====================
-  build-macos:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        # 同时支持 Intel 和 Apple Silicon
-        arch: [x86_64, arm64]
+  # ==================== macOS Apple Silicon 构建 ====================
+  build-macos-arm64:
+    runs-on: macos-14  # M1 runner
     
     steps:
       - name: 检出代码
@@ -33,21 +29,89 @@ jobs:
           pip install pyinstaller
           pip install -r requirements.txt
 
+      - name: 显示环境信息
+        run: |
+          echo "=== 系统架构 ==="
+          uname -m
+          echo "=== Python 版本 ==="
+          python --version
+          echo "=== PyInstaller 版本 ==="
+          pyinstaller --version
+
       - name: 构建应用
         run: |
           # 使用 spec 文件打包
           pyinstaller BongoCultivator-mac-applesilicon.spec --noconfirm
 
+      - name: 验证构建产物
+        run: |
+          echo "=== 检查构建产物 ==="
+          ls -la dist/
+          echo "=== 检查可执行文件架构 ==="
+          file dist/BongoCultivator.app/Contents/MacOS/BongoCultivator
+
       - name: 压缩应用
         run: |
           cd dist
-          zip -r ../BongoCultivator-macOS-${{ matrix.arch }}.zip BongoCultivator.app
+          zip -r ../BongoCultivator-macOS-AppleSilicon.zip BongoCultivator.app
 
       - name: 上传构建产物
         uses: actions/upload-artifact@v4
         with:
-          name: BongoCultivator-macOS-${{ matrix.arch }}
-          path: BongoCultivator-macOS-${{ matrix.arch }}.zip
+          name: BongoCultivator-macOS-AppleSilicon
+          path: BongoCultivator-macOS-AppleSilicon.zip
+          retention-days: 30
+
+  # ==================== macOS Intel 构建 ====================
+  build-macos-intel:
+    runs-on: macos-13  # Intel runner
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r requirements.txt
+
+      - name: 显示环境信息
+        run: |
+          echo "=== 系统架构 ==="
+          uname -m
+          echo "=== Python 版本 ==="
+          python --version
+          echo "=== PyInstaller 版本 ==="
+          pyinstaller --version
+
+      - name: 构建应用
+        run: |
+          # 使用 spec 文件打包
+          pyinstaller BongoCultivator-mac-applesilicon.spec --noconfirm
+
+      - name: 验证构建产物
+        run: |
+          echo "=== 检查构建产物 ==="
+          ls -la dist/
+          echo "=== 检查可执行文件架构 ==="
+          file dist/BongoCultivator.app/Contents/MacOS/BongoCultivator
+
+      - name: 压缩应用
+        run: |
+          cd dist
+          zip -r ../BongoCultivator-macOS-Intel.zip BongoCultivator.app
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: BongoCultivator-macOS-Intel
+          path: BongoCultivator-macOS-Intel.zip
           retention-days: 30
 
   # ==================== Windows 构建 ====================
