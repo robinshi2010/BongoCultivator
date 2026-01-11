@@ -3,6 +3,7 @@
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows-green.svg)]()
+[![Version](https://img.shields.io/badge/Version-1.0.0-purple.svg)]()
 
 <p align="center">
   <img src="assets/cultivator_idle.png" alt="BongoCultivator" width="200">
@@ -17,31 +18,50 @@
 
 ## ✨ 核心特色
 
-### ⌨️ 赛博修炼
-你的每一次键盘敲击、鼠标点击都会被系统捕获并转化为修为：
-- **闭关 (Idle)**: 摸鱼时自动积累修为
-- **历练 (Work)**: 敲键盘（写代码/文档）收益提升
-- **悟道 (Read)**: 频繁鼠标操作时触发顿悟
-- **斗法 (Combat)**: 极高 APM 进入战斗模式
+### ⌨️ 工作即修行 (Input Driven Growth)
 
-### 🐱 桌面陪伴
+没有所谓的"自动挂机"。你的每一次键盘敲击、鼠标点击都会被系统捕获并转化为修为。
+
+**APM (Actions Per Minute)** 决定了你的修炼效率：
+
+| 状态 | 触发条件 | 修炼效率 |
+|------|----------|----------|
+| 🧘 **闭关 (Idle)** | 摸鱼/离开电脑 | 基础积累 |
+| ⚔️ **历练 (Work)** | 敲键盘（写代码/文档） | 效率提升 |
+| 📖 **悟道 (Read)** | 频繁鼠标操作 | 触发顿悟 |
+| 🔥 **斗法 (Combat)** | 极高 APM（打游戏） | 灵气潮汐 |
+
+### 🐱 桌面陪伴 (Desktop Companion)
+
 一只可爱的修仙小人常驻桌面：
-- 始终置顶但不抢占焦点
-- 背景透明、可自由拖拽
-- 多种状态动画（呼吸、施法、炼丹）
-- 粒子特效（雷劫、火焰、金光）
+- 🪟 始终置顶但不抢占焦点
+- 🎨 背景透明、可自由拖拽
+- 🎭 多种状态动画（呼吸、施法、炼丹、睡眠）
+- ✨ 粒子特效（雷劫、火焰、金光）
 
-### ⚗️ 炼丹系统
+### ⚗️ 丹道通神 (Alchemy System)
+
+修仙岂能无丹？收集天材地宝，按照上古丹方开炉炼丹。
+
 - **121 种物品** (Tier 0 - Tier 8)
 - **42 种丹方** 可供炼制
+- **9 个品阶** 品质系统
 - **坊市交易** 每 15 分钟刷新
 
-### 🎲 随机奇遇
-- **66+ 种事件** 随时触发
+> ⚠️ 完美品质的筑基丹能让你一步登天，而稍有不慎，炼出的废丹不仅浪费材料，还可能产生不可预知的副作用...
+
+### 🎲 机缘与天命 (Random Encounters)
+
+这是一个"活着"的世界。你可以选择挂机闭关，也可以选择外出历练。
+
+- **66+ 种随机事件** 随时触发
 - 根据境界和状态解锁不同事件
 - 完整的修仙日志记录
 
+> 你可能在深山遭遇**地龙翻身**，发现灵脉；也可能误入**上古遗阵**，九死一生。
+
 ### 🏆 成就系统
+
 - 20+ 成就解锁专属头衔
 - 头衔提供永久属性加成
 
@@ -53,15 +73,20 @@
 炼气期 → 筑基期 → 金丹期 → 元婴期 → 化神期 → 炼虚期 → 合体期 → 大乘期 → 渡劫期 → ✨ 飞升仙界
 ```
 
+
 ---
 
 ## 🚀 快速开始
 
 ### 方式一：下载预编译版本（推荐）
 
-前往 [Releases](https://github.com/robinshi2010/BongoCultivator/releases) 页面下载：
-- **macOS**: `BongoCultivator.app`
-- **Windows**: `BongoCultivator.exe`
+前往 [Releases](https://github.com/robinshi2010/BongoCultivator/releases) 页面下载对应平台的安装包：
+
+| 平台 | 文件 | 说明 |
+|------|------|------|
+| **macOS (Apple Silicon)** | `BongoCultivator.app` | M 芯片 |
+| **macOS (Intel)** | `BongoCultivator-intel.app` | Intel 芯片 |
+| **Windows** | `BongoCultivator.exe` | Windows 10/11 |
 
 ### 方式二：源码运行
 
@@ -70,20 +95,56 @@
 git clone https://github.com/robinshi2010/BongoCultivator.git
 cd BongoCultivator
 
-# 2. 安装依赖
+# 2. (可选) 创建虚拟环境
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+# venv\Scripts\activate   # Windows
+
+# 3. 安装依赖
 pip3 install -r requirements.txt
 
-# 3. 运行
+# 4. 运行
 python3 main.py
 ```
 
-### 依赖项
-- Python 3.10+
-- PyQt6
-- pynput
-- matplotlib
-- pillow
-- sqlmodel
+### 方式三：自行打包
+
+如果你想自己打包成可执行文件，可以使用 PyInstaller：
+
+```bash
+# 安装 PyInstaller
+pip3 install pyinstaller
+
+# macOS (Apple Silicon) 打包
+pyinstaller BongoCultivator-mac-applesilicon.spec
+
+# Windows 打包
+pyinstaller BongoCultivator-win.spec
+```
+
+打包完成后，可执行文件位于 `dist/` 目录下。
+
+---
+
+## 🔐 权限设置
+
+### macOS 权限配置（重要！）
+
+由于本应用需要监控键盘和鼠标输入来计算 APM，**必须授予输入监控权限**：
+
+1. 打开 **系统设置** (System Settings)
+2. 进入 **隐私与安全性** → **输入监控** (Input Monitoring)
+3. 点击 **+** 添加 `BongoCultivator.app`（或终端/IDE，如果是源码运行）
+4. ✅ 勾选启用
+5. **重启应用**使权限生效
+
+> 💡 如果运行后发现 APM 始终为 0，很可能是权限未正确授予。
+
+### Windows 注意事项
+
+- ⚠️ 部分杀毒软件可能误报（因为应用会监控键盘输入）
+- 请将 `BongoCultivator.exe` 添加到杀毒软件的**白名单**中
+- 如遇到 Windows Defender 拦截，点击 **更多信息** → **仍要运行**
 
 ---
 
@@ -92,16 +153,19 @@ python3 main.py
 | 操作 | 说明 |
 |------|------|
 | **左键拖拽** | 移动小人位置 |
-| **左键点击** | 播放修仙对话 |
+| **左键点击** | 对话/互动 |
 | **右键点击** | 打开功能菜单 |
 
 ### 功能菜单
-- 📊 **状态** - 查看详细属性
-- 🎒 **储物袋** - 查看物品、使用丹药
-- ⚗️ **炼丹房** - 合成丹药
-- 🏪 **坊市** - 购买材料
-- 📈 **统计** - 工作效率图表
-- ⚙️ **设置** - 系统选项
+
+| 菜单项 | icon | 功能 |
+|--------|------|------|
+| **状态** | 📊 | 查看详细属性、境界、修为进度 |
+| **储物袋** | 🎒 | 查看物品、使用丹药 |
+| **炼丹房** | ⚗️ | 合成丹药 |
+| **坊市** | 🏪 | 购买材料和丹药 |
+| **统计** | 📈 | 工作效率图表 |
+| **设置** | ⚙️ | 系统选项 |
 
 ---
 
@@ -116,26 +180,59 @@ python3 main.py
 | **输入监听** | Pynput |
 | **打包** | PyInstaller |
 
+### 依赖项
+
+```
+PyQt6>=6.4.0
+pynput>=1.7.6
+sqlmodel>=0.0.14
+matplotlib>=3.7.0
+Pillow>=9.5.0
+```
+
 ---
 
 ## 📂 项目结构
 
 ```
 BongoCultivator/
-├── main.py              # 程序入口
-├── requirements.txt     # 依赖声明
-├── LICENSE              # CC BY-NC-SA 4.0
-├── assets/              # 资源文件
-│   ├── cultivator_*.png # 角色状态图
-│   └── tribulation_*.png# 渡劫特效图
-└── src/                 # 源代码
-    ├── cultivator.py    # 核心逻辑
-    ├── data/            # 静态数据 (JSON)
-    ├── models/          # 数据模型
-    ├── services/        # 业务服务
-    ├── ui/              # UI 组件
-    └── utils/           # 工具函数
+├── main.py                 # 程序入口
+├── requirements.txt        # 依赖声明
+├── LICENSE                 # CC BY-NC-SA 4.0
+├── assets/                 # 资源文件
+│   ├── cultivator_*.png    # 角色状态图
+│   ├── tribulation_*.png   # 渡劫特效图
+│   └── icon.icns           # 应用图标
+└── src/                    # 源代码
+    ├── cultivator.py       # 核心逻辑
+    ├── pet_window.py       # 桌宠窗口
+    ├── input_monitor.py    # 输入监听
+    ├── data/               # 静态数据 (JSON)
+    ├── models/             # 数据模型
+    ├── services/           # 业务服务
+    ├── ui/                 # UI 组件
+    └── utils/              # 工具函数
 ```
+
+---
+
+## ❓ 常见问题 (FAQ)
+
+### Q: 为什么我的 APM 一直是 0？
+**A:** 请检查是否已授予输入监控权限（见上方"权限设置"章节）。macOS 用户需要在系统设置中明确授权。
+
+### Q: 应用启动后看不到小人？
+**A:** 小人默认出现在屏幕右下角。尝试将所有窗口最小化，或者在 Dock/任务栏中找到应用图标（在托盘中有开启对话框和一直保持在最上层的选项）。
+
+### Q: 如何重置游戏进度？
+**A:** 删除应用同目录下的 `user_data.db` 文件即可重新开始。
+
+### Q: 炼丹失败率太高怎么办？
+**A:** 
+1. 减少APM，炼丹是个精细活儿，不要操之过急。
+
+### Q: 应用会占用很多资源吗？
+**A:** 正常情况下，CPU 占用 < 1%，内存 < 100MB。如果发现异常，请提交 Issue。
 
 ---
 
@@ -158,6 +255,7 @@ BongoCultivator/
 - 有趣的修仙事件文案
 - 新的丹药点子
 - Bug 反馈
+- 功能建议
 
 请在 [Issues](https://github.com/robinshi2010/BongoCultivator/issues) 中留言。
 

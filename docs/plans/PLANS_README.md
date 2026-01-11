@@ -17,7 +17,8 @@
 ~~4. 身外化身丹和幽冥锻体丹消耗的药材一样，没有差异性，重新设计一个合理的。~~
 
 在托盘控制区新增一个开机自动启动功能。
-
+帮我分析一下，我想给小人在不同等级生成不同的皮肤。
+需要录制一个各阶段渡劫的动画gif。
 
 > ✅ 以上问题已整合至 **Plan 48: 游戏平衡性调整**
 
@@ -26,7 +27,7 @@
 | Plan ID | 标题 (Title) | 描述 (Description) | 链接 (Link) |
 | :--- | :--- | :--- | :--- |
 | **Plan 25** | 用户系统 (User System) | 使用 Supabase 完成邮箱验证注册功能，留存用户数据。 | [plan25.md](active/plan25.md) |
-| **Plan 49** | GitHub 发布准备 | 清理非必要文件，更新 .gitignore，创建宣传页。 | [plan49_github_release.md](active/plan49_github_release.md) |
+
 
 ---
 
